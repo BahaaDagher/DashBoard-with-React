@@ -5,6 +5,7 @@ import  Sidebar  from './scenes/global/Sidebar';
 import Topbar from './scenes/global/Topbar'
 import  Dashboard  from "./scenes/dashboard/Dashboard"
 import { Route, Routes } from 'react-router-dom';
+import { Box } from "@mui/material";
 function App() {
   return (
     <>
@@ -12,9 +13,11 @@ function App() {
         <Sidebar />
         <main className='content'>
           <Topbar />
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-          </Routes>
+          <Box padding="20px">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+            </Routes>
+          </Box>
         </main>
       </div>
     </>

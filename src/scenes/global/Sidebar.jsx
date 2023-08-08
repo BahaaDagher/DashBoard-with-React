@@ -7,16 +7,12 @@ import {Colors} from '../../theme'
 import { useState } from 'react'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
-import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
-import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
-import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -68,14 +64,13 @@ const Sidebar = () => {
         {/* LOGO AND MENU Icon sx={{width: "20px" , height : "20px" }}*/}
         <MenuItem 
           onClick={() => setIsCollapsed(!isCollapsed)}
-          icon={isCollapsed ? <MenuOutlinedIcon sx={{width: "30px" , height : "30px" , color:"#fff"}} /> : undefined}
+          icon={isCollapsed ? <MenuOutlinedIcon sx={{width: "30px" , height : "30px" , color:"#fff"  }} /> : undefined}
           style={{
             display: "flex",
             justifyContent: "center",
             margin: "10px 0",
             color: "#fff",
-            
-          }}
+          }}   
         >
           {!isCollapsed && (
               <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
