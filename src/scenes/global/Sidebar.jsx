@@ -5,14 +5,19 @@ import {Box , Drawer, IconButton ,Typography , useMediaQuery, useTheme} from '@m
 import {Link} from 'react-router-dom'
 import {Colors} from '../../theme'
 import { useState } from 'react'
+import styled from '@emotion/styled'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
-import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
+import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
+import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlined';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -30,6 +35,13 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     </MenuItem>
   );
 };
+
+const Line = styled("div")(({ theme }) => ({
+  width: "100%",
+  height: "1px",
+  backgroundColor: Colors.main[2],
+  margin: "10px 0",
+}));
 
 
 
@@ -60,11 +72,12 @@ const Sidebar = () => {
       },
       "& .pro-menu-item.active": {
         backgroundColor: `${Colors.main[2]} !important`,
-        
       },
+      
     }}
   >
-    <ProSidebar collapsed={isCollapsed || phone} >
+    <ProSidebar collapsed={isCollapsed || phone} 
+    >
       <Menu iconShape="square" >
         {/* LOGO AND MENU Icon sx={{width: "20px" , height : "20px" }}*/}
         <MenuItem 
@@ -92,7 +105,7 @@ const Sidebar = () => {
                 width="100px"
                 height="100px"
                 src={`../../assets/person3.png`}
-                style={{ cursor: "pointer", borderRadius: "50%" , border: "2px solid #fff" , paddingTop :"5px"}}
+                style={{  borderRadius: "50%" , border: "2px solid #fff" , paddingTop :"5px"}}
               />
             </Box>
             <Box textAlign="center">
@@ -104,7 +117,7 @@ const Sidebar = () => {
               >
                  إسماعيل محمود  
               </Typography>
-              <Typography variant="h5" color={Colors.greenAccent[500]}>
+              <Typography variant="h5" color={Colors.main[4]}>
                 مهندس برمجيات 
               </Typography>
             </Box>
@@ -118,7 +131,30 @@ const Sidebar = () => {
             selected={selected}
             setSelected={setSelected}
           />
-
+          <Line/>
+          
+          <Typography
+            variant="h6"
+            color="#fff" 
+            sx={{ m: "15px 10px 5px 20px" , display:"flex"  , fontSize: "16px" , fontWeight: "700"}}
+          >
+            الأبحاث
+          </Typography>
+          <Item
+            title="أبحاثي"
+            to="/myResearches"
+            icon={<PlagiarismOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Item
+            title="إضافة بحث"
+            to="/addResearch"
+            icon={<AddCircleOutlineOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Line/>
           <Typography
             variant="h6"
             color="#fff" 
@@ -129,60 +165,61 @@ const Sidebar = () => {
           <Item
             title="أسألتي"
             to="/team"
-            icon={<PeopleOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
+            icon={<QuizOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
             selected={selected}
             setSelected={setSelected}
           />
           <Item
             title="اضافة سؤال"
             to="/contacts"
-            icon={<ContactsOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
+            icon={<AddCircleOutlineOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Line/>
+
+          <Item sx={{fontSize: "40px" }}  
+            title="بيت العلم"
+            to="/scienceHome"
+            icon={<PsychologyOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Line/>
+          <Item sx={{fontSize: "40px" }}  
+            title="أسألة وأجوبة"
+            to="/scienceHome"
+            icon={<ContactSupportOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+           <Line/>
+          <Item sx={{fontSize: "40px" }}  
+            title="شات الادراة"
+            to="/scienceHome"
+            icon={<ChatOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+           <Line/>
+          <Item sx={{fontSize: "40px" }}  
+            title="شات الصف"
+            to="/scienceHome"
+            icon={<ChatOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+           <Line/>
+          <Item sx={{fontSize: "40px" }}  
+            title="شات الموقع"
+            to="/scienceHome"
+            icon={<ChatOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
             selected={selected}
             setSelected={setSelected}
           />
 
-          <Typography
-            variant="h6"
-            color="#fff" 
-            sx={{ m: "15px 10px 5px 20px" , display:"flex"  , fontSize: "16px" , fontWeight: "700"}}
-          >
-            الصفحات
-          </Typography>
-          <Item
-            title="الصفحة الشخصية"
-            to="/form"
-            icon={<PersonOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
-            selected={selected}
-            setSelected={setSelected}
-          />
-          <Item
-            title="النتيجة"
-            to="/calendar"
-            icon={<CalendarTodayOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
-            selected={selected}
-            setSelected={setSelected}
-          />
-          <Typography
-            variant="h6"
-            color="#fff" 
-            sx={{ m: "15px 10px 5px 20px" , display:"flex"  , fontSize: "16px" , fontWeight: "700"}}
-          >
-            التقارير
-          </Typography>
-          <Item
-            title="تقرير الطقس"
-            to="/bar"
-            icon={<BarChartOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
-            selected={selected}
-            setSelected={setSelected}
-          />
-          <Item
-            title="تقرير الجغرافي"
-            to="/pie"
-            icon={<PieChartOutlineOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
-            selected={selected}
-            setSelected={setSelected}
-          />
+          
+          
         </Box>
       </Menu>
     </ProSidebar>
@@ -287,48 +324,27 @@ const Sidebar = () => {
               color="#fff" 
               sx={{ m: "15px 10px 5px 20px" , display:"flex"  , fontSize: "16px" , fontWeight: "700"}}
             >
-              الصفحات
+              الأبحاث
             </Typography>
             <Item
-              title="الصفحة الشخصية"
+              title="أبحاثي"
               to="/form"
               icon={<PersonOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="النتيجة"
+              title="إضافة بحث"
               to="/calendar"
               icon={<CalendarTodayOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
               selected={selected}
               setSelected={setSelected}
             />
-            <Typography
-              variant="h6"
-              color="#fff" 
-              sx={{ m: "15px 10px 5px 20px" , display:"flex"  , fontSize: "16px" , fontWeight: "700"}}
-            >
-              التقارير
-            </Typography>
-            <Item
-              title="تقرير الطقس"
-              to="/bar"
-              icon={<BarChartOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="تقرير الجغرافي"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            
           </Box>
           </Menu>
         </ProSidebar>
         </Box>
-
     </Drawer>
   </Box>
   )

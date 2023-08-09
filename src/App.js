@@ -6,16 +6,20 @@ import Topbar from './scenes/global/Topbar'
 import  Dashboard  from "./scenes/dashboard/Dashboard"
 import { Route, Routes } from 'react-router-dom';
 import { Box } from "@mui/material";
+import MyResearches from "./scenes/research/MyResearches";
+import AddResearch from "./scenes/research/AddResearch";
 function App() {
   return (
     <>
-      <div className= "app">
+      <div className= "app" >
         <Sidebar />
-        <main className='content'>
+        <main className='content' style={{ overflow:"hidden" }}>
           <Topbar />
-          <Box padding="20px">
+          <Box  style={{margin:"10px"}}>
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/myResearches" element={<MyResearches />} />
+              <Route path="/addResearch" element={<AddResearch />} />
             </Routes>
           </Box>
         </main>
