@@ -30,7 +30,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       onClick={() => setSelected(title)}
       icon={icon}
     >
-      <Typography sx={{fontSize: "20px" , display:"flex"}}>{title}</Typography>
+      <Typography sx={{fontSize: "20px" ,   fontWeight:"bold", display:"flex"}}>{title}</Typography>
       <Link to={to} /> 
     </MenuItem>
   );
@@ -118,13 +118,13 @@ const Sidebar = () => {
                  إسماعيل محمود  
               </Typography>
               <Typography variant="h5" color={Colors.main[4]}>
-                مهندس برمجيات 
+                 الصف الخامس 
               </Typography>
             </Box>
           </Box>
         )}
         <Box >
-          <Item sx={{fontSize: "40px" }}  
+          <Item sx={{fontSize: "40px"}}  
             title="الصفحة الرئيسية "
             to="/"
             icon={<HomeOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
@@ -132,14 +132,6 @@ const Sidebar = () => {
             setSelected={setSelected}
           />
           <Line/>
-          
-          <Typography
-            variant="h6"
-            color="#fff" 
-            sx={{ m: "15px 10px 5px 20px" , display:"flex"  , fontSize: "16px" , fontWeight: "700"}}
-          >
-            الأبحاث
-          </Typography>
           <Item
             title="أبحاثي"
             to="/myResearches"
@@ -147,39 +139,19 @@ const Sidebar = () => {
             selected={selected}
             setSelected={setSelected}
           />
-          <Item
-            title="إضافة بحث"
-            to="/addResearch"
-            icon={<AddCircleOutlineOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
-            selected={selected}
-            setSelected={setSelected}
-          />
+         
           <Line/>
-          <Typography
-            variant="h6"
-            color="#fff" 
-            sx={{ m: "15px 10px 5px 20px" , display:"flex"  , fontSize: "16px" , fontWeight: "700"  }}
-          >
-            الأسئلة 
-          </Typography>
           <Item
-            title="أسألتي"
+            title="حلولي"
             to="/team"
             icon={<QuizOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
-            selected={selected}
-            setSelected={setSelected}
-          />
-          <Item
-            title="اضافة سؤال"
-            to="/contacts"
-            icon={<AddCircleOutlineOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
             selected={selected}
             setSelected={setSelected}
           />
           <Line/>
 
           <Item sx={{fontSize: "40px" }}  
-            title="بيت العلم"
+            title="تنبيهاتي"
             to="/scienceHome"
             icon={<PsychologyOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
             selected={selected}
@@ -187,39 +159,12 @@ const Sidebar = () => {
           />
           <Line/>
           <Item sx={{fontSize: "40px" }}  
-            title="أسألة وأجوبة"
+            title="الدعم الفني"
             to="/scienceHome"
             icon={<ContactSupportOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
             selected={selected}
             setSelected={setSelected}
           />
-           <Line/>
-          <Item sx={{fontSize: "40px" }}  
-            title="شات الادراة"
-            to="/scienceHome"
-            icon={<ChatOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
-            selected={selected}
-            setSelected={setSelected}
-          />
-           <Line/>
-          <Item sx={{fontSize: "40px" }}  
-            title="شات الصف"
-            to="/scienceHome"
-            icon={<ChatOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
-            selected={selected}
-            setSelected={setSelected}
-          />
-           <Line/>
-          <Item sx={{fontSize: "40px" }}  
-            title="شات الموقع"
-            to="/scienceHome"
-            icon={<ChatOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
-            selected={selected}
-            setSelected={setSelected}
-          />
-
-          
-          
         </Box>
       </Menu>
     </ProSidebar>

@@ -9,12 +9,6 @@ const Topbar = () => {
   return (
     <>
       <Box display="flex" padding="10px" justifyContent="flex-end" backgroundColor= {Colors.main[1]}> 
-        <IconButton sx={{color : "#fff"}} >
-          <NotificationsOutlinedIcon sx={{width: "30px" , height : "30px" }}/>
-        </IconButton>
-        <IconButton sx={{color : "#fff"}}>
-          <SettingsOutlinedIcon sx={{width: "30px" , height : "30px"}}/>
-        </IconButton>
         <IconButton sx={{color : "#fff"}}>
           <PersonOutlineIcon sx={{width: "30px" , height : "30px"}}/>
         </IconButton>

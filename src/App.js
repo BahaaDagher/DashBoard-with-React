@@ -22,7 +22,7 @@ function App() {
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
-        <Route path="*" element={<h1>Not Found!</h1>} />
+        <Route path="*" element={<h1>عذرا لا يوجد صفحة هنا</h1>} />
       </Routes>
       </div>
     </>
