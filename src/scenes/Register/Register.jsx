@@ -1,10 +1,24 @@
 import React from 'react'
 import './Register.css'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getLevels } from '../../store/slices/levelSlice'
+
 
 const Register = () => {
+  const data =[1,2,3]
+  const levels = useSelector((state) => state.levelsList.levels.data.levels
+  )
+  console.log(levels)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(getLevels())
+    
+  },[])
   return (
     <>
+    
         <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
@@ -30,6 +44,16 @@ const Register = () => {
               className="form-control mt-1"
               placeholder="أدخل البريد الإلكتروني "
             />
+          </div>
+          <div className="form-group mt-3">
+          <label> المستوي الدراسي </label>
+            <select className="form-select" aria-label="Default select example">
+              <option >اختر المستوي الدراسي</option>
+              {levels.map((level)=>{
+                 return <option key={level.id}>{level.name}</option>
+               
+              })}
+            </select>
           </div>
           <div className="form-group mt-3">
             <label>كلمة المرور</label>
