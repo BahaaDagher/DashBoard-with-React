@@ -17,6 +17,7 @@ import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined';
 import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
 import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined';
+import { useSelector } from 'react-redux'
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -50,6 +51,8 @@ const Sidebar = () => {
   const [selected, setSelected] = useState('Dashboard') ; 
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const phone = useMediaQuery(theme.breakpoints.down("sm"));
+  const userData = JSON.parse(localStorage.getItem('userData'))
+  console.log(userData);
 
   return (
     <Box 
@@ -114,10 +117,10 @@ const Sidebar = () => {
                 fontWeight="bold"
                 sx={{ m: "10px 0 0 0"  , fontFamily: 'Cairo' , fontSize: "28px"}}
               >
-                 إسماعيل محمود  
+                 {userData.name}   
               </Typography>
               <Typography variant="h5" color={Colors.main[4]} sx = {{fontFamily: 'Cairo' , padding:"10px"}}>
-                 الصف الخامس 
+              {userData.level}    
               </Typography>
             </Box>
           </Box>
