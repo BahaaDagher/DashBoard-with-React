@@ -115,7 +115,7 @@ const Sidebar = () => {
                 variant="h2"
                 color="#fff"
                 fontWeight="bold"
-                sx={{ m: "10px 0 0 0"  , fontFamily: 'Cairo' , fontSize: "28px"}}
+                sx={{ m: "10px 0 0 0"  , fontFamily: 'Cairo' , fontSize: "25px"}}
               >
                  {userData.name}   
               </Typography>
