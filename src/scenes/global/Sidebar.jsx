@@ -12,12 +12,11 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
-import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlined';
-import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined';
+import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
+import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -30,7 +29,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       onClick={() => setSelected(title)}
       icon={icon}
     >
-      <Typography sx={{fontSize: "20px" ,   fontWeight:"bold", display:"flex"}}>{title}</Typography>
+      <Typography sx={{fontSize: "18px" ,   fontWeight:"bold", display:"flex" , fontFamily: 'Cairo' , }}>{title}</Typography>
       <Link to={to} /> 
     </MenuItem>
   );
@@ -108,16 +107,16 @@ const Sidebar = () => {
                 style={{  borderRadius: "50%" , border: "2px solid #fff" , paddingTop :"5px"}}
               />
             </Box>
-            <Box textAlign="center">
+            <Box textAlign="center"   >
               <Typography
                 variant="h2"
                 color="#fff"
                 fontWeight="bold"
-                sx={{ m: "10px 0 0 0" }}
+                sx={{ m: "10px 0 0 0"  , fontFamily: 'Cairo' , fontSize: "28px"}}
               >
                  إسماعيل محمود  
               </Typography>
-              <Typography variant="h5" color={Colors.main[4]}>
+              <Typography variant="h5" color={Colors.main[4]} sx = {{fontFamily: 'Cairo' , padding:"10px"}}>
                  الصف الخامس 
               </Typography>
             </Box>
@@ -143,7 +142,7 @@ const Sidebar = () => {
           <Line/>
           <Item
             title="حلولي"
-            to="/team"
+            to="/myAnswers"
             icon={<QuizOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
             selected={selected}
             setSelected={setSelected}
@@ -152,16 +151,16 @@ const Sidebar = () => {
 
           <Item sx={{fontSize: "40px" }}  
             title="تنبيهاتي"
-            to="/scienceHome"
-            icon={<PsychologyOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
+            to="/"
+            icon={<CampaignOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
             selected={selected}
             setSelected={setSelected}
           />
           <Line/>
           <Item sx={{fontSize: "40px" }}  
             title="الدعم الفني"
-            to="/scienceHome"
-            icon={<ContactSupportOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
+            to="/"
+            icon={<BuildOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
             selected={selected}
             setSelected={setSelected}
           />

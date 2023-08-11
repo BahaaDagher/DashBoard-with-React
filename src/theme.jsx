@@ -4,6 +4,7 @@ import { createTheme } from "@mui/material";
 
 // color design tokens  
 export const Colors = {
+    height: "87px", 
     main:{
         1 :"#008d95" , 
         2 :"#00a4a9"  , 
@@ -12,6 +13,8 @@ export const Colors = {
         5 :"#00a4a9d4" , 
         6:"#00a4a91f",
         7:"#00a4a97d" , 
+        8:"#00a4a933" , 
+        9:"#00a4a90a" , 
     },
     grey: {
         100: "#141414",

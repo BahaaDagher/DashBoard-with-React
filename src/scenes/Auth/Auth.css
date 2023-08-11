@@ -11,15 +11,18 @@
     height: 100vh;
     background-color: #00a4a952;
     padding: 10px;
+    background-image: url("../../../public/assets/school.jpg");
+    background-size: cover;
   }
   
   .Auth-form {
     width: 420px;
-    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+    box-shadow: rgba(165, 98, 98, 0.16) 1px 1px 10px;
     padding-top: 30px;
     padding-bottom: 20px;
     border-radius: 8px;
     background-color: white;
+    opacity: 0.8;
   }
   
   .Auth-form-content {
@@ -41,11 +44,11 @@
     color: rgb(34, 34, 34);
   }
 
-  .loginButton {
+  .submitButton {
     background-color: #00a4a9;
     border-color:#00a4a9 ;
   }
-  .loginButton:hover {
+  .submitButton:hover {
     background-color: #008d95;
     border-color:#008d95 ;
   }

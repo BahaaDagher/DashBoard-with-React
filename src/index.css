@@ -18,17 +18,20 @@ body,
 ::-webkit-scrollbar {
     width: 3px;
     height: 3px;
+    overflow: hidden;
 }
 
 /* track */
 ::-webkit-scrollbar-track {
     background: #00bfc6;
+    overflow: hidden;
     
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #008d95;
+    overflow: hidden;
 }
 
 /* Handle On Over */

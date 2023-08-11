@@ -1,5 +1,5 @@
 import React from 'react'
-import './Register.css'
+import './Auth.css'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -7,19 +7,18 @@ import { getLevels } from '../../store/slices/levelSlice'
 
 
 const Register = () => {
-  const data =[1,2,3]
-  const levels = useSelector((state) => state.levelsList.levels.data.levels
-  )
+  const levels = useSelector((state) => state.levelsList.levels.data.levels )
   console.log(levels)
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(getLevels())
     
   },[])
+
   return (
     <>
     
-        <div className="Auth-form-container">
+      <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
           <h1 className="Auth-form-title">إنشاء حساب</h1>
@@ -49,10 +48,7 @@ const Register = () => {
           <label> المستوي الدراسي </label>
             <select className="form-select" aria-label="Default select example">
               <option >اختر المستوي الدراسي</option>
-              {levels.map((level)=>{
-                 return <option key={level.id}>{level.name}</option>
-               
-              })}
+              
             </select>
           </div>
           <div className="form-group mt-3">
@@ -72,7 +68,7 @@ const Register = () => {
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary RegisterButton">
+            <button type="submit" className="btn btn-primary submitButton">
               إنشاء حساب
             </button>
           </div>

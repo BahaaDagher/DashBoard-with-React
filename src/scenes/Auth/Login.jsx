@@ -1,5 +1,5 @@
 import React from 'react'
-import './Login.css'
+import './Auth.css'
 import {Link} from 'react-router-dom'
 const Login = () => {
   return (
@@ -25,10 +25,13 @@ const Login = () => {
               />
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary loginButton">
+              <button type="submit" className="btn btn-primary submitButton">
                 تسجيل الدخول 
               </button>
             </div>
+            <p className="signup text-right mt-2">
+                 <Link to="/register" className='RegisterLink' > نسيت كلمة المرور ؟ </Link>  
+            </p>
             <p className="signup text-right mt-2">
             ليس لديك حساب ؟  <Link to="/register" className='RegisterLink' > إنشاء حساب جديد </Link>  
             </p>

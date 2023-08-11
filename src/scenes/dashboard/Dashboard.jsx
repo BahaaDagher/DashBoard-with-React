@@ -18,6 +18,10 @@ const Tab = styled("div")(({ theme }) => ({
   [theme.breakpoints.down("800")]: {
     margin: "30px 10px",
   },
+  "&:hover": {
+    cursor: "pointer",
+  },
+  
   
 }));
 
@@ -27,38 +31,39 @@ const BoxContainer = styled("div")(({ theme }) => ({
   justifyContent : "center" ,
   alignItems : "center" ,
   textAlign : "center" ,
-  maxHeight: "calc(100vh - 66px)",
+  maxHeight: `calc(100vh - ${Colors.height} )`,
   overflow: "auto",
+  fontWeight : "bold" ,
   [theme.breakpoints.down("800")]: {
     flexDirection : "column" ,
   },
 
 }));
 const LinkStyle = styled(Link)(({ theme }) => ({
-  textDecoration: "none" , 
-  fontSize: "20px"  , 
-  color  :Colors.main[1] ,
+  textDecoration: "none",
+  fontSize: "20px",
+  color: Colors.main[1],
   "&:hover": {
     color: Colors.main[2],
   },
   [theme.breakpoints.down("500")]: {
-    fontSize: "15px"  , 
+    fontSize: "15px",
   },
 }));
 const Dashboard = () => {
   return (
     <BoxContainer >
       <Box width="99%" margin="auto">
-        <Tab><LinkStyle to = "/">طلبات البحوث</LinkStyle></Tab>
-        <Tab><LinkStyle to = "/">بوت بيت العلم</LinkStyle></Tab>
-        <Tab><LinkStyle to = "/">بيت العلم بدون اعلانات</LinkStyle></Tab>
-        <Tab><LinkStyle to = "/">حلول الكتب</LinkStyle></Tab>
+        <LinkStyle to = "/AddResearch"> <Tab> طلبات البحوث </Tab></LinkStyle>
+        <LinkStyle to = "/"><Tab> بوت بيت العلم </Tab></LinkStyle>
+        <LinkStyle to = "/scienceHome"><Tab> بيت العلم بدون اعلانات </Tab></LinkStyle>
+        <LinkStyle to = "/booksAnswers"><Tab> حلول الكتب </Tab></LinkStyle>
       </Box>
       <Box width="99%" margin="auto">
-        <Tab className='first'><LinkStyle to = "/" >حل الواجبات</LinkStyle></Tab>
-        <Tab><LinkStyle to = "/">شات الطلاب</LinkStyle></Tab>
-        <Tab><LinkStyle to = "/">منصة العلم بدون اعلانات</LinkStyle></Tab>
-        <Tab><LinkStyle to = "/">الاختبارات المركزية</LinkStyle></Tab>
+        <LinkStyle to = "/homeWorks" ><Tab className='first'>حل الواجبات </Tab></LinkStyle>
+        <LinkStyle to = "/"><Tab> شات الطلاب </Tab></LinkStyle>
+        <LinkStyle to = "/sciencePlatform"> <Tab>منصة العلم بدون اعلانات </Tab></LinkStyle>
+        <LinkStyle to = "/"> <Tab>الاختبارات المركزية</Tab></LinkStyle>
       </Box>
     </BoxContainer>
   )
