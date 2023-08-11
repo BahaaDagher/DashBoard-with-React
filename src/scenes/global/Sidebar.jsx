@@ -112,9 +112,9 @@ const Sidebar = () => {
                 variant="h2"
                 color="#fff"
                 fontWeight="bold"
-                sx={{ m: "10px 0 0 0"  , fontFamily: 'Cairo' , fontSize: "28px"}}
+                sx={{ m: "10px 0 0 0"  , fontFamily: 'Cairo' , fontSize: "25px"}}
               >
-                 إسماعيل محمود  
+              اسماعيل محمود
               </Typography>
               <Typography variant="h5" color={Colors.main[4]} sx = {{fontFamily: 'Cairo' , padding:"10px"}}>
                  الصف الخامس 
