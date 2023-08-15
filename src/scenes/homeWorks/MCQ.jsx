@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Box } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Colors } from '../../theme';
 import  SubmitButton  from '../../components/SubmitButton';
 
@@ -53,11 +53,22 @@ const AddButton = styled(Box)(({ theme }) => ({
 }));
 
 const Ul = styled("ul")(({ theme }) => ({
+  width:'92%',
   listStyle: 'none' ,
+  display:'flex',
+  flexDirection:'row',
+  justifyContent:'space-around'
+}));
+
+const Div = styled("div")(({ theme }) => ({
+
+  display:'flex',
+  flexDirection:'row',
+  justifyContent:'end'
 }));
 
 const Li = styled("li")(({ theme }) => ({
-  margin: '10px 0' ,
+  margin: '10px 5px' ,
   width: '50%' ,
   border: `2px solid ${Colors.main[3]}` ,
   padding: '10px' ,
@@ -71,70 +82,111 @@ const Li = styled("li")(({ theme }) => ({
 
 function MCQ() {
 
-  const [question, setQuestion] = useState('');
-  const [answers, setAnswers] = useState({});
-  const [currentAnswer, setCurrentAnswer] = useState('');
+  const [data, setData] = useState([
+     {
+      question:'',
+      answers:[
+        
+        ]
+      }
+  
+  ]);
+  const [currentAnswer ,setCurrentAnswer ] = useState([])
 
-  const handleQuestionChange = (event) => {
-    setQuestion(event.target.value);
+
+  const handleQuestionChange = (event ,i) => {
+    let questions = [...data]
+    questions[i].question = event.target.value
+
+    setData(questions)
   };
 
-  const handleAnswerChange = (event) => {
-    setCurrentAnswer(event.target.value);
+  const handleAnswerChange = (event ,i) => {
+    let currentAns = [...currentAnswer]
+    currentAns[i]  = event.target.value
+    setCurrentAnswer(currentAns);
   };
 
-  const addAnswer = () => {
-    if (currentAnswer) {
-      const answerKey = `answer${Object.keys(answers).length+1}` 
-      setAnswers((prevAnswers) => ({
-        ...prevAnswers,
-        [answerKey]: currentAnswer,
-      }));
-      setCurrentAnswer('');
+  const addAnswer = (i) => {
+    if(currentAnswer[i]){
+
+      let questions = [...data]
+      questions[i].answers.push(currentAnswer)
+      setData(questions)
+      let currentAns = [...currentAnswer]
+      currentAns[i]  = ''
+      setCurrentAnswer(currentAns);
     }
   };
   const handleSubmit = () => {
-    if (question && Object.keys(answers).length > 0) {
-      setAnswers({});
-    }
+    console.log('gg');
+  };
+
+  const addAnotherQues = () => {
+    let questions = [...data]
+    questions.push( {
+      question:'',
+      answers:[
+        
+        ]
+      })
+
+    setData(questions)
+  
   };
 
   return (
-    
-    <Box >
-      <ChildBox>
-        <H5>  السؤال :</H5>
-        <div>
-          <Input
-            type="text"
-            placeholder="أدخل السؤال هنا"
-            value={question}
-            onChange={handleQuestionChange}
-          />
-        </div>
-      </ChildBox>
-      <ChildBox>
-        <H5>   الإجابات :</H5>
-        <Box display="flex" justifyContent="space-between">
-          <Input
-            className="add"
-            type="text"
-            placeholder="أدخل الإجابة هنا"
-            value={currentAnswer}
-            onChange={handleAnswerChange}
-          />
-          <AddButton onClick={addAnswer}>+</AddButton>
+    <>
+    {data.map((ques ,i)=>{
+      
+       return(
+        <Box border="1px solid #20c997  " margin="20px 0px" padding="10px">
+        <ChildBox>
+          <H5>  السؤال : {i+1}</H5>
+          <div>
+            <Input
+              type="text"
+              placeholder="أدخل السؤال هنا"
+              value={ques.question}
+              onChange={(e)=>handleQuestionChange(e ,i)}
+            />
+          </div>
+        </ChildBox>
+        <ChildBox>
+          <H5>   الإجابات :</H5>
+          <Box display="flex" justifyContent="space-between">
+            <Input
+              className="add"
+              type="text"
+              placeholder="أدخل الاختيار هنا"
+              value={currentAnswer[i]}
+              onChange={(e)=>handleAnswerChange(e,i)}
+            />
+            <AddButton onClick={()=>addAnswer(i)}>اضافة اختيار</AddButton>
+          </Box>
+          <div>
+          
+            
+            <Ul  >
+            {
+              ques.answers.map((ans ,j)=>{
+                return <Li key={j}> {j+1}- {ans}</Li>
+              })
+            }
+            </Ul>
+          </div>
+        </ChildBox>
         </Box>
-        <div>
-          <Ul>
-            {Object.entries(answers).map(([answerId, answer], index) => (
-              <Li key={answerId}> - {answer}</Li>
-            ))}
-          </Ul>
-        </div>
-      </ChildBox>
-      <SubmitButton onClick={handleSubmit}>تأكيد</SubmitButton>
-    </Box>
+       )
+       
+    })}
+    <Div > 
+    <SubmitButton onClick={handleSubmit}>ارسال الأسئلة</SubmitButton>
+    <SubmitButton onClick={addAnotherQues}>اضافة سؤال اخر</SubmitButton>
+    </Div>
+    
+    
+    </>
   );
 }
 

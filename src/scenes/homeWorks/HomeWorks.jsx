@@ -35,7 +35,7 @@ const TabBox = styled(Box)(({ theme }) => ({
     },
 }));
 const Box2 = styled(Box)(({ theme }) => ({
-    border : `1px solid ${Colors.main[2]}` ,
+
     maxHeight : `calc(100vh - ${Colors.height} - 170px) ` ,
     padding : "20px" ,
     overflowY : "auto" ,
