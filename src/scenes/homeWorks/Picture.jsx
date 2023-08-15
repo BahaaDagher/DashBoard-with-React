@@ -12,7 +12,7 @@ function Picture() {
   };
 
   return (
-    <div>
+    <div style={{border:'1px solid #20c997 ' , padding: '10px'}}>  
       <H5>  اختر الصورة  :</H5>
       <div>
         <input
