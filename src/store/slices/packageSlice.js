@@ -6,7 +6,7 @@ export const getpackages = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(
-        "https://learninghouse.cloudy.mohamedmansi.com/api/packages"
+        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/packages"
       );
       return response.data.data.packages ;
     } catch (error) {

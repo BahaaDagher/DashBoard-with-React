@@ -18,7 +18,6 @@ const levelSlice = createSlice({
   name: "levelList",
   initialState: {
     levels: [],
-  
   },
   extraReducers: (builder) => {
     builder

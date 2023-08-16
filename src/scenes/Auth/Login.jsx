@@ -17,11 +17,10 @@ const Login = () => {
     // redirect user to login page if registration was successful
     if (isAuth) {
       localStorage.setItem('userData', JSON.stringify(userData))
-
-      navigate('/')
+      navigate('/dashBoard')
     }
-
   }, [isAuth])
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -31,9 +30,6 @@ const Login = () => {
     event.preventDefault();
     dispatch(userLogin(formData))
     
-    // !isAuth ? alert('failed') : ""
-
- 
   };
   return (
     <>

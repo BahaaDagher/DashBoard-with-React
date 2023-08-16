@@ -18,8 +18,6 @@ const Register = () => {
   useEffect(()=>{
     dispatch(getLevels())
     dispatch(getpackages())
-    
-    
   },[])
 
 
@@ -34,9 +32,9 @@ const Register = () => {
 
   const navigate = useNavigate()
   const registeData =useSelector((state) => state.userData.registerData ) 
-  const isRegisterSuccess =useSelector((state) => state.userData.isRegisterSuccess ) 
+  const isRegisterSuccess =useSelector((state) => state.userData.isRegisterSuccess )
+  
   useEffect(() => {
-
     if (isRegisterSuccess) {
       localStorage.setItem('registeData', JSON.stringify(registeData))
       navigate('/otp')
@@ -52,22 +50,17 @@ const Register = () => {
     event.preventDefault();
     dispatch(userRegister(formData))
     console.log(registeData);
-    
-    // !isAuth ? alert('failed') : ""
-
- 
   };
 
   return (
     <>
-    
       <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
           <h1 className="Auth-form-title">إنشاء حساب</h1>
           <div className="text-center">
           لديك حساب بالفعل  ؟ {" "}
-            <Link className="LoginLink" to = "/login">
+            <Link className="RegisterLink" to = "/" >
               تسجيل الدخول 
             </Link>
           </div>

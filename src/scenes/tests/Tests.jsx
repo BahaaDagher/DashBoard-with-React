@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Colors } from "../../theme";
+import { Box } from "@mui/material";
+import TestsData from "./TestsData";
+import Answer from "./Answer";
+import Swal from "sweetalert2";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -23,16 +27,6 @@ const Label = styled("label")(({ theme }) => ({
   fontSize: "17px",
 }));
 
-const Input = styled("input")(({ theme }) => ({
-  padding: "8px",
-  border: "1px solid #ccc",
-  borderRadius: "5px",
-  "&:hover, &:focus": {
-    outlineColor: Colors.main[3] , 
-    borderColor: Colors.main[3] , 
-  },
-  transition: "all 0.3s ease-in-out" , 
-}));
 
 const Select = styled("select")(({ theme }) => ({
   padding: "8px",
@@ -66,65 +60,67 @@ const Button = styled("button")(({ theme }) => ({
   maxWidth: "1000px",
 }));
 
-const options = [
-  "رياضة",
-  "عربي",
-  "فيزياء",
-  "كيمياء",
-  "تاريخ",
-];
+const BoxContainer = styled(Box)(({ theme }) => ({
+  margin : "10px auto" ,
+  maxHeight : `calc(100vh - ${Colors.height} - 260px) ` ,
+  overflow : "auto" ,
+})); 
 
-const AddResearch = () => {
-  const [title, setTitle] = useState("");
-  const [supervisor, setSupervisor] = useState("");
+
+
+const Tests = () => {
   const [selectedOption, setSelectedOption] = useState("");
+  const [options, setOptions] = useState([]);
+  const [Questions, setQuestions] = useState([]);
+
+
+  useEffect(() => {
+    const newOptions = TestsData.map((test) => test.name);
+    setOptions(newOptions);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform form submission logic here
-    console.log("Form submitted:", title, selectedOption);
+    var find = false  ; 
+    TestsData.map((test) => {
+      if (test.name === selectedOption) {
+        setQuestions(test.questions);
+        find = true ;
+      }
+    });
+    if (!find) {
+      Swal.fire('من فضلك قم بإختيار نوع الإختبار')
+    }
   };
 
   return (
     <>
-      <Title>إضافة بحث :</Title>
+      <Title> الإختبارات المركزية  :</Title>
       <FormContainer>
         <Form onSubmit={handleSubmit}>
-          <Label>عنوان البحث</Label>
-          <Input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            onFocus={(e) => e.target.classList.add("active")}
-            onBlur={(e) => e.target.classList.remove("active")}
-          />
-          <Label>  مشرف البحث </Label>
-          <Input
-            type="text"
-            value={supervisor}
-            onChange={(e) => setSupervisor(e.target.value)}
-            onFocus={(e) => e.target.classList.add("active")}
-            onBlur={(e) => e.target.classList.remove("active")}
-          />
-
-          <Label>  المادة</Label>
+          <Label>   الإختبار</Label>
           <Select
             value={selectedOption}
             onChange={(e) => setSelectedOption(e.target.value)}
           >
-            <Option value="">اختر اسم المادة </Option>
+            <Option value="">اختر نوع الإختبار </Option>
             {options.map((option, index) => (
               <Option key={index} value={option}>
                 {option}
               </Option>
             ))}
           </Select>
-
-          <Button type="submit">إضافة</Button>
+          <Button type="submit">اختيار</Button>
         </Form>
       </FormContainer>
+      <BoxContainer sx = {{}}>
+        {Questions.map((question, i ) => (
+            <Answer singleQuestion={question}  key = {i} />
+        ))}
+    </BoxContainer>     
+
     </>
   );
 };
 
-export default AddResearch;
+export default Tests;

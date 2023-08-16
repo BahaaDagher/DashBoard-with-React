@@ -17,28 +17,41 @@ import IframeSite from "./scenes/iframe/IframeSite";
 import MyAnswers from "./scenes/Answers/MyAnswers";
 import HomeWorks from "./scenes/homeWorks/HomeWorks";
 import { useSelector } from "react-redux";
+import EditProfile from "./scenes/editProfile/EditProfile";
+import { Chat } from "@mui/icons-material";
+import Protected from "./Protected";
+import Tests from "./scenes/tests/Tests";
+import AddProjects from "./scenes/projects/AddProjects";
+import MyProjects from "./scenes/projects/MyProjects";
 function App() {
   
   return (
     <>
       <div className= "app" >
       <Routes>
-        <Route path= "/" element= {<LayoutsWithNavbar/>}>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/myResearches" element={<MyResearches />} />
-          <Route path="/addResearch" element={<AddResearch />} />
-          <Route path="/myAnswers" element={<MyAnswers />} />
-          <Route path="/homeWorks" element={<HomeWorks />} />
-          <Route path="/scienceHome" element={<IframeSite url = "https://www.baetiy.com/" title = "بيت العلم"/>} />
-          <Route path="/sciencePlatform" element={<IframeSite url = "https://www.el3elm.com/" title = "منصة العلم"/>} />
-          <Route path="/booksAnswers" element={<IframeSite url = "https://www.hululktaab.com/" title = "حلول الكتب"/>} />
+      
+        <Route path="/student/login" element={<Login/>} />
+        <Route path="/student/register" element={<Register/>} />
+        <Route path="/student/forgetPassword" element={<ForgetPassword/>} />
+        <Route path="/student/OTP" element={<OTPCode/>} />
+        <Route path="/student/setPassword" element={<SetPassword/>} />
+        <Route path="/*" element={<h1>عذرا لا يوجد صفحة هنا</h1>} /> 
+        
+        <Route path= "/" element= {<Protected><LayoutsWithNavbar/></Protected>}>
+          <Route path="student/dashboard" element={<Protected><Dashboard /></Protected>} />
+          <Route path="student/editProfile" element={<Protected> <EditProfile /></Protected>} />
+          <Route path="student/AddProjects" element={<Protected> <AddProjects /></Protected>} />
+          <Route path="student/myProjects" element={<Protected> <MyProjects /></Protected>} />
+          <Route path="student/tests" element={<Protected> <Tests /></Protected>} />
+          <Route path="student/myResearches" element={<Protected> <MyResearches /> </Protected> } />
+          <Route path="student/addResearch" element={<Protected> <AddResearch /> </Protected> } />
+          <Route path="student/myAnswers" element={<Protected> <MyAnswers /> </Protected> } />
+          <Route path="student/homeWorks" element={<Protected> <HomeWorks /> </Protected> } />
+          <Route path="student/scienceHome" element={<Protected><IframeSite url = "https://www.baetiy.com/" title = "بيت العلم"/></Protected>}  />
+          <Route path="student/sciencePlatform" element={ <Protected> <IframeSite url = "https://www.el3elm.com/" title = "منصة العلم"/> </Protected> } />
+          <Route path="student/booksAnswers" element={<Protected><IframeSite url = "https://www.hululktaab.com/" title = "حلول الكتب"/> </Protected>  } />
         </Route>
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/forgetPassword" element={<ForgetPassword/>} />
-        <Route path="/OTP" element={<OTPCode/>} />
-        <Route path="/setPassword" element={<SetPassword/>} />
-        <Route path="*" element={<h1>عذرا لا يوجد صفحة هنا</h1>} />
+
       </Routes>
       </div>
     </>
@@ -46,8 +59,6 @@ function App() {
 }
 
 function LayoutsWithNavbar() {
-
-
   return (
     <>
         <Sidebar />

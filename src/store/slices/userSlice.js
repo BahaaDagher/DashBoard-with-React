@@ -1,12 +1,18 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"; 
 import axios from "axios";
-const token = JSON.parse(localStorage.getItem('registeData')).token
+console.log("token",localStorage.getItem('registeData'))
+
+const localStorageData = JSON.parse(localStorage.getItem('registeData'));
+const token = localStorageData ? localStorageData.token : 'default-token-value';
+
+const userData = JSON.parse(localStorage.getItem('userData'));
+
 export const userLogin = createAsyncThunk(
   "user/userLogin", 
   async (values) => {
     try {
       const response = await axios.post(
-        "https://learninghouse.cloudy.mohamedmansi.com/api/login" ,{
+        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/login" ,{
             phone:values.email,
             password:values.password
         }
@@ -22,7 +28,7 @@ export const userRegister = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "https://learninghouse.cloudy.mohamedmansi.com/api/register" ,{
+        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/register" ,{
           name:values.name,
           phone:values.phone,
           email:values.email,
@@ -42,10 +48,9 @@ export const sendOtp = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "https://learninghouse.cloudy.mohamedmansi.com/api/verifyOtp" ,{
+        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/verifyOtp" ,{
           otp:values.otp,
           order_id:values.orderId,
-        
         },{ headers: {"Authorization" : token}}
       );
       return response.data ;
@@ -54,12 +59,27 @@ export const sendOtp = createAsyncThunk(
     }
 });
 
+
+export const logout = createAsyncThunk(
+  "user/logout", 
+  async () => {
+    try {
+      const response = await axios.post(
+        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/logout" ,{ headers: {"Authorization" : token}}
+      );
+      return response.data ;
+    } catch (error) {
+      console.error(error);
+    }
+});
+
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
     userData: [],
     registerData:[],
-    isAuth:false,
+    isAuth: userData ? true : false ,
     isRegisterSuccess:false,
     isOtpSuccess:false
   
@@ -69,20 +89,19 @@ const userSlice = createSlice({
      
       .addCase(userLogin.fulfilled, (state, action) => {
         state.userData = action.payload.data.user;
-        state.isAuth = action.payload.status
-       
+        state.isAuth = true
       })
 
       .addCase(userRegister.fulfilled, (state, action) => {
         state.registerData = action.payload.data.user;
         state.isRegisterSuccess = action.payload.status
-  
        
       })
       .addCase(sendOtp.fulfilled, (state, action) => {
         state.isOtpSuccess = action.payload.status
-  
-       
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.isAuth = false ; 
       })
      
   }

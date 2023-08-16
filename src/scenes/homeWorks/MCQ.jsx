@@ -14,6 +14,15 @@ export  const H5 = styled("h5")(({ theme }) => ({
   margin: "20px 0" ,
 }));
 
+const FlexBox = styled(Box)(({ theme }) => ({
+  display: 'flex' ,
+  alignItems: 'center' ,
+  [theme.breakpoints.down("900")]: {
+    flexDirection: 'column' ,
+  },
+
+}));
+
 const Input = styled("input")(({ theme }) => ({
     width: "100%" ,
     padding: "8px" , 
@@ -25,9 +34,9 @@ const Input = styled("input")(({ theme }) => ({
       borderColor: "#00bfc6" , 
     }, 
     "&.add": {
-      width: "89%" ,
-      [theme.breakpoints.down("500")]: {
-        width: '85%' ,
+      width: "80%" ,
+      [theme.breakpoints.down("900")]: {
+        width: '92%' ,
       },
     }
 }));
@@ -40,41 +49,51 @@ const AddButton = styled(Box)(({ theme }) => ({
   borderRadius: '5px' ,
   fontWeight: 'bold' ,
   cursor: 'pointer' ,
+  padding: '10px' ,
+  margin: '10px 0' ,
   backgroundColor: Colors.main[3] ,
   color: 'white' ,
+  transition: "background-color 0.3s",
   "&:hover": {
     backgroundColor: Colors.main[2],
   },
-  transition: "background-color 0.3s",
-  [theme.breakpoints.down("500")]: {
-    width: '14%' ,
+  [theme.breakpoints.down("900")]: {
+    width: '60%' ,
+    fontWeight: '100' ,
   },
 
 }));
 
 const Ul = styled("ul")(({ theme }) => ({
+  padding: '0' ,
   width:'92%',
   listStyle: 'none' ,
   display:'flex',
-  flexDirection:'row',
-  justifyContent:'space-around'
+  justifyContent:'center' ,
+  margin: '0 auto' ,
+  [theme.breakpoints.down("900")]: {
+    flexDirection: 'column' ,
+  },
 }));
 
 const Div = styled("div")(({ theme }) => ({
-
   display:'flex',
   flexDirection:'row',
-  justifyContent:'end'
+  justifyContent:'end' , 
+  [theme.breakpoints.down("500")]: {
+    flexDirection:'column' ,
+  },
 }));
 
 const Li = styled("li")(({ theme }) => ({
   margin: '10px 5px' ,
   width: '50%' ,
+  overflow: 'auto' ,  
   border: `2px solid ${Colors.main[3]}` ,
   padding: '10px' ,
   borderRadius: '5px' ,
   fontWeight: 'bold' ,
-  [theme.breakpoints.down("800")]: {
+  [theme.breakpoints.down("900")]: {
     width: '100%' ,
   },
 }));
@@ -154,7 +173,7 @@ function MCQ() {
         </ChildBox>
         <ChildBox>
           <H5>   الإجابات :</H5>
-          <Box display="flex" justifyContent="space-between">
+          <FlexBox display="flex" justifyContent="space-between">
             <Input
               className="add"
               type="text"
@@ -163,26 +182,22 @@ function MCQ() {
               onChange={(e)=>handleAnswerChange(e,i)}
             />
             <AddButton onClick={()=>addAnswer(i)}>اضافة اختيار</AddButton>
-          </Box>
-          <div>
-          
-            
-            <Ul  >
+          </FlexBox>
+          <Ul>
             {
               ques.answers.map((ans ,j)=>{
                 return <Li key={j}> {j+1}- {ans}</Li>
               })
             }
-            </Ul>
-          </div>
+          </Ul>
         </ChildBox>
         </Box>
        )
        
     })}
-    <Div > 
-    <SubmitButton onClick={handleSubmit}>ارسال الأسئلة</SubmitButton>
-    <SubmitButton onClick={addAnotherQues}>اضافة سؤال اخر</SubmitButton>
+    <Div> 
+      <SubmitButton onClick={handleSubmit}>ارسال الأسئلة</SubmitButton>
+      <SubmitButton onClick={addAnotherQues}>اضافة سؤال اخر</SubmitButton>
     </Div>
     
     

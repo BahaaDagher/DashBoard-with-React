@@ -26,6 +26,7 @@ const TabBox = styled(Box)(({ theme }) => ({
     "&:hover": {
         cursor: "pointer",
         color: Colors.main[2],
+        backgroundColor: "#00a4a93d",
     },
     fontWeight : "bold" ,
     fontSize : "17px" ,

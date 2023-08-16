@@ -6,65 +6,55 @@ import { Colors } from '../../theme';
 
 const Tab = styled("div")(({ theme }) => ({
   backgroundColor: Colors.main[6],
-  margin: "30px",
-  padding: "20px",
+  margin: "20px",
+  padding: "40px 20px",
   borderRadius: "10px",
   minWidth: "200px",
-  "&.first": {
-    [theme.breakpoints.down("800")]: {
-      marginTop: "0px",
-    },
-  } ,
-  [theme.breakpoints.down("800")]: {
-    margin: "30px 10px",
-  },
+  transition: "all 0.3s ease-in-out", 
   "&:hover": {
     cursor: "pointer",
+    backgroundColor: Colors.main[8],
   },
-  
-  
 }));
-
 const BoxContainer = styled("div")(({ theme }) => ({
   width: "100%",
   display : "flex",
-  justifyContent : "center" ,
-  alignItems : "center" ,
-  textAlign : "center" ,
+  justifyContent : "space-around" ,
   maxHeight: `calc(100vh - ${Colors.height} )`,
   overflow: "auto",
+  alignItems : "center" ,
+  textAlign : "center" ,
   fontWeight : "bold" ,
-  [theme.breakpoints.down("800")]: {
-    flexDirection : "column" ,
-  },
-
+  flexWrap : "wrap" , 
 }));
 const LinkStyle = styled(Link)(({ theme }) => ({
+  width: "40%",
   textDecoration: "none",
   fontSize: "20px",
+  fontWeight: "bold",
+  textAlign: "center",
   color: Colors.main[1],
   "&:hover": {
     color: Colors.main[2],
+  },
+  [theme.breakpoints.down("900")]: {
+    width: "100%",
   },
   [theme.breakpoints.down("500")]: {
     fontSize: "15px",
   },
 }));
+
 const Dashboard = () => {
   return (
     <BoxContainer >
-      <Box width="99%" margin="auto">
-        <LinkStyle to = "/AddResearch"> <Tab> طلبات البحوث </Tab></LinkStyle>
-        <LinkStyle to = "/"><Tab> بوت بيت العلم </Tab></LinkStyle>
-        <LinkStyle to = "/scienceHome"><Tab> بيت العلم بدون اعلانات </Tab></LinkStyle>
-        <LinkStyle to = "/booksAnswers"><Tab> حلول الكتب </Tab></LinkStyle>
-      </Box>
-      <Box width="99%" margin="auto">
-        <LinkStyle to = "/homeWorks" ><Tab className='first'>حل الواجبات </Tab></LinkStyle>
-        <LinkStyle to = "/"><Tab> شات الطلاب </Tab></LinkStyle>
-        <LinkStyle to = "/sciencePlatform"> <Tab>منصة العلم بدون اعلانات </Tab></LinkStyle>
-        <LinkStyle to = "/"> <Tab>الاختبارات المركزية</Tab></LinkStyle>
-      </Box>
+        <LinkStyle to = "/student/AddResearch"> <Tab> طلبات البحوث </Tab></LinkStyle>
+        <LinkStyle to = "/student/AddProjects" ><Tab > طلبات المشاريع </Tab></LinkStyle>
+        <LinkStyle to = "/student/dashboard"><Tab> بوت بيت العلم </Tab></LinkStyle>
+        <LinkStyle to = "/student/homeWorks" ><Tab >حل الواجبات </Tab></LinkStyle>
+        <LinkStyle to = "/student/dashboard"><Tab> شات الطلاب </Tab></LinkStyle>
+        <LinkStyle to = "/student/tests"> <Tab>الاختبارات المركزية</Tab></LinkStyle>
+        <LinkStyle to = "/student/scienceHome"><Tab > بيت العلم بدون اعلانات </Tab></LinkStyle>
     </BoxContainer>
   )
 }

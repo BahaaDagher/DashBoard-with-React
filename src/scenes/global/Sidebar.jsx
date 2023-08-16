@@ -12,11 +12,11 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
-import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlined';
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined';
 import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
 import BuildOutlinedIcon from '@mui/icons-material/BuildOutlined';
+import FactoryOutlinedIcon from '@mui/icons-material/FactoryOutlined';
 import { useSelector } from 'react-redux'
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -51,12 +51,16 @@ const Sidebar = () => {
   const [selected, setSelected] = useState('Dashboard') ; 
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const phone = useMediaQuery(theme.breakpoints.down("sm"));
-  const userData = JSON.parse(localStorage.getItem('userData'))
+
+  const localStorageData = JSON.parse(localStorage.getItem('userData'));
+  const userData = localStorageData ? localStorageData : 'default-token-sideBar';
+  
   console.log(userData);
 
   return (
     <Box 
     sx={{
+      height: "100vh",
       "& .pro-sidebar-inner": {
         background: `${Colors.main[1]} !important`,
       },
@@ -127,8 +131,8 @@ const Sidebar = () => {
         )}
         <Box >
           <Item sx={{fontSize: "40px"}}  
-            title="الصفحة الرئيسية "
-            to="/"
+            title="الصفحة الرئيسية"
+            to="/student/dashboard"
             icon={<HomeOutlinedIcon sx={{width: "20px" , height : "20px" }} />}
             selected={selected}
             setSelected={setSelected}
@@ -136,8 +140,16 @@ const Sidebar = () => {
           <Line/>
           <Item
             title="أبحاثي"
-            to="/myResearches"
+            to="/student/myResearches"
             icon={<PlagiarismOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Line/>
+           <Item
+            title="مشاريعي"
+            to="/student/MyProjects"
+            icon={<FactoryOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
             selected={selected}
             setSelected={setSelected}
           />
@@ -145,7 +157,7 @@ const Sidebar = () => {
           <Line/>
           <Item
             title="حلولي"
-            to="/myAnswers"
+            to="/student/myAnswers"
             icon={<QuizOutlinedIcon sx={{width: "20px" , height : "20px" }}/>}
             selected={selected}
             setSelected={setSelected}

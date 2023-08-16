@@ -74,57 +74,52 @@ const options = [
   "تاريخ",
 ];
 
-const AddResearch = () => {
-  const [title, setTitle] = useState("");
-  const [supervisor, setSupervisor] = useState("");
+const EditProfile = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform form submission logic here
-    console.log("Form submitted:", title, selectedOption);
+    console.log("Form submitted:", name, selectedOption);
   };
 
   return (
     <>
-      <Title>إضافة بحث :</Title>
+      <Title> تعديل الصفحة الشخصية :</Title>
       <FormContainer>
         <Form onSubmit={handleSubmit}>
-          <Label>عنوان البحث</Label>
+          <Label> الاسم </Label>
           <Input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             onFocus={(e) => e.target.classList.add("active")}
             onBlur={(e) => e.target.classList.remove("active")}
           />
-          <Label>  مشرف البحث </Label>
+          <Label> البريد الإلكتروني </Label>
           <Input
-            type="text"
-            value={supervisor}
-            onChange={(e) => setSupervisor(e.target.value)}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             onFocus={(e) => e.target.classList.add("active")}
             onBlur={(e) => e.target.classList.remove("active")}
           />
-
-          <Label>  المادة</Label>
-          <Select
-            value={selectedOption}
-            onChange={(e) => setSelectedOption(e.target.value)}
-          >
-            <Option value="">اختر اسم المادة </Option>
-            {options.map((option, index) => (
-              <Option key={index} value={option}>
-                {option}
-              </Option>
-            ))}
-          </Select>
-
-          <Button type="submit">إضافة</Button>
+          <Label> الهاتف </Label>
+          <Input
+            type="number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            onFocus={(e) => e.target.classList.add("active")}
+            onBlur={(e) => e.target.classList.remove("active")}
+          />
+          <Button type="submit">حفظ</Button>
         </Form>
       </FormContainer>
     </>
   );
 };
 
-export default AddResearch;
+export default EditProfile;
