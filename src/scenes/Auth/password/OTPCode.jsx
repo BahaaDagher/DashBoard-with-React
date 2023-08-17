@@ -21,7 +21,7 @@ const Login = () => {
   useEffect(() => {
 
     if (isOtpSuccess) {
-      navigate('/login')
+      navigate('/student/login')
     }
 
   }, [isOtpSuccess,userData])

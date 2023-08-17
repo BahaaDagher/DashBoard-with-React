@@ -6,7 +6,7 @@ export const getLevels = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(
-        "https://learninghouse.cloudy.mohamedmansi.com/api/levels"
+        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/levels"
       );
       return response.data.data.levels ;
     } catch (error) {

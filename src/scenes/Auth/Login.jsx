@@ -6,7 +6,7 @@ import { userLogin } from '../../store/slices/userSlice';
 
 const Login = () => {
 
-  const [formData, setFormData] = useState({email: "",password: ""});
+  const [formData, setFormData] = useState({email: "01472589632",password: "12345678"});
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const Login = () => {
     // redirect user to login page if registration was successful
     if (isAuth) {
       localStorage.setItem('userData', JSON.stringify(userData))
-      navigate('/dashBoard')
+      navigate('/student/dashboard')
     }
   }, [isAuth])
   
@@ -38,12 +38,13 @@ const Login = () => {
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">تسجيل الدخول</h3>
             <div className="form-group mt-3">
-              <label>البريد الإلكتروني</label>
+              <label> رقم الهاتف</label>
               <input
                 type="number"
                 name='email'
+                value={'01472589632'}
                 className="form-control mt-1"
-                placeholder="أدخل البريد الإلكتروني "
+                placeholder="أدخل  رقم الهاتف "
                 onChange={handleChange}
               />
             </div>
@@ -52,6 +53,7 @@ const Login = () => {
               <input
                 type="password"
                 name='password'
+                value={'12345678'}
                 className="form-control mt-1"
                 placeholder="أدخل كلمة المرور"
                 onChange={handleChange}
@@ -63,10 +65,10 @@ const Login = () => {
               </button>
             </div>
             <p className="signup text-right mt-2">
-                 <Link to="/register" className='RegisterLink' > نسيت كلمة المرور ؟ </Link>  
+                 <Link to="/student/register" className='RegisterLink' > نسيت كلمة المرور ؟ </Link>  
             </p>
             <p className="signup text-right mt-2">
-            ليس لديك حساب ؟  <Link to="/register" className='RegisterLink' > إنشاء حساب جديد </Link>  
+            ليس لديك حساب ؟  <Link to="/student/register" className='RegisterLink' > إنشاء حساب جديد </Link>  
             </p>
           </div>
         </form>

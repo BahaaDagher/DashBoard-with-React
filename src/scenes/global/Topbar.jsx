@@ -63,10 +63,10 @@ const Topbar = () => {
   useEffect(() => {
     console.log("isAuth" , isAuth)
     if (!isAuth) {
-      navigate('/')
-      localStorage.removeItem('userData');
       console.log('logout')
       localStorage.removeItem('userData');
+      navigate('/student/login')
+
     }
   }, [isAuth])
 

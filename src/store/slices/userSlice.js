@@ -2,8 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 console.log("token",localStorage.getItem('registeData'))
 
-const localStorageData = JSON.parse(localStorage.getItem('registeData'));
-const token = localStorageData ? localStorageData.token : 'default-token-value';
+
 
 const userData = JSON.parse(localStorage.getItem('userData'));
 
@@ -46,6 +45,7 @@ export const userRegister = createAsyncThunk(
 export const sendOtp = createAsyncThunk(
   "user/sendOtp", 
   async (values) => {
+    const token = JSON.parse(localStorage.getItem('registeData')).token;
     try {
       const response = await axios.post(
         "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/verifyOtp" ,{
@@ -63,6 +63,7 @@ export const sendOtp = createAsyncThunk(
 export const logout = createAsyncThunk(
   "user/logout", 
   async () => {
+    const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
         "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/logout" ,{ headers: {"Authorization" : token}}
