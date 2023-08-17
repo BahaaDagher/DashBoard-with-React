@@ -17,7 +17,7 @@ const Login = () => {
     // redirect user to login page if registration was successful
     if (isAuth) {
       localStorage.setItem('userData', JSON.stringify(userData))
-      navigate('/dashBoard')
+      navigate('/student/dashboard')
     }
   }, [isAuth])
   
@@ -66,7 +66,7 @@ const Login = () => {
                  <Link to="/register" className='RegisterLink' > نسيت كلمة المرور ؟ </Link>  
             </p>
             <p className="signup text-right mt-2">
-            ليس لديك حساب ؟  <Link to="/register" className='RegisterLink' > إنشاء حساب جديد </Link>  
+            ليس لديك حساب ؟  <Link to="/student/register" className='RegisterLink' > إنشاء حساب جديد </Link>  
             </p>
           </div>
         </form>

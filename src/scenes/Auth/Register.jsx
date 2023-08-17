@@ -19,8 +19,7 @@ const Register = () => {
     dispatch(getLevels())
     dispatch(getpackages())
   },[])
-
-
+  
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -51,7 +50,6 @@ const Register = () => {
     dispatch(userRegister(formData))
     console.log(registeData);
   };
-
   return (
     <>
       <div className="Auth-form-container">
@@ -60,7 +58,7 @@ const Register = () => {
           <h1 className="Auth-form-title">إنشاء حساب</h1>
           <div className="text-center">
           لديك حساب بالفعل  ؟ {" "}
-            <Link className="RegisterLink" to = "/" >
+            <Link className="RegisterLink" to = "/student/login" >
               تسجيل الدخول 
             </Link>
           </div>
