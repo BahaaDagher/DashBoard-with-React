@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const localStorageData = JSON.parse(localStorage.getItem('userData'));
-const token = localStorageData ? localStorageData.token : 'default-token-Questions';
 
 
 export const addQuestions = createAsyncThunk(
@@ -24,6 +22,7 @@ export const addQuestions = createAsyncThunk(
 export const getQuestions = createAsyncThunk(
   "questions/getQuestions", 
   async () => {
+    const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
         "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/getQuestions?exam_id=1" ,
