@@ -19,7 +19,7 @@ const Register = () => {
     dispatch(getLevels())
     dispatch(getpackages())
   },[])
-  
+
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -38,8 +38,8 @@ const Register = () => {
       localStorage.setItem('registeData', JSON.stringify(registeData))
       navigate('/student/otp')
     }
-
   }, [isRegisterSuccess])
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));

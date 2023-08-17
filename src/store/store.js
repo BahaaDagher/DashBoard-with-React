@@ -3,6 +3,7 @@ import levelSlice from './slices/levelSlice'
 import userSlice from './slices/userSlice'
 import packageSlice from './slices/packageSlice'
 import questionsSlice from './slices/questionsSlice'
+import researchesSlice from './slices/researchesSlice'
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     packagesList:packageSlice,
     userData:userSlice , 
     questionsData : questionsSlice , 
+    researchesData:researchesSlice,
   },
 })

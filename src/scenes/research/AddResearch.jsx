@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { Colors } from "../../theme";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { sendResearch } from "../../store/slices/researchesSlice";
+import Swal from "sweetalert2";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -79,10 +83,24 @@ const AddResearch = () => {
   const [supervisor, setSupervisor] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
 
+  const isResearchReceive = useSelector((state) => state.researchesData.isResearchReceive ) ; 
+  const dispatch = useDispatch()
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform form submission logic here
     console.log("Form submitted:", title, selectedOption);
+    dispatch(sendResearch({name : title , subjecet_id : 2})) ; 
+    if (isResearchReceive) {
+      Swal.fire({
+        text: 'تم ارسال طلب البحث، و سيتم ارسال البحث في خلال 3 ايام',
+      })
+    }
+    else {
+      Swal.fire({
+        icon: 'error',
+        text: 'حذث خطأ ما برجاء اعادة المحاولة',
+      })
+    }
   };
 
   return (
