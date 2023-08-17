@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { H5 } from './MCQ';
 import SubmitButton from '../../components/SubmitButton';
-function Picture() {
-  const [selectedPicture, setSelectedPicture] = useState(null);
 
+function Picture() {
+
+  const [selectedPicture, setSelectedPicture] = useState(null);
+  
   const handlePictureChange = (event) => {
     const file = event.target.files[0];
     if (file) {

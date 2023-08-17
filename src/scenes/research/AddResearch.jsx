@@ -83,24 +83,37 @@ const AddResearch = () => {
   const [supervisor, setSupervisor] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
 
-  const isResearchReceive = useSelector((state) => state.researchesData.isResearchReceive ) ; 
+  const isResearchSuccess = useSelector((state) => state.researchesData.isResearchSuccess ) ; 
+  const isResearchFail = useSelector((state) => state.researchesData.isResearchFail ) ; 
   const dispatch = useDispatch()
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", title, selectedOption);
-    dispatch(sendResearch({name : title , subjecet_id : 2})) ; 
-    if (isResearchReceive) {
+  let c = 1 ; 
+  useEffect(() => {
+    if (isResearchSuccess && !isResearchFail) {
       Swal.fire({
         text: 'تم ارسال طلب البحث، و سيتم ارسال البحث في خلال 3 ايام',
+        confirmButtonText: 'موافق',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload() ;
+        } 
       })
     }
-    else {
+    else if (!isResearchSuccess && isResearchFail) { 
       Swal.fire({
         icon: 'error',
         text: 'حذث خطأ ما برجاء اعادة المحاولة',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload() ;
+        } 
       })
     }
+  }, [isResearchSuccess, isResearchFail])
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", title, selectedOption);
+    dispatch(sendResearch({name : title , subjecet_id : 4})) ;
+    
   };
 
   return (

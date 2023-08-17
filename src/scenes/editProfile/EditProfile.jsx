@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Colors } from "../../theme";
+import { useDispatch, useSelector } from "react-redux";
+import { getLevels } from "../../store/slices/levelSlice";
+import { profileData } from "../../store/slices/userSlice";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -75,15 +78,40 @@ const options = [
 ];
 
 const EditProfile = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
+  const levels = useSelector((state) => state.levelsList.levels )
+  const user = useSelector((state) => state.userData.dataOfProfile )  
+
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [phone, setPhone] = useState(user.phone);
+  const [selectedOption, setSelectedOption] = useState(user.level_id);
+  const [selectedPicture, setSelectedPicture] = useState();
+
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if(!user.id) {
+      dispatch(getLevels()) ;
+      dispatch(profileData()) ; 
+    } else {
+      setName(user.name);
+      setEmail(user.email);
+      setPhone(user.phone);
+      setSelectedOption(user.level_id);
+    }
+    console.log("user" , user) ; 
+  }, [user] );
+
+  const handlePictureChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedPicture(file);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform form submission logic here
-    console.log("Form submitted:", name, selectedOption);
+    console.log("Form submitted:", name, email, phone ,  selectedOption , selectedPicture);
   };
 
   return (
@@ -115,9 +143,29 @@ const EditProfile = () => {
             onFocus={(e) => e.target.classList.add("active")}
             onBlur={(e) => e.target.classList.remove("active")}
           />
+          <Label> الصف </Label>
+          <Select
+            value={selectedOption}
+            onChange={(e) => setSelectedOption(e.target.value)}
+          >
+            {levels.map((level, index) => (
+              <Option key={index} value={level.id}>
+                {level.id}
+              </Option>
+            ))}
+          </Select>
+          <Label> الصورة </Label>
+          <div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handlePictureChange}
+            />
+          </div>
           <Button type="submit">حفظ</Button>
         </Form>
       </FormContainer>
+      
     </>
   );
 };

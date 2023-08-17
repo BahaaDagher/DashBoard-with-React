@@ -37,16 +37,21 @@ const researchesSlice = createSlice({
   name: "researches",
   initialState: {
     researches: [],
-    isResearchReceive: false,
+    isResearchSuccess: false,
+    isResearchFail: false ,
   },
   extraReducers: (builder) => {
     builder
       .addCase(getResearches.fulfilled, (state, action) => {
         state.researches = action.payload;
       })
-
       .addCase(sendResearch.fulfilled, (state, action) => {
-        state.isResearchReceive = action.payload.status
+        state.isResearchSuccess = action.payload.status
+        state.isResearchFail  = (state.isResearchSuccess)? false : true  ;
+      })
+      .addCase(sendResearch.rejected, (state, action) => {
+        state.isResearchSuccess = action.payload.status
+        state.isResearchFail  = true  ;
       })
   }
 });

@@ -5,6 +5,7 @@ import Researchers from "./Researchers";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getResearches } from "../../store/slices/researchesSlice";
+import { Box } from "@mui/material";
 
 const Container = styled("div")(({ theme }) => ({
   textAlign: "center",
@@ -79,6 +80,8 @@ const MyResearches = () => {
 
   return (
     <>
+    { (researches.length == 0) ? <Title>لا يوجد بحوث</Title> :
+    <Box>
     <Title>أبحاثي : </Title>
       <Container>
         <GrantStyledTable>
@@ -87,7 +90,8 @@ const MyResearches = () => {
               <GrantTableHead>الرقم</GrantTableHead>
               <GrantTableHead>عنوان البحث</GrantTableHead>
               <GrantTableHead>حالة البحث</GrantTableHead>
-              <GrantTableHead>البحث</GrantTableHead>
+              <GrantTableHead>اظهار </GrantTableHead>
+              <GrantTableHead>تنزيل</GrantTableHead>
             </tr>
           </thead>
           <tbody>
@@ -103,10 +107,20 @@ const MyResearches = () => {
                       }
                     </TableData>
                     <TableData>
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+                    <div className="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div className="modal-dialog modal-lg">
+                        <div className="modal-content">
+                          ...
+                        </div>
+                      </div>
+                    </div>
+                    </TableData>
+                    <TableData>
                       {
                         obj.status==0 ? 
-                        <FailButton>اظهار</FailButton> : 
-                        <GrantButton onClick={()=>pdfLink(obj.pdf)}>اظهار</GrantButton> 
+                        <FailButton>تنزيل</FailButton> : 
+                        <GrantButton onClick={()=>pdfLink(obj.pdf)}>تنزيل</GrantButton> 
                       }
                     </TableData>
                   </tr>
@@ -116,6 +130,8 @@ const MyResearches = () => {
           </tbody>
         </GrantStyledTable>
       </Container>
+    </Box>
+    }
     </>
   );
 };

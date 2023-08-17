@@ -60,6 +60,7 @@ export const sendOtp = createAsyncThunk(
 });
 
 
+
 export const logout = createAsyncThunk(
   "user/logout", 
   async () => {
@@ -74,6 +75,21 @@ export const logout = createAsyncThunk(
     }
 });
 
+export const profileData = createAsyncThunk(
+  "user/profileData", 
+  async (values) => {
+    const token = JSON.parse(localStorage.getItem('userData')).token;
+    try {
+      const response = await axios.get(
+        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/getProfileData" ,
+        { headers: {"Authorization" : token}}
+      );
+      return response.data.data.user ;
+    } catch (error) {
+      console.error(error);
+    }
+});
+
 
 const userSlice = createSlice({
   name: "user",
@@ -82,12 +98,12 @@ const userSlice = createSlice({
     registerData:[],
     isAuth: userData ? true : false ,
     isRegisterSuccess:false,
-    isOtpSuccess:false
-  
+    isOtpSuccess:false , 
+    dataOfProfile:{}
   },
   extraReducers: (builder) => {
     builder
-     
+
       .addCase(userLogin.fulfilled, (state, action) => {
         state.userData = action.payload.data.user;
         state.isAuth = true
@@ -104,7 +120,9 @@ const userSlice = createSlice({
       .addCase(logout.fulfilled, (state, action) => {
         state.isAuth = false ; 
       })
-     
+      .addCase(profileData.fulfilled, (state, action) => {
+        state.dataOfProfile = action.payload ; 
+      })
   }
 });
 

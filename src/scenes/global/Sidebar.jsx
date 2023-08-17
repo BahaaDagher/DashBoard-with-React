@@ -37,7 +37,7 @@ const Item = ({ title, to, icon, selected, setSelected, onClick }) => {
       }}
       onClick={() => {
         setSelected(title);
-        onClick();
+        onClick && onClick();
       }}
       icon={icon}
     >
@@ -90,7 +90,7 @@ const Sidebar = ({
         display: phone ? "none" : "block",
         height: "100vh",
         "& .pro-sidebar-inner": {
-          paddingTop: "60px",
+          paddingTop: "55px",
           background: `${Colors.main[1]} !important`,
         },
         "& .pro-icon-wrapper": {
@@ -154,7 +154,6 @@ const Sidebar = ({
           )}
           <Box>
             <Item
-              sx={{ fontSize: "40px" }}
               title="الصفحة الرئيسية"
               to="/student/dashboard"
               icon={<HomeOutlinedIcon sx={{ width: "20px", height: "20px" }} />}
@@ -239,7 +238,9 @@ const Sidebar = ({
       >
         <Box
           sx={{
+            height: "100vh",
             "& .pro-sidebar-inner": {
+              paddingTop: "55px",
               background: `${Colors.main[1]} !important`,
             },
             "& .pro-icon-wrapper": {
@@ -267,39 +268,45 @@ const Sidebar = ({
               style={{ backgroundColor: `${Colors.main[1]} !important` }}
             >
               <Box mb="25px">
-                <Box display="flex" justifyContent="center" alignItems="center">
-                  <img
-                    alt="profile-user"
-                    width="100px"
-                    height="100px"
-                    src={`../../assets/person3.png`}
-                    style={{
-                      cursor: "pointer",
-                      borderRadius: "50%",
-                      border: "2px solid #fff",
-                      paddingTop: "5px",
-                    }}
-                  />
-                </Box>
-                <Box textAlign="center">
-                  <Typography
-                    variant="h2"
-                    color="#fff"
-                    fontWeight="bold"
-                    sx={{ m: "10px 0 0 0" }}
-                  >
-                    إسماعيل محمود
-                  </Typography>
-                  <Typography variant="h5" color={Colors.greenAccent[500]}>
-                    مهندس برمجيات
-                  </Typography>
-                </Box>
+              <Box display="flex" justifyContent="center" alignItems="center">
+                <img
+                  alt="profile-user"
+                  width="100px"
+                  height="100px"
+                  src={`../../assets/person3.png`}
+                  style={{
+                    borderRadius: "50%",
+                    border: "2px solid #fff",
+                    paddingTop: "5px",
+                  }}
+                />
               </Box>
+              <Box textAlign="center">
+                <Typography
+                  variant="h2"
+                  color="#fff"
+                  fontWeight="bold"
+                  sx={{
+                    m: "10px 0 0 0",
+                    fontFamily: "Cairo",
+                    fontSize: "25px",
+                  }}
+                >
+                  {userData.name}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  color={Colors.main[4]}
+                  sx={{ fontFamily: "Cairo", padding: "10px" }}
+                >
+                  {userData.level}
+                </Typography>
+              </Box>
+            </Box>
               <Box>
                 <Item
                   onClick={mobileItemClicked}
-                  sx={{ fontSize: "40px" }}
-                  title="الصفحة الرئيسية "
+                  title="الصفحة الرئيسية"
                   to="/student/dashboard"
                   icon={
                     <HomeOutlinedIcon sx={{ width: "20px", height: "20px" }} />
@@ -307,72 +314,61 @@ const Sidebar = ({
                   selected={selected}
                   setSelected={setSelected}
                 />
-
-                <Typography
-                  variant="h6"
-                  color="#fff"
-                  sx={{
-                    m: "15px 10px 5px 20px",
-                    display: "flex",
-                    fontSize: "16px",
-                    fontWeight: "700",
-                  }}
-                >
-                  الأسئلة
-                </Typography>
+                <Line />
                 <Item
-                  title="أسألتي"
-                  to="/team"
-                  icon={
-                    <PeopleOutlinedIcon
-                      sx={{ width: "20px", height: "20px" }}
-                    />
-                  }
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                <Item
-                  title="اضافة سؤال"
-                  to="/contacts"
-                  icon={
-                    <ContactsOutlinedIcon
-                      sx={{ width: "20px", height: "20px" }}
-                    />
-                  }
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-
-                <Typography
-                  variant="h6"
-                  color="#fff"
-                  sx={{
-                    m: "15px 10px 5px 20px",
-                    display: "flex",
-                    fontSize: "16px",
-                    fontWeight: "700",
-                  }}
-                >
-                  الأبحاث
-                </Typography>
-                <Item
+                  onClick={mobileItemClicked}
                   title="أبحاثي"
-                  to="/form"
+                  to="/student/myResearches"
                   icon={
-                    <PersonOutlinedIcon
+                    <PlagiarismOutlinedIcon
                       sx={{ width: "20px", height: "20px" }}
                     />
                   }
                   selected={selected}
                   setSelected={setSelected}
                 />
+                <Line />
                 <Item
-                  title="إضافة بحث"
-                  to="/calendar"
+                  onClick={mobileItemClicked}
+                  title="مشاريعي"
+                  to="/student/MyProjects"
                   icon={
-                    <CalendarTodayOutlinedIcon
-                      sx={{ width: "20px", height: "20px" }}
-                    />
+                    <FactoryOutlinedIcon sx={{ width: "20px", height: "20px" }} />
+                  }
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+
+                <Line />
+                <Item
+                  onClick={mobileItemClicked}
+                  title="حلولي"
+                  to="/student/myAnswers"
+                  icon={<QuizOutlinedIcon sx={{ width: "20px", height: "20px" }} />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Line />
+
+                <Item
+                  onClick={mobileItemClicked}
+                  sx={{ fontSize: "40px" }}
+                  title="تنبيهاتي"
+                  to="/"
+                  icon={
+                    <CampaignOutlinedIcon sx={{ width: "20px", height: "20px" }} />
+                  }
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Line />
+                <Item
+                  onClick={mobileItemClicked}
+                  sx={{ fontSize: "40px" }}
+                  title="الدعم الفني"
+                  to="/"
+                  icon={
+                    <BuildOutlinedIcon sx={{ width: "20px", height: "20px" }} />
                   }
                   selected={selected}
                   setSelected={setSelected}
