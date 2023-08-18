@@ -90,7 +90,7 @@ const Sidebar = ({
         display: phone ? "none" : "block",
         height: "100vh",
         "& .pro-sidebar-inner": {
-          paddingTop: "55px",
+          paddingTop: "56px",
           background: `${Colors.main[1]} !important`,
         },
         "& .pro-icon-wrapper": {

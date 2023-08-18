@@ -89,6 +89,25 @@ export const profileData = createAsyncThunk(
       console.error(error);
     }
 });
+export const updateProfile = createAsyncThunk(
+  "user/updateProfile", 
+  async (values) => {
+    const token = JSON.parse(localStorage.getItem('userData')).token;
+    try {
+      const response = await axios.post(
+        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/updateProfile" ,{
+          name:values.name,
+          email:values.email,
+          phone:values.phone,
+          level_id:values.level_id,
+        },
+        { headers: {"Authorization" : token}}
+      );
+      return response.data ;
+    } catch (error) {
+      console.error(error);
+    }
+});
 
 
 const userSlice = createSlice({
@@ -99,7 +118,8 @@ const userSlice = createSlice({
     isAuth: userData ? true : false ,
     isRegisterSuccess:false,
     isOtpSuccess:false , 
-    dataOfProfile:{}
+    dataOfProfile : {} ,
+    ResponseUpdateProfile : {} ,
   },
   extraReducers: (builder) => {
     builder
@@ -122,6 +142,9 @@ const userSlice = createSlice({
       })
       .addCase(profileData.fulfilled, (state, action) => {
         state.dataOfProfile = action.payload ; 
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.ResponseUpdateProfile = action.payload; 
       })
   }
 });

@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Colors } from "../../theme";
 import { useDispatch, useSelector } from "react-redux";
 import { getLevels } from "../../store/slices/levelSlice";
-import { profileData } from "../../store/slices/userSlice";
+import { profileData, updateProfile } from "../../store/slices/userSlice";
+import Swal from "sweetalert2";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -80,13 +81,13 @@ const options = [
 const EditProfile = () => {
   const levels = useSelector((state) => state.levelsList.levels )
   const user = useSelector((state) => state.userData.dataOfProfile )  
+  const ResponseUpdateProfile = useSelector((state) => state.userData.ResponseUpdateProfile )
 
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
-  const [selectedOption, setSelectedOption] = useState(user.level_id);
+  const [selectedLevel, setSelectedLevel] = useState(levels.find(level => level.id === user.level_id));
   const [selectedPicture, setSelectedPicture] = useState();
-
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -97,7 +98,7 @@ const EditProfile = () => {
       setName(user.name);
       setEmail(user.email);
       setPhone(user.phone);
-      setSelectedOption(user.level_id);
+      setSelectedLevel(levels.find(level => level.id === user.level_id));
     }
     console.log("user" , user) ; 
   }, [user] );
@@ -109,9 +110,41 @@ const EditProfile = () => {
     }
   };
 
+
+  useEffect(() => {
+    if(ResponseUpdateProfile.status == true) {
+      const storedData = localStorage.getItem('userData');
+      const data = JSON.parse(storedData);
+      data.name = name ;
+      data.email = email ;
+      data.phone = phone ;
+      data.level_id = selectedLevel.id ;
+      const updatedData = JSON.stringify(data);
+      localStorage.setItem('userData', updatedData);
+      Swal.fire({
+        icon: 'success',
+        title: 'تم تعديل البيانات بنجاح',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      // window.location.reload();
+    }
+    else if (ResponseUpdateProfile.status==false) {
+      Swal.fire({
+        icon: 'error',
+        title: ResponseUpdateProfile.message ,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+  }, [ResponseUpdateProfile] );
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", name, email, phone ,  selectedOption , selectedPicture);
+    dispatch(updateProfile({name : name , email : email , phone : phone , level_id : selectedLevel.id }))
+    console.log( "name : " , name , "email : " , email , "phone : " , phone , "level_id : " , selectedLevel.id ,
+     "level: " , selectedLevel.name ) ;
   };
 
   return (
@@ -145,12 +178,16 @@ const EditProfile = () => {
           />
           <Label> الصف </Label>
           <Select
-            value={selectedOption}
-            onChange={(e) => setSelectedOption(e.target.value)}
+            value={""}
+            onChange={(e) => {
+              const selectedId = e.target.value;
+              const selectedLevel = levels.find(level => level.id === selectedId);
+              setSelectedLevel(selectedLevel);
+            }}
           >
             {levels.map((level, index) => (
               <Option key={index} value={level.id}>
-                {level.id}
+                {level.name}
               </Option>
             ))}
           </Select>
