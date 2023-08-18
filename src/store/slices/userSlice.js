@@ -89,6 +89,7 @@ export const profileData = createAsyncThunk(
       console.error(error);
     }
 });
+
 export const updateProfile = createAsyncThunk(
   "user/updateProfile", 
   async (values) => {
@@ -100,7 +101,7 @@ export const updateProfile = createAsyncThunk(
           email:values.email,
           phone:values.phone,
           level_id:values.level_id,
-          
+          image :values.image
         },
         { headers: {"Authorization" : token}}
       );
