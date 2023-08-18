@@ -86,7 +86,9 @@ const EditProfile = () => {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
-  const [selectedLevel, setSelectedLevel] = useState(levels.find(level => level.id === user.level_id));
+  const [selectedLevel, setSelectedLevel] = useState(user.level_id);
+  const [levelObject , setLevelObject] = useState({}) ;
+
   const [selectedPicture, setSelectedPicture] = useState();
 
   const dispatch = useDispatch();
@@ -98,18 +100,18 @@ const EditProfile = () => {
       setName(user.name);
       setEmail(user.email);
       setPhone(user.phone);
-      setSelectedLevel(levels.find(level => level.id === user.level_id));
+      setSelectedLevel(user.level_id);
     }
     console.log("user" , user) ; 
   }, [user] );
 
   const handlePictureChange = (event) => {
     const file = event.target.files[0];
+    console.log("file" , file) ;
     if (file) {
       setSelectedPicture(file);
     }
   };
-
 
   useEffect(() => {
     if(ResponseUpdateProfile.status == true) {
@@ -118,7 +120,9 @@ const EditProfile = () => {
       data.name = name ;
       data.email = email ;
       data.phone = phone ;
-      data.level_id = selectedLevel.id ;
+      data.level_id = selectedLevel ;
+      data.level = levelObject.name ; 
+      
       const updatedData = JSON.stringify(data);
       localStorage.setItem('userData', updatedData);
       Swal.fire({
@@ -127,24 +131,26 @@ const EditProfile = () => {
         showConfirmButton: false,
         timer: 1500
       })
-      // window.location.reload();
+      window.location.reload();
     }
     else if (ResponseUpdateProfile.status==false) {
       Swal.fire({
         icon: 'error',
-        title: ResponseUpdateProfile.message ,
+        text: ResponseUpdateProfile.message ,
         showConfirmButton: false,
         timer: 1500
       })
     }
   }, [ResponseUpdateProfile] );
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateProfile({name : name , email : email , phone : phone , level_id : selectedLevel.id }))
-    console.log( "name : " , name , "email : " , email , "phone : " , phone , "level_id : " , selectedLevel.id ,
-     "level: " , selectedLevel.name ) ;
+    dispatch(updateProfile({name : name , email : email , phone : phone , level_id : selectedLevel , image: selectedPicture}))
+    console.log( "name : " , name , "email : " , email , "phone : " , phone , "level_id : " , selectedLevel )
+    console.log("levels" , levels) ;
+    console.log("selectedLevel" , selectedLevel) ;
+    setLevelObject(levels.find(level => level.id == selectedLevel))
+    console.log("levelObject" , levelObject) ;
   };
 
   return (
@@ -178,11 +184,9 @@ const EditProfile = () => {
           />
           <Label> الصف </Label>
           <Select
-            value={""}
+            value = {selectedLevel}
             onChange={(e) => {
-              const selectedId = e.target.value;
-              const selectedLevel = levels.find(level => level.id === selectedId);
-              setSelectedLevel(selectedLevel);
+              setSelectedLevel(e.target.value);
             }}
           >
             {levels.map((level, index) => (

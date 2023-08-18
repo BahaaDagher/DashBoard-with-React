@@ -100,6 +100,7 @@ export const updateProfile = createAsyncThunk(
           email:values.email,
           phone:values.phone,
           level_id:values.level_id,
+          
         },
         { headers: {"Authorization" : token}}
       );
