@@ -35,7 +35,7 @@ function App() {
   const navigate = useNavigate()
   // useEffect(() => {
   //   if ( pathname == '/') {
-  //     window.location.href='https://learninghouse.cloudy.mohamedmansi.com/home/'
+  //     window.location.href='https://app.baetiy.com/home'
   //   }
   // },[])
   
