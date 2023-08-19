@@ -6,12 +6,12 @@ import axios from "axios";
 export const addQuestions = createAsyncThunk(
   "questions/addQuestions", 
   async (values) => {
+    const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/addResearch" ,{
-            phone:values.email,
-            password:values.password
-        }
+        "https://dash.baetiy.com/api/addQuestion" ,{
+          questions:JSON.stringify(values)
+        },{ headers: {"Authorization" : token ,'Content-Type': 'application/json'}}
       );
       return response.data ;
     } catch (error) {
@@ -38,13 +38,14 @@ const questionsSlice = createSlice({
   name: "questions",
   initialState: {
     questions: [],
+    isQuestionsAdded:{}
 
   },
   extraReducers: (builder) => {
     builder
      
       .addCase(addQuestions.fulfilled, (state, action) => {
-       
+       state.isQuestionsAdded =action.payload
       })
 
       .addCase(getQuestions.fulfilled, (state, action) => {
