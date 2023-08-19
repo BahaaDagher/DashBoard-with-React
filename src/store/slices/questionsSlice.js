@@ -8,7 +8,7 @@ export const addQuestions = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "https://learninghouse.cloudy.mohamedmansi.com/api/login" ,{
+        "https://dash.baetiy.com/api/addResearch" ,{
             phone:values.email,
             password:values.password
         }
@@ -25,7 +25,7 @@ export const getQuestions = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://test.learnning.mohamedmansi.com/api/getQuestions?exam_id=1" ,
+        "https://dash.baetiy.com/api/getQuestions?exam_id=1" ,
         { headers: {"Authorization" : token}}
       );
       return response.data ;

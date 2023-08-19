@@ -53,7 +53,7 @@ const Dashboard = () => {
         <LinkStyle to = "/student/dashboard"><Tab> بوت بيت العلم </Tab></LinkStyle>
         <LinkStyle to = "/student/homeWorks" ><Tab >حل الواجبات </Tab></LinkStyle>
         <LinkStyle to = "/student/dashboard"><Tab> شات الطلاب </Tab></LinkStyle>
-        <LinkStyle to = "/student/tests"> <Tab>الاختبارات المركزية</Tab></LinkStyle>
+        <LinkStyle to = "/student/exams"> <Tab>الاختبارات المركزية</Tab></LinkStyle>
         <LinkStyle to = "/student/scienceHome"><Tab > بيت العلم بدون اعلانات </Tab></LinkStyle>
     </BoxContainer>
   )

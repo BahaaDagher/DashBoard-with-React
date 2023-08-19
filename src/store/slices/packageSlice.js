@@ -6,7 +6,7 @@ export const getpackages = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(
-        "https://test.learnning.mohamedmansi.com/api/packages"
+        "https://dash.baetiy.com/api/packages"
       );
       return response.data.data.packages ;
     } catch (error) {

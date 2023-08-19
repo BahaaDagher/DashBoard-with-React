@@ -22,7 +22,7 @@ export const sendResearch = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://test.learnning.mohamedmansi.com/api/addResearch" , {
+        "https://dash.baetiy.com/api/addResearch" , {
           name:values.name,
           subjecet_id:values.subjecet_id,
         },{ headers: {"Authorization" : token}}

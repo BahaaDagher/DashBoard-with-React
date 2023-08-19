@@ -16,15 +16,13 @@ import SetPassword from "./scenes/Auth/password/SetPassword";
 import IframeSite from "./scenes/iframe/IframeSite";
 import MyAnswers from "./scenes/Answers/MyAnswers";
 import HomeWorks from "./scenes/homeWorks/HomeWorks";
-import { useSelector } from "react-redux";
 import EditProfile from "./scenes/editProfile/EditProfile";
-import { Chat } from "@mui/icons-material";
 import Protected from "./Protected";
-import Tests from "./scenes/tests/Tests";
 import AddProjects from "./scenes/projects/AddProjects";
 import MyProjects from "./scenes/projects/MyProjects";
 import { useState } from "react";
 import { useTheme } from "@emotion/react";
+import Exams from "./scenes/exams/Exams";
 function App() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
@@ -87,11 +85,11 @@ function App() {
               }
             />
             <Route
-              path="student/tests"
+              path="student/exams"
               element={
                 <Protected>
                   {" "}
-                  <Tests />
+                  <Exams />
                 </Protected>
               }
             />
