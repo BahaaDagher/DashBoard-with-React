@@ -5,5 +5,3 @@ const InputFile = styled("input")(({ theme }) => ({
     display: "none",
 })) 
 export default InputFile ;
-
-

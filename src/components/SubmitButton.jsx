@@ -13,7 +13,6 @@ const SubmitButton = styled("div")(({ theme }) => ({
   },
   transition: "background-color 0.3s",
   margin: "10px auto",
-
   textAlign: "center",
 }));
 

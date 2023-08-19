@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sendResearch } from "../../store/slices/researchesSlice";
 import Swal from "sweetalert2";
+import  Title from "../../components/Title";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -51,9 +52,7 @@ const Select = styled("select")(({ theme }) => ({
 const Option = styled("option")(({ theme }) => ({
 }))
 
-const Title = styled("h1")(({ theme }) => ({
-  padding : "10px ",
-}));
+;
 
 const Button = styled("button")(({ theme }) => ({
   padding: "10px 30px",
@@ -85,6 +84,7 @@ const AddResearch = () => {
 
   const isResearchSuccess = useSelector((state) => state.researchesData.isResearchSuccess ) ; 
   const isResearchFail = useSelector((state) => state.researchesData.isResearchFail ) ; 
+
   const dispatch = useDispatch()
   let c = 1 ; 
   useEffect(() => {
@@ -95,7 +95,7 @@ const AddResearch = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           window.location.reload() ;
-        } 
+        }
       })
     }
     else if (!isResearchSuccess && isResearchFail) { 
@@ -104,7 +104,7 @@ const AddResearch = () => {
         text: 'حذث خطأ ما برجاء اعادة المحاولة',
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.reload() ;
+          // window.location.reload() ;
         } 
       })
     }
@@ -112,7 +112,7 @@ const AddResearch = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", title, selectedOption);
-    dispatch(sendResearch({name : title , subjecet_id : 4})) ;
+    dispatch(sendResearch({name : title , teacher_name: supervisor, subjecet_id : 2 })) ;
     
   };
 

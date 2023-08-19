@@ -13,6 +13,7 @@ const BoxContainer = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   flexWrap: "wrap",
+ 
 }));
 
 
@@ -29,7 +30,31 @@ const Button = styled("button")(({ theme }) => ({
   transition: "background-color 0.3s",
   margin: "auto",
   fontWeight: "bold",
+  [theme.breakpoints.down("900")]: {
+    width:"90%" ,
+  },
 }));
+
+
+const BoxParent = styled(Box)(({ theme }) => ({
+  height: `calc(100vh - ${Colors.height} - 70px)` ,
+  overflow: "auto",
+}));
+
+const ParenButton = styled(Box)(({ theme }) => ({
+  width:"25%" , 
+  textAlign :"center" ,
+  marginBottom : "10px" , 
+  [theme.breakpoints.down("900")]: {
+    width:"50%" ,
+  },
+  [theme.breakpoints.down("500")]: {
+    width:"100%" ,
+  },
+
+}));
+
+
 
 
 
@@ -43,33 +68,34 @@ const Exams = () => {
 
   const dispatch  = useDispatch() ; 
   useEffect(() => {
+    dispatch(getExamQuestions(selectedExam))
+  }, [selectedExam]);
+
+
+  useEffect(() => {
     dispatch(getExams())
-    dispatch(getExamQuestions(1))
     console.log( "Exam", Exams)
     console.log( "ExamQuestions", ExamQuestions)
   }, []);
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-   
-  };
-
   return (
     <>
       <Title> الإختبارات المركزية  :</Title>
-      <BoxContainer>
-        {Exams.map((exam, index) => (
-          <div style= {{width:"25%" , textAlign :"center" , marginBottom : "10px"}}>
-            <Button key={index} onClick={() => setSelectedExam(exam.id)}>{exam.name}</Button>
-          </div>
-        ))}
-      </BoxContainer>
-      {/* <Box>
-        {ExamQuestions.map((question, i ) => (
-            <Answer singleQuestion={question}  key = {i} />
-        ))}
-      </Box>     */}
+      <BoxParent>
+        <BoxContainer>
+          {Exams.map((exam, index) => (
+            <ParenButton style= {{}}>
+              <Button key={index} onClick={() => setSelectedExam(exam.id)}>{exam.name}</Button>
+            </ParenButton>
+          ))}
+        </BoxContainer>
+        <Box>
+          {ExamQuestions.map((question, i ) => (
+              <Answer singleQuestion={question}  key = {i} />
+          ))}
+        </Box>    
+      </BoxParent>
 
     </>
   );

@@ -8,15 +8,20 @@ const LabelFile = styled("label")(({ theme }) => ({
     color: "#fff",
     background: Colors.main[1],
     textAlign: "center",
-    padding: "15px 40px",
-    fontSize: "18px",
+    width: "60%",
+    padding: "40px 30px",
+    fontSize: "30px",
     letterSpacing: "1.5px",
     userSelect: "none",
     cursor: "pointer",
     boxShadow: "0px 7px 10px rgba(0, 0, 0, 0.35)",
-    borderRadius: "3px",
+    borderRadius: "5px",
+    transition: "all 0.3s ease-in-out",
     "&:active": {
         transform: "scale(0.9)",
+    } , 
+    "&:hover": {
+      backgroundColor: Colors.main[2],
     }
   })) 
 

@@ -1,28 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getResearches = createAsyncThunk(
-  "researches/getResearches", 
+export const getProjects = createAsyncThunk(
+  "projects/getProjects", 
   async () => {
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://dash.baetiy.com/api/getResearches" , 
+        "https://dash.baetiy.com/api/getProjects" , 
         { headers: {"Authorization" : token}}
       );
-      return response.data.data.researchs ;
+      return response.data.data.projects ;
     } catch (error) {
       console.error(error);
     }
 });
 
-export const sendResearch = createAsyncThunk(
-  "researches/sendResearch", 
+export const sendProject = createAsyncThunk(
+  "projects/sendProject", 
   async (values) => {
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/addResearch" , {
+        "https://dash.baetiy.com/api/addProjecet" , {
           name:values.name,
           subjecet_id:values.subjecet_id,
           teacher_name: values.teacher_name,
@@ -34,27 +34,27 @@ export const sendResearch = createAsyncThunk(
     }
 });
 
-const researchesSlice = createSlice({
-  name: "researches",
+const projectsSlice = createSlice({
+  name: "projects",
   initialState: {
-    researches: [],
+    projects: [],
     isResearchSuccess: false,
     isResearchFail: false ,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getResearches.fulfilled, (state, action) => {
-        state.researches = action.payload;
+      .addCase(getProjects.fulfilled, (state, action) => {
+        state.projects = action.payload;
       })
-      .addCase(sendResearch.fulfilled, (state, action) => {
+      .addCase(sendProject.fulfilled, (state, action) => {
         state.isResearchSuccess = action.payload.status
         state.isResearchFail  = (state.isResearchSuccess)? false : true  ;
       })
-      .addCase(sendResearch.rejected, (state, action) => {
+      .addCase(sendProject.rejected, (state, action) => {
         state.isResearchSuccess = action.payload.status
         state.isResearchFail  = true  ;
       })
   }
 });
 
-export default researchesSlice.reducer;
+export default projectsSlice.reducer;

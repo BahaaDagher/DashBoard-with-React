@@ -1,6 +1,12 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { Colors } from "../../theme";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { sendResearch } from "../../store/slices/researchesSlice";
+import Swal from "sweetalert2";
+import  Title  from "../../components/Title";
+import { sendProject } from "../../store/slices/projectsSlice";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -47,9 +53,7 @@ const Select = styled("select")(({ theme }) => ({
 const Option = styled("option")(({ theme }) => ({
 }))
 
-const Title = styled("h1")(({ theme }) => ({
-  padding : "10px ",
-}));
+
 
 const Button = styled("button")(({ theme }) => ({
   padding: "10px 30px",
@@ -79,15 +83,43 @@ const AddProjects = () => {
   const [supervisor, setSupervisor] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
 
+  const isResearchSuccess = useSelector((state) => state.projectsData.isResearchSuccess ) ; 
+  const isResearchFail = useSelector((state) => state.projectsData.isResearchFail ) ; 
+
+  const dispatch = useDispatch()
+  let c = 1 ; 
+  useEffect(() => {
+    if (isResearchSuccess && !isResearchFail) {
+      Swal.fire({
+        text: 'تم ارسال طلب المشروع و سيتم ارسال البحث في خلال 3 ايام',
+        confirmButtonText: 'موافق',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload() ;
+        } 
+      })
+    }
+    else if (!isResearchSuccess && isResearchFail) { 
+      Swal.fire({
+        icon: 'error',
+        text: 'حذث خطأ ما برجاء اعادة المحاولة',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // window.location.reload() ;
+        } 
+      })
+    }
+  }, [isResearchSuccess, isResearchFail])
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform form submission logic here
     console.log("Form submitted:", title, selectedOption);
+    dispatch(sendProject({name : title , teacher_name: supervisor, subjecet_id : 2 })) ;
+    
   };
 
   return (
     <>
-      <Title>إضافة مشروع :</Title>
+      <Title>إضافة مشروع </Title>
       <FormContainer>
         <Form onSubmit={handleSubmit}>
           <Label>عنوان المشروع</Label>
@@ -98,7 +130,7 @@ const AddProjects = () => {
             onFocus={(e) => e.target.classList.add("active")}
             onBlur={(e) => e.target.classList.remove("active")}
           />
-          <Label>  مشرف البحث </Label>
+          <Label>  مشرف المشروع </Label>
           <Input
             type="text"
             value={supervisor}

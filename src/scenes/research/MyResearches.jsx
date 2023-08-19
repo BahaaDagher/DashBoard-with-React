@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getResearches } from "../../store/slices/researchesSlice";
 import { Box } from "@mui/material";
+import  Title  from "../../components/Title";
 
 const Container = styled("div")(({ theme }) => ({
   textAlign: "center",
@@ -60,9 +61,8 @@ const FailButton = styled("div")(({ theme }) => ({
   margin: "auto",
   padding: "3px",
 }));
-const Title = styled("h1")(({ theme }) => ({
-  padding : "10px ",
-}));
+
+
 
 const MyResearches = () => {
 
@@ -71,7 +71,7 @@ const MyResearches = () => {
 
   useEffect (() => {
     dispatch(getResearches()) ; 
-    console.log(researches);
+    console.log("researches ",researches);
   },[])
 
   const pdfLink = (pdf) =>{
@@ -82,7 +82,7 @@ const MyResearches = () => {
     <>
     { (researches.length == 0) ? <Title>لا يوجد بحوث</Title> :
     <Box>
-    <Title>أبحاثي : </Title>
+    <Title>أبحاثي  </Title>
       <Container>
         <GrantStyledTable>
           <thead>
@@ -103,7 +103,7 @@ const MyResearches = () => {
                     <TableData>{obj.name}</TableData>
                     <TableData>
                       {
-                        obj.status==0 ? "غير جاهز" : "جاهز" 
+                        obj.status==1 ? "جاهز" : "غير جاهز" 
                       }
                     </TableData>
                     <TableData>
@@ -118,9 +118,9 @@ const MyResearches = () => {
                     </TableData>
                     <TableData>
                       {
-                        obj.status==0 ? 
-                        <FailButton>تنزيل</FailButton> : 
-                        <GrantButton onClick={()=>pdfLink(obj.pdf)}>تنزيل</GrantButton> 
+                        obj.status==1 ? 
+                        <GrantButton onClick={()=>pdfLink(obj.pdf)}>تنزيل</GrantButton>  : 
+                        <FailButton>تنزيل</FailButton> 
                       }
                     </TableData>
                   </tr>

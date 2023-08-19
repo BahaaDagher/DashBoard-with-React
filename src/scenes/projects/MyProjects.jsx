@@ -1,12 +1,16 @@
 import styled from "@emotion/styled";
 import { Colors } from "../../theme";
 import { Fragment } from "react";
-import Projects from "./Projects";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { Box } from "@mui/material";
+import  Title  from "../../components/Title";
+import { getProjects } from "../../store/slices/projectsSlice";
 
 const Container = styled("div")(({ theme }) => ({
-  maxHeight: "100vh",
-  overflow: "auto",
   textAlign: "center",
+  maxHeight: `calc(100vh - ${Colors.height} - 70px)` ,
+  overflow: "auto",
 }));
 
 const GrantStyledTable = styled("table")(({ theme }) => ({
@@ -47,14 +51,37 @@ const GrantButton = styled("div")(({ theme }) => ({
   padding: "3px",
 }));
 
-const Title = styled("h1")(({ theme }) => ({
-  padding : "10px ",
+const FailButton = styled("div")(({ theme }) => ({
+  textAlign: "center",
+  backgroundColor: "#aaaaaa4a",
+  color: Colors.main[5],
+  border: `2px solid ${Colors.main[5]}`,
+  borderRadius: "10px",
+  margin: "auto",
+  padding: "3px",
 }));
 
+
+
 const MyProjects = () => {
+
+  const projects = useSelector((state) => state.projectsData.projects ) ; 
+  const dispatch = useDispatch()
+
+  useEffect (() => {
+    dispatch(getProjects()) ; 
+    console.log("projects ",projects);
+  },[])
+
+  const pdfLink = (pdf) =>{
+    window.open(pdf);
+  }
+
   return (
     <>
-    <Title>مشاريعي : </Title>
+    { (projects.length == 0) ? <Title>لا يوجد مشاريع</Title> :
+    <Box>
+    <Title> مشاريعي </Title>
       <Container>
         <GrantStyledTable>
           <thead>
@@ -62,19 +89,38 @@ const MyProjects = () => {
               <GrantTableHead>الرقم</GrantTableHead>
               <GrantTableHead>عنوان المشروع</GrantTableHead>
               <GrantTableHead>حالة المشروع</GrantTableHead>
-              <GrantTableHead>المشروع</GrantTableHead>
+              <GrantTableHead>اظهار </GrantTableHead>
+              <GrantTableHead>تنزيل</GrantTableHead>
             </tr>
           </thead>
           <tbody>
-            {Projects.map((obj, i) => {
+            {projects.map((obj, i) => {
               return (
                 <Fragment key={i}>
                   <tr>
                     <TableData>{obj.id}</TableData>
-                    <TableData>{obj.title}</TableData>
-                    <TableData>{obj.status}</TableData>
+                    <TableData>{obj.name}</TableData>
                     <TableData>
-                      <GrantButton>اظهار</GrantButton>
+                      {
+                        obj.status==1 ? "جاهز" : "غير جاهز" 
+                      }
+                    </TableData>
+                    <TableData>
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+                    <div className="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div className="modal-dialog modal-lg">
+                        <div className="modal-content">
+                          ...
+                        </div>
+                      </div>
+                    </div>
+                    </TableData>
+                    <TableData>
+                      {
+                        obj.status==1 ? 
+                        <GrantButton onClick={()=>pdfLink(obj.pdf)}>تنزيل</GrantButton>  : 
+                        <FailButton>تنزيل</FailButton> 
+                      }
                     </TableData>
                   </tr>
                 </Fragment>
@@ -83,6 +129,8 @@ const MyProjects = () => {
           </tbody>
         </GrantStyledTable>
       </Container>
+    </Box>
+    }
     </>
   );
 };

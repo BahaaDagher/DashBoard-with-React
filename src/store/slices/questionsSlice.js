@@ -19,6 +19,22 @@ export const addQuestions = createAsyncThunk(
     }
 });
 
+export const addImageQuestion = createAsyncThunk(
+  "questions/addImageQuestion", 
+  async (values) => {
+    const token = JSON.parse(localStorage.getItem('userData')).token;
+    try {
+      const response = await axios.post(
+        "https://dash.baetiy.com/api/addQuestion" ,
+          { images : [values] }
+         ,{ headers: {"Authorization" : token , "Content-Type": "multipart/form-data",}}
+      );
+      return response.data ;
+    } catch (error) {
+      console.error(error);
+    }
+});
+
 export const getQuestions = createAsyncThunk(
   "questions/getQuestions", 
   async () => {
@@ -26,7 +42,7 @@ export const getQuestions = createAsyncThunk(
     try {
       const response = await axios.get(
         "https://dash.baetiy.com/api/getQuestions?exam_id=1" ,
-        { headers: {"Authorization" : token}}
+        { headers: {"Authorization" : token , }}
       );
       return response.data ;
     } catch (error) {
@@ -50,6 +66,10 @@ const questionsSlice = createSlice({
 
       .addCase(getQuestions.fulfilled, (state, action) => {
         state.questions = action.payload.data.questions;
+      })
+
+      .addCase(addImageQuestion.fulfilled, (state, action) => {
+        state.isQuestionsAdded = action.payload;
       })
      
   }
