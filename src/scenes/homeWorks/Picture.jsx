@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { H5 } from './MCQ';
 import SubmitButton from '../../components/SubmitButton';
+import InputFile from '../../components/InputFile';
+import LabelFile from '../../components/LabelFile';
+
+
+
 
 function Picture() {
 
@@ -15,13 +20,14 @@ function Picture() {
 
   return (
     <div style={{border:'1px solid #20c997 ' , padding: '10px'}}>  
-      <H5>  اختر الصورة  :</H5>
       <div>
-        <input
+        <InputFile
+          id = "uploadPicture"
           type="file"
           accept="image/*"
           onChange={handlePictureChange}
         />
+        <LabelFile htmlFor="uploadPicture">اختر صورة</LabelFile>
       </div>
       {selectedPicture && (
         <div>

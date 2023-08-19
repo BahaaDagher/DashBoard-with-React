@@ -25,7 +25,7 @@ export const getQuestions = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/getQuestions?exam_id=1" ,
+        "https://test.learnning.mohamedmansi.com/api/getQuestions?exam_id=1" ,
         { headers: {"Authorization" : token}}
       );
       return response.data ;

@@ -11,7 +11,7 @@ export const userLogin = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/login" ,{
+        "https://test.learnning.mohamedmansi.com/api/login" ,{
             phone:values.email,
             password:values.password
         }
@@ -27,7 +27,7 @@ export const userRegister = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/register" ,{
+        "https://test.learnning.mohamedmansi.com/api/register" ,{
           name:values.name,
           phone:values.phone,
           email:values.email,
@@ -48,7 +48,7 @@ export const sendOtp = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('registeData')).token;
     try {
       const response = await axios.post(
-        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/verifyOtp" ,{
+        "https://test.learnning.mohamedmansi.com/api/verifyOtp" ,{
           otp:values.otp,
           order_id:values.orderId,
         },{ headers: {"Authorization" : token}}
@@ -67,7 +67,7 @@ export const logout = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/logout" ,{ headers: {"Authorization" : token}}
+        "https://test.learnning.mohamedmansi.com/api/logout" ,{ headers: {"Authorization" : token}}
       );
       return response.data ;
     } catch (error) {
@@ -81,7 +81,7 @@ export const profileData = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/getProfileData" ,
+        "https://test.learnning.mohamedmansi.com/api/getProfileData" ,
         { headers: {"Authorization" : token}}
       );
       return response.data.data.user ;
@@ -96,7 +96,7 @@ export const updateProfile = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/updateProfile" ,{
+        "https://test.learnning.mohamedmansi.com/api/updateProfile" ,{
           name:values.name,
           email:values.email,
           phone:values.phone,
