@@ -7,7 +7,7 @@ export const getResearches = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/getResearches" , 
+        "https://test.learnning.mohamedmansi.com/api/getResearches" , 
         { headers: {"Authorization" : token}}
       );
       return response.data.data.researchs ;
@@ -22,7 +22,7 @@ export const sendResearch = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/addResearch" , {
+        "https://test.learnning.mohamedmansi.com/api/addResearch" , {
           name:values.name,
           subjecet_id:values.subjecet_id,
         },{ headers: {"Authorization" : token}}

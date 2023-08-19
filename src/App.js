@@ -4,7 +4,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import Sidebar from "./scenes/global/Sidebar";
 import Topbar from "./scenes/global/Topbar";
 import Dashboard from "./scenes/dashboard/Dashboard";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Box, useMediaQuery } from "@mui/material";
 import MyResearches from "./scenes/research/MyResearches";
 import AddResearch from "./scenes/research/AddResearch";
@@ -23,7 +23,7 @@ import Protected from "./Protected";
 import Tests from "./scenes/tests/Tests";
 import AddProjects from "./scenes/projects/AddProjects";
 import MyProjects from "./scenes/projects/MyProjects";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@emotion/react";
 function App() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -31,6 +31,14 @@ function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const phone = useMediaQuery(theme.breakpoints.down("sm"));
+  const { pathname } = useLocation();
+  const navigate = useNavigate()
+  // useEffect(() => {
+  //   if ( pathname == '/') {
+  //     window.location.href='https://learninghouse.cloudy.mohamedmansi.com/home/'
+  //   }
+  // },[])
+  
 
   return (
     <>

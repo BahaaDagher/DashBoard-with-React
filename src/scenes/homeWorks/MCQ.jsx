@@ -3,6 +3,9 @@ import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Colors } from '../../theme';
 import  SubmitButton  from '../../components/SubmitButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { addQuestions } from '../../store/slices/questionsSlice';
+import Swal from "sweetalert2";
 
 const ChildBox = styled(Box)(({ theme }) => ({
   margin: '10px 0 ' ,
@@ -100,22 +103,41 @@ const Li = styled("li")(({ theme }) => ({
 
 
 function MCQ() {
-
+  const dispatch = useDispatch()
   const [data, setData] = useState([
      {
-      question:'',
-      answers:[
+      "name":'',
+      "answer":[
         
         ]
       }
   
   ]);
   const [currentAnswer ,setCurrentAnswer ] = useState([])
+  const isQuestionsAdded = useSelector((state) => state.questionsData.isQuestionsAdded )
+  useEffect(() => {
+    if(isQuestionsAdded.status == true) {
 
-
+      Swal.fire({
+        icon: 'success',
+        title: 'تم  ارسال الاسألة بنجاح',
+        showConfirmButton: false,
+        timer: 3000
+      })
+      window.location.reload();
+    }
+    else if (isQuestionsAdded.status == false) {
+      Swal.fire({
+        icon: 'error',
+        text: 'برجاء المحاولة مرة اخري',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+  }, [isQuestionsAdded] );
   const handleQuestionChange = (event ,i) => {
     let questions = [...data]
-    questions[i].question = event.target.value
+    questions[i].name = event.target.value
 
     setData(questions)
   };
@@ -130,7 +152,7 @@ function MCQ() {
     if(currentAnswer[i]){
 
       let questions = [...data]
-      questions[i].answers.push(currentAnswer)
+      questions[i].answer.push(currentAnswer[i])
       setData(questions)
       let currentAns = [...currentAnswer]
       currentAns[i]  = ''
@@ -138,14 +160,16 @@ function MCQ() {
     }
   };
   const handleSubmit = () => {
+    console.log(data);
+    dispatch(addQuestions(data))
     console.log('gg');
   };
 
   const addAnotherQues = () => {
     let questions = [...data]
     questions.push( {
-      question:'',
-      answers:[
+      "name":'',
+      "answer":[
         
         ]
       })
@@ -166,7 +190,7 @@ function MCQ() {
             <Input
               type="text"
               placeholder="أدخل السؤال هنا"
-              value={ques.question}
+              value={ques.name}
               onChange={(e)=>handleQuestionChange(e ,i)}
             />
           </div>
@@ -185,7 +209,7 @@ function MCQ() {
           </FlexBox>
           <Ul>
             {
-              ques.answers.map((ans ,j)=>{
+              ques.answer.map((ans ,j)=>{
                 return <Li key={j}> {j+1}- {ans}</Li>
               })
             }

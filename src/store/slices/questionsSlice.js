@@ -6,12 +6,12 @@ import axios from "axios";
 export const addQuestions = createAsyncThunk(
   "questions/addQuestions", 
   async (values) => {
+    const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://learninghouse.cloudy.mohamedmansi.com/api/login" ,{
-            phone:values.email,
-            password:values.password
-        }
+        "https://test.learnning.mohamedmansi.com/api/addQuestion" ,{
+          questions:JSON.stringify(values)
+        },{ headers: {"Authorization" : token ,'Content-Type': 'application/json'}}
       );
       return response.data ;
     } catch (error) {
@@ -25,7 +25,7 @@ export const getQuestions = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://learninghouse.cloudy.mohamedmansi.com/dashboard/api/getQuestions?exam_id=1" ,
+        "https://test.learnning.mohamedmansi.com/api/getQuestions?exam_id=1" ,
         { headers: {"Authorization" : token}}
       );
       return response.data ;
@@ -38,13 +38,14 @@ const questionsSlice = createSlice({
   name: "questions",
   initialState: {
     questions: [],
+    isQuestionsAdded:{}
 
   },
   extraReducers: (builder) => {
     builder
      
       .addCase(addQuestions.fulfilled, (state, action) => {
-       
+       state.isQuestionsAdded =action.payload
       })
 
       .addCase(getQuestions.fulfilled, (state, action) => {
