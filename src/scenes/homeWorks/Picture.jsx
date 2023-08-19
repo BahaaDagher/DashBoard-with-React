@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { H5 } from './MCQ';
 import SubmitButton from '../../components/SubmitButton';
+import InputFile from '../../components/InputFile';
+import LabelFile from '../../components/LabelFile';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import styled from '@emotion/styled';
+
+const CenterDiv = styled("div")(({ theme }) => ({
+  textAlign: "center" ,
+})) 
 
 function Picture() {
 
@@ -15,23 +23,24 @@ function Picture() {
 
   return (
     <div style={{border:'1px solid #20c997 ' , padding: '10px'}}>  
-      <H5>  اختر الصورة  :</H5>
-      <div>
-        <input
+      <CenterDiv >
+        <InputFile
+          id = "uploadPicture"
           type="file"
           accept="image/*"
           onChange={handlePictureChange}
         />
-      </div>
+        <LabelFile htmlFor="uploadPicture"> <AddPhotoAlternateIcon sx= {{fontSize : "25px"}}/> اختر صورة</LabelFile>
+      </CenterDiv>
       {selectedPicture && (
-        <div>
-          <H5> الصورة المختارة :</H5>
+        <CenterDiv>
+          <H5> الصورة المختارة </H5>
           <img
             src={URL.createObjectURL(selectedPicture)}
             alt="Selected"
             style={{ maxWidth: '100%', maxHeight: '300px' }}
           />
-        </div>
+        </CenterDiv>
       )}
       <SubmitButton>تأكيد</SubmitButton>
     </div>

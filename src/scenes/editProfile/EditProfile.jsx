@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getLevels } from "../../store/slices/levelSlice";
 import { profileData, updateProfile } from "../../store/slices/userSlice";
 import Swal from "sweetalert2";
+import  Title  from "../../components/Title";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -51,9 +52,6 @@ const Select = styled("select")(({ theme }) => ({
 const Option = styled("option")(({ theme }) => ({
 }))
 
-const Title = styled("h1")(({ theme }) => ({
-  padding : "10px ",
-}));
 
 const Button = styled("button")(({ theme }) => ({
   padding: "10px 30px",
@@ -155,7 +153,7 @@ const EditProfile = () => {
 
   return (
     <>
-      <Title> تعديل الصفحة الشخصية :</Title>
+      <Title> تعديل الصفحة الشخصية </Title>
       <FormContainer>
         <Form onSubmit={handleSubmit}>
           <Label> الاسم </Label>
