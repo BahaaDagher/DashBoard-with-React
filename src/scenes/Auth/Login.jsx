@@ -6,7 +6,7 @@ import { userLogin } from '../../store/slices/userSlice';
 
 const Login = () => {
 
-  const [formData, setFormData] = useState({email: "01472589632",password: "12345678"});
+  const [formData, setFormData] = useState({email: "",password: ""});
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -41,7 +41,7 @@ const Login = () => {
               <input
                 type="number"
                 name='email'
-                value={'01472589632'}
+             
                 className="form-control mt-1"
                 placeholder="أدخل  رقم الهاتف "
                 onChange={handleChange}
@@ -52,7 +52,7 @@ const Login = () => {
               <input
                 type="password"
                 name='password'
-                value={'12345678'}
+           
                 className="form-control mt-1"
                 placeholder="أدخل كلمة المرور"
                 onChange={handleChange}

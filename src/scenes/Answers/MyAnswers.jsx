@@ -58,8 +58,8 @@ const MyAnswers = () => {
   return (
     <>
     <BoxContainer sx = {{}}>
-        {Questions.map((question) => (
-            <Answer singleQuestion={question} />
+        {Questions.map((question,index) => (
+            <Answer singleQuestion={question} index={index} />
         ))}
     </BoxContainer>
     </>

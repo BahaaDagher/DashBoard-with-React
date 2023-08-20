@@ -68,15 +68,15 @@ const Topbar = ({
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-
+  const token = JSON.parse(localStorage.getItem('userData')).token;
   useEffect(() => {
     console.log("isAuth", isAuth);
     if (!isAuth) {
       console.log("logout");
-      localStorage.removeItem("userData");
+      localStorage.clear()
       navigate("/student/login");
     }
-  }, [isAuth]);
+  }, [isAuth,token]);
 
   const handleLogout = () => {
     dispatch(logout());
