@@ -26,7 +26,7 @@ export const addImageQuestion = createAsyncThunk(
     try {
       const response = await axios.post(
         "https://dash.baetiy.com/api/addQuestion" ,
-          { images : [values] }
+          values
          ,{ headers: {"Authorization" : token , "Content-Type": "multipart/form-data",}}
       );
       return response.data ;
