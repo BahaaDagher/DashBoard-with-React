@@ -41,7 +41,7 @@ export const getQuestions = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://dash.baetiy.com/api/getQuestions?exam_id=1" ,
+        "https://dash.baetiy.com/api/getQuestionsStudent" ,
         { headers: {"Authorization" : token , }}
       );
       return response.data ;

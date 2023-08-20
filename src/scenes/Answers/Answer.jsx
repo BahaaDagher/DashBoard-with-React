@@ -42,45 +42,34 @@ const H6 = styled("h6")(({ theme }) => ({
     paddingRight: '10px' ,
 }));  
 
-const Answer = ({singleQuestion}) => {
+const Answer = ({singleQuestion ,index}) => {
     const ans = singleQuestion.answer ;
+    console.log( 'jkjgkjg',singleQuestion.choices[0].choose);
   return (
     <>
         <BoxContainer>
-            <h5 style={{fontWeight : "bold"}} ><span>{singleQuestion.id}</span> -  {singleQuestion.name}</h5>
+            <h5 style={{fontWeight : "bold"}} ><span>{index+1}</span> -  {singleQuestion.name}</h5>
             <BoxAnswer>
-                <Item>
-                    {
-                        (ans===1) ? 
-                        (<CheckIcon sx={{fontSize:"20px" , color : Colors.main[1] }} />) :
-                        (<FiberManualRecordOutlinedIcon sx={{fontSize:"20px" }} />)
-                    }
-                    <H6>{singleQuestion.option_1 } </H6>
-                </Item>
-                <Item>
-                    {
-                        (ans===2) ?  
-                        (<CheckIcon sx={{fontSize:"20px" , color : Colors.main[1] }} />) :
-                        (<FiberManualRecordOutlinedIcon sx={{fontSize:"20px" }} />)
-                    }
-                    <H6>{singleQuestion.option_2 } </H6>
-                </Item>
-                <Item>
-                    {
-                        (ans===3) ? 
-                        (<CheckIcon sx={{fontSize:"20px" , color : Colors.main[1] }} />) :
-                        (<FiberManualRecordOutlinedIcon sx={{fontSize:"20px" }} />)
-                    }
-                    <H6>{singleQuestion.option_3 } </H6>
-                </Item>
-                <Item>
-                    {
-                        (ans===4) ? 
-                        (<CheckIcon sx={{fontSize:"20px" , color : Colors.main[1] }} />) :
-                        (<FiberManualRecordOutlinedIcon sx={{fontSize:"20px" }} />)
-                    }
-                    <H6>{singleQuestion.option_4 } </H6>
-                </Item>
+           
+                {
+                singleQuestion.choices ?  
+                singleQuestion.choices.map((choice,i)=>{
+                    return(  
+                    <Item>
+                        {
+                            (singleQuestion.answer===i+1) ? 
+                            (<CheckIcon sx={{fontSize:"20px" , color : Colors.main[1] }} />) :
+                            (<FiberManualRecordOutlinedIcon sx={{fontSize:"20px" }} />)
+                        }
+                        <H6>{choice.choose } </H6>
+                        </Item>)
+
+                })
+                : ''
+                
+                } 
+            
+             
             </BoxAnswer>
         </BoxContainer>
     </>

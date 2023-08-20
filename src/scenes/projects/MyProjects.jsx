@@ -79,7 +79,7 @@ const MyProjects = () => {
 
   return (
     <>
-    { (projects.length == 0) ? <Title>لا يوجد مشاريع</Title> :
+    { (!projects) ? <Title>لا يوجد مشاريع</Title> :
     <Box>
     <Title> مشاريعي </Title>
       <Container>

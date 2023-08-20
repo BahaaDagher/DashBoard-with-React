@@ -44,7 +44,7 @@ const Register = () => {
   useEffect(() => {
     if (isRegisterSuccess) {
       localStorage.setItem('registeData', JSON.stringify(registeData))
-      navigate('/student/otp')
+      navigate('/student/login')
     }
   }, [isRegisterSuccess])
   
