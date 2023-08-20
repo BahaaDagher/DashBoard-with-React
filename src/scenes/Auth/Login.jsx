@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const Login = () => {
 
   const [formData, setFormData] = useState({email: "",password: ""});
-  
+
   const [change , setChange] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -18,7 +18,6 @@ const Login = () => {
 
   useEffect(() => {
     // redirect user to login page if registration was successful
-    console.log("loginValidatiosdfsdfdsn" , loginValidation)
     if (isAuth) {
       localStorage.setItem('userData', JSON.stringify(userData.data.user))
       navigate('/student/dashboard')

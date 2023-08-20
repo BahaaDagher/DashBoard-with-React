@@ -40,24 +40,33 @@ const projectsSlice = createSlice({
   name: "projects",
   initialState: {
     projects: [],
+    loading : false,
     sendProjectResponse: {},
     isResearchSuccess: false,
     isResearchFail: false ,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getProjects.fulfilled, (state, action) => {
-        state.projects = action.payload;
-      })
-      .addCase(sendProject.fulfilled, (state, action) => {
-        state.isResearchSuccess = action.payload.status
-        state.isResearchFail  = (state.isResearchSuccess)? false : true  ;
-        state.sendProjectResponse = action.payload;
-      })
-      .addCase(sendProject.rejected, (state, action) => {
-        state.isResearchSuccess = action.payload.status
-        state.isResearchFail  = true  ;
-      })
+
+    .addCase(getProjects.pending, (state, action) => {
+      state.loading = true;
+    })
+    .addCase(getProjects.rejected, (state, action) => {
+      state.loading = false;
+    })
+    .addCase(getProjects.fulfilled, (state, action) => {
+      state.projects = action.payload;
+      state.loading = false;
+    })
+    .addCase(sendProject.fulfilled, (state, action) => {
+      state.isResearchSuccess = action.payload.status
+      state.isResearchFail  = (state.isResearchSuccess)? false : true  ;
+      state.sendProjectResponse = action.payload;
+    })
+    .addCase(sendProject.rejected, (state, action) => {
+      state.isResearchSuccess = action.payload.status
+      state.isResearchFail  = true  ;
+    })
   }
 });
 

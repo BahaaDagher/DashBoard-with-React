@@ -3,7 +3,7 @@ import { Colors } from "../../theme";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import  Title  from "../../components/Title";
 import { getProjects } from "../../store/slices/projectsSlice";
 
@@ -66,6 +66,7 @@ const FailButton = styled("div")(({ theme }) => ({
 const MyProjects = () => {
 
   const projects = useSelector((state) => state.projectsData.projects ) ; 
+  const loading = useSelector((state) => state.projectsData.loading ) ;
   const dispatch = useDispatch()
 
   useEffect (() => {
@@ -79,7 +80,8 @@ const MyProjects = () => {
 
   return (
     <>
-    { (projects.length==0) ? <Title>لا يوجد مشاريع</Title> :
+     { loading ? <CircularProgress/> :
+     (projects.length==0) ? <Title>لا يوجد مشاريع</Title> :
     <Box>
     <Title> مشاريعي </Title>
       <Container>
@@ -132,7 +134,9 @@ const MyProjects = () => {
         </GrantStyledTable>
       </Container>
     </Box>
-    }
+
+     }
+    
     </>
   );
 };

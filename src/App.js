@@ -23,6 +23,7 @@ import MyProjects from "./scenes/projects/MyProjects";
 import { useEffect, useState } from "react";
 import { useTheme } from "@emotion/react";
 import Exams from "./scenes/exams/Exams";
+import StudentsChat from "./scenes/chat/StudentsChat";
 function App() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
@@ -174,6 +175,14 @@ function App() {
                     url="https://www.hululktaab.com/"
                     title="حلول الكتب"
                   />{" "}
+                </Protected>
+              }
+            />
+            <Route
+              path="student/studentsChat"
+              element={
+                <Protected>
+                  <StudentsChat/>
                 </Protected>
               }
             />
