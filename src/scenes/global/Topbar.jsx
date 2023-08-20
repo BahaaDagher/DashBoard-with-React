@@ -79,6 +79,7 @@ const Topbar = ({
   }, [isAuth,token]);
 
   const handleLogout = () => {
+    console.log(isAuth);
     dispatch(logout());
   };
 

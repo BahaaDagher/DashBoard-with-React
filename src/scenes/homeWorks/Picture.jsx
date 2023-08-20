@@ -28,7 +28,7 @@ function Picture() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('images', selectedPicture );
+    formData.append('image', selectedPicture );
     dispatch(addImageQuestion(formData))
 
   };
