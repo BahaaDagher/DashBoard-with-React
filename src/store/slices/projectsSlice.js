@@ -4,13 +4,15 @@ import axios from "axios";
 export const getProjects = createAsyncThunk(
   "projects/getProjects", 
   async () => {
+  
     const token = JSON.parse(localStorage.getItem('userData')).token;
+    console.log(token);
     try {
       const response = await axios.get(
-        "https://dash.baetiy.com/api/getProjects" , 
+        "https://dash.baetiy.com/api/getProjecets?page=1&limit=20" , 
         { headers: {"Authorization" : token}}
       );
-      return response.data.data.projects ;
+      return response.data.data.projecets;
     } catch (error) {
       console.error(error);
     }
