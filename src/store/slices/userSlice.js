@@ -113,8 +113,9 @@ export const updateProfile = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    userData: [],
+    userData: {},
     registerData:{},
+    loginValidation:{},
     registerResponse : {}, 
     isAuth: userData ? true : false ,
     isRegisterSuccess:false,
@@ -126,8 +127,10 @@ const userSlice = createSlice({
     builder
 
       .addCase(userLogin.fulfilled, (state, action) => {
-        state.userData = action.payload.data.user;
-        state.isAuth = true
+        state.userData = action.payload;
+        state.loginValidation = action.payload;
+        state.isAuth = action.payload.status
+        
       })
 
       .addCase(userRegister.fulfilled, (state, action) => {

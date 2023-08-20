@@ -3,23 +3,37 @@ import './Auth.css'
 import {Link, useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../../store/slices/userSlice';
+import Swal from 'sweetalert2';
 
 const Login = () => {
 
   const [formData, setFormData] = useState({email: "",password: ""});
-
+  
+  const [change , setChange] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const isAuth =useSelector((state) => state.userData.isAuth ) 
   const userData =useSelector((state) => state.userData.userData ) 
+  const loginValidation =useSelector((state) => state.userData.loginValidation )
 
   useEffect(() => {
     // redirect user to login page if registration was successful
+    console.log("loginValidatiosdfsdfdsn" , loginValidation)
     if (isAuth) {
-      localStorage.setItem('userData', JSON.stringify(userData))
+      localStorage.setItem('userData', JSON.stringify(userData.data.user))
       navigate('/student/dashboard')
     }
-  }, [isAuth])
+    else if (!loginValidation.data && change) {
+      Swal.fire({
+        icon: 'error',
+        text: loginValidation.message,
+        showConfirmButton: false,
+        timer: 2000
+      })
+    }
+  }, [isAuth, loginValidation])
+
+
   
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,6 +43,8 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(userLogin(formData))
+    setChange(true)
+    console.log("loginValidation" , loginValidation) 
   };
   return (
     <>
@@ -41,7 +57,6 @@ const Login = () => {
               <input
                 type="number"
                 name='email'
-             
                 className="form-control mt-1"
                 placeholder="أدخل  رقم الهاتف "
                 onChange={handleChange}
@@ -64,7 +79,7 @@ const Login = () => {
               </button>
             </div>
             <p className="signup text-right mt-2">
-                 <Link to="/student/register" className='RegisterLink' > نسيت كلمة المرور ؟ </Link>  
+                 <Link to="/student/forgetPassword" className='RegisterLink' > نسيت كلمة المرور ؟ </Link>  
             </p>
             <p className="signup text-right mt-2">
             ليس لديك حساب ؟  <Link to="/student/register" className='RegisterLink' > إنشاء حساب جديد </Link>  

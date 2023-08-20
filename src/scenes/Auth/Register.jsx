@@ -43,7 +43,7 @@ const Register = () => {
   const navigate = useNavigate()
   const registerData =useSelector((state) => state.userData.registerData)
   const isRegisterSuccess =useSelector((state) => state.userData.isRegisterSuccess )
-
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [change , setChange] = useState(false) 
   useEffect(() => {
@@ -69,16 +69,29 @@ const Register = () => {
       })
     }
   }, [isRegisterSuccess, registerData])
+
   
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-  };
+  const { name, value } = event.target;
+  setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+};
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(userRegister(formData))
-    setChange(true)
+    
+    if (formData.password.length>0 && formData.password !== confirmPassword) {
+      Swal.fire({
+        icon: 'error',
+        text: 'كلمة السر غير متطابقة',
+      })
+    }
+    else 
+    {
+      dispatch(userRegister(formData));
+      setChange(true);
+    }
+
   };
   return (
     <>
@@ -165,6 +178,7 @@ const Register = () => {
               className="form-control mt-1"
               placeholder="تأكيد كلمة المرور "
               name='confirmPass'
+              onChange={(e)=>setConfirmPassword(e.target.value)}
             />
           </div>
           <div className="d-grid gap-2 mt-3">

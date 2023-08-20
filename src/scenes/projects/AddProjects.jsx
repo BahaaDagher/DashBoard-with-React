@@ -83,47 +83,48 @@ const AddProjects = () => {
   const [title, setTitle] = useState("");
   const [supervisor, setSupervisor] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
+  const [change , setChange] = useState(false) ;
 
   const subjects = useSelector((state) => state.subjectsData.subjects ) ;
+  const sendProjectResponse = useSelector((state) => state.projectsData.sendProjectResponse ) ;
+
+useEffect(() => {
+    if (sendProjectResponse.status) {
+      Swal.fire({
+        icon: 'success',
+        title: 'تم إضافة المشروع  بنجاح',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      setTimeout(() => {
+        window.location.reload() ;
+      }, 2300);
+    }
+    else if (change ) {
+      Swal.fire({
+        icon: 'error',
+        text:sendProjectResponse.message ,
+        showConfirmButton: false,
+        timer: 2000
+      })
+      setTimeout(() => {
+      }, 2300);
+    }
+  }, [sendProjectResponse]);
 
   const dispatch = useDispatch()
-
   useEffect(() => { 
     dispatch(getSubjects()) ;
     console.log(subjects) ;
   }, [])
 
-  const isResearchSuccess = useSelector((state) => state.projectsData.isResearchSuccess ) ; 
-  const isResearchFail = useSelector((state) => state.projectsData.isResearchFail ) ; 
 
-  
-  let c = 1 ; 
-  useEffect(() => {
-    if (isResearchSuccess && !isResearchFail) {
-      Swal.fire({
-        text: 'تم ارسال طلب المشروع و سيتم ارسال البحث في خلال 3 ايام',
-        confirmButtonText: 'موافق',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.reload() ;
-        } 
-      })
-    }
-    else if (!isResearchSuccess && isResearchFail) { 
-      Swal.fire({
-        icon: 'error',
-        text: 'حذث خطأ ما برجاء اعادة المحاولة',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // window.location.reload() ;
-        } 
-      })
-    }
-  }, [isResearchSuccess, isResearchFail])
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", title, selectedSubject);
     dispatch(sendProject({name : title , teacher_name: supervisor, subjecet_id : selectedSubject })) ;
+    setChange(true) ;
     
   };
 

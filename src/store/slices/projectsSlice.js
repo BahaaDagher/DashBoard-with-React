@@ -40,6 +40,7 @@ const projectsSlice = createSlice({
   name: "projects",
   initialState: {
     projects: [],
+    sendProjectResponse: {},
     isResearchSuccess: false,
     isResearchFail: false ,
   },
@@ -51,6 +52,7 @@ const projectsSlice = createSlice({
       .addCase(sendProject.fulfilled, (state, action) => {
         state.isResearchSuccess = action.payload.status
         state.isResearchFail  = (state.isResearchSuccess)? false : true  ;
+        state.sendProjectResponse = action.payload;
       })
       .addCase(sendProject.rejected, (state, action) => {
         state.isResearchSuccess = action.payload.status

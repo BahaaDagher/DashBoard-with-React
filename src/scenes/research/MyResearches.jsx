@@ -5,7 +5,7 @@ import Researchers from "./Researchers";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getResearches } from "../../store/slices/researchesSlice";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import  Title  from "../../components/Title";
 
 const Container = styled("div")(({ theme }) => ({
@@ -67,6 +67,7 @@ const FailButton = styled("div")(({ theme }) => ({
 const MyResearches = () => {
 
   const researches = useSelector((state) => state.researchesData.researches ) ; 
+  const loading = useSelector((state) => state.researchesData.loading ) ;
   const dispatch = useDispatch()
 
   useEffect (() => {
@@ -80,7 +81,7 @@ const MyResearches = () => {
 
   return (
     <>
-    { (researches.length == 0) ? <Title>لا يوجد بحوث</Title> :
+    {loading? <CircularProgress/>:  (researches.length == 0) ? <Title>لا يوجد بحوث</Title> :
     <Box>
     <Title>أبحاثي  </Title>
       <Container>

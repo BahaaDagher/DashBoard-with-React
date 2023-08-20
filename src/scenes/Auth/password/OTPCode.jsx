@@ -3,43 +3,59 @@ import "../Auth.css"
 import {Link, useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { sendOtp } from '../../../store/slices/userSlice'
-const Login = () => {
-  const userData = JSON.parse(localStorage.getItem('registeData'))
-  const dispatch = useDispatch()
+import { constrainPoint } from '@fullcalendar/core/internal'
+import Swal from 'sweetalert2'
+import { otpCode } from '../../../store/slices/passwordSlice'
 
 
+const OTPCode = () => {
 
-  const [formData, setFormData] = useState({
-    otp: "",
-    orderId:userData.order_id
+  const passwordPhone = (localStorage.getItem('passwordPhone') ) ? 
+  JSON.parse(localStorage.getItem('passwordPhone')) : "01010673076"
 
-  });
+  const [otp, setOtp] = useState('') ;
+  const [change , setChange] = useState(false)
+  const  OTPCodeResponse = useSelector((state) => state.passwordData.OTPCodeResponse ) 
 
-  const navigate = useNavigate()
-  const isOtpSuccess =useSelector((state) => state.userData.isOtpSuccess ) 
- 
   useEffect(() => {
-
-    if (isOtpSuccess) {
-      navigate('/student/login')
+    if (OTPCodeResponse.status) {
+      Swal.fire({
+        icon: 'success',
+        title: 'تم ارسال رمز التعيين بنجاح',
+        text: 'سيتم تحويلك لصفحة   ادخال الرمز',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      setTimeout(() => {
+        window.location.href = "/student/OTP"
+      }
+      , 2300)
     }
+    else if (change){
+      Swal.fire({
+        icon: 'error',
+        text:OTPCodeResponse.message,
+        showConfirmButton: false,
+        timer: 2000
+      })
+    }
+  }, [OTPCodeResponse])
 
-  }, [isOtpSuccess,userData])
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-  };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(sendOtp(formData))
+  const dispatch = useDispatch()
+  
+  const handleSubmit = (e) => { 
 
-    
-    // !isAuth ? alert('failed') : ""
+    e.preventDefault()
+    console.log("first")
+    dispatch(otpCode({phone:passwordPhone , otp :otp}))
+    console.log("second")
+    setChange(true)
+  }
 
- 
-  };
+
+
   return (
     <>
       <div className="Auth-form-container">
@@ -53,12 +69,14 @@ const Login = () => {
                 type="text"
                 className="form-control mt-1"
                 placeholder="أدخل  رمز ال OTP  "
-                onChange={handleChange}
+                onChange={(e)=>setOtp(e.target.value)}
                 name='otp'
               />
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary submitButton" onClick={(e)=>handleSubmit(e)}>
+              <button type="submit" className="btn btn-primary submitButton w-100" 
+              onClick={(e)=>handleSubmit(e)}
+              >
                   تأكيد   
               </button>
             </div>
@@ -69,4 +87,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default OTPCode

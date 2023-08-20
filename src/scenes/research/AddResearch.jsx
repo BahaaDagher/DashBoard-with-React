@@ -76,42 +76,52 @@ const AddResearch = () => {
   const [title, setTitle] = useState("");
   const [supervisor, setSupervisor] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
+  const [change , setChange] = useState(false) ;
 
-  const isResearchSuccess = useSelector((state) => state.researchesData.isResearchSuccess ) ; 
-  const isResearchFail = useSelector((state) => state.researchesData.isResearchFail ) ; 
+  const sendResearchResponse = useSelector((state) => state.researchesData.sendResearchResponse ) ;
+
   const subjects = useSelector((state) => state.subjectsData.subjects ) ;
 
-  const dispatch = useDispatch()
 
+  useEffect(() => {
+    if (sendResearchResponse.status) {
+      Swal.fire({
+        icon: 'success',
+        title: 'تم إضافة البحث بنجاح',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      setTimeout(() => {
+        window.location.reload() ;
+      }, 2300);
+      
+    }
+    else if (change ) {
+      Swal.fire({
+        icon: 'error',
+        text:sendResearchResponse.message ,
+        showConfirmButton: false,
+        timer: 2000
+      })
+      setTimeout(() => {
+      }, 2300);
+    }
+
+
+  }, [sendResearchResponse]);
+
+
+
+  const dispatch = useDispatch()
   useEffect(() => { 
     dispatch(getSubjects()) ;
+    setChange(true) ;
     console.log(subjects) ;
   }, [])
 
 
-  let c = 1 ; 
-  useEffect(() => {
-    if (isResearchSuccess && !isResearchFail) {
-      Swal.fire({
-        text: 'تم ارسال طلب البحث، و سيتم ارسال البحث في خلال 3 ايام',
-        confirmButtonText: 'موافق',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.reload() ;
-        }
-      })
-    }
-    else if (!isResearchSuccess && isResearchFail) { 
-      Swal.fire({
-        icon: 'error',
-        text: 'حذث خطأ ما برجاء اعادة المحاولة',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // window.location.reload() ;
-        } 
-      })
-    }
-  }, [isResearchSuccess, isResearchFail])
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", title, selectedSubject);

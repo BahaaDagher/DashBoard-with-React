@@ -31,6 +31,7 @@ function App() {
   const phone = useMediaQuery(theme.breakpoints.down("sm"));
   const { pathname } = useLocation();
   const navigate = useNavigate()
+
   // useEffect(() => {
   //   if ( pathname == '/') {
   //     window.location.href='https://app.baetiy.com/home'
