@@ -7,6 +7,7 @@ import { sendResearch } from "../../store/slices/researchesSlice";
 import Swal from "sweetalert2";
 import  Title  from "../../components/Title";
 import { sendProject } from "../../store/slices/projectsSlice";
+import { getSubjects } from "../../store/slices/subjectsSlice";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -81,12 +82,21 @@ const options = [
 const AddProjects = () => {
   const [title, setTitle] = useState("");
   const [supervisor, setSupervisor] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("");
+
+  const subjects = useSelector((state) => state.subjectsData.subjects ) ;
+
+  const dispatch = useDispatch()
+
+  useEffect(() => { 
+    dispatch(getSubjects()) ;
+    console.log(subjects) ;
+  }, [])
 
   const isResearchSuccess = useSelector((state) => state.projectsData.isResearchSuccess ) ; 
   const isResearchFail = useSelector((state) => state.projectsData.isResearchFail ) ; 
 
-  const dispatch = useDispatch()
+  
   let c = 1 ; 
   useEffect(() => {
     if (isResearchSuccess && !isResearchFail) {
@@ -112,8 +122,8 @@ const AddProjects = () => {
   }, [isResearchSuccess, isResearchFail])
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", title, selectedOption);
-    dispatch(sendProject({name : title , teacher_name: supervisor, subjecet_id : 2 })) ;
+    console.log("Form submitted:", title, selectedSubject);
+    dispatch(sendProject({name : title , teacher_name: supervisor, subjecet_id : selectedSubject })) ;
     
   };
 
@@ -141,13 +151,13 @@ const AddProjects = () => {
 
           <Label>  المادة</Label>
           <Select
-            value={selectedOption}
-            onChange={(e) => setSelectedOption(e.target.value)}
+            value={selectedSubject}
+            onChange={(e) => setSelectedSubject(e.target.value)}
           >
             <Option value="">اختر اسم المادة </Option>
-            {options.map((option, index) => (
-              <Option key={index} value={option}>
-                {option}
+            {subjects?.map((subject, index) => (
+              <Option key={index} value={subject.id}>
+                {subject.name}
               </Option>
             ))}
           </Select>

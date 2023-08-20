@@ -114,7 +114,8 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     userData: [],
-    registerData:[],
+    registerData:{},
+    registerResponse : {}, 
     isAuth: userData ? true : false ,
     isRegisterSuccess:false,
     isOtpSuccess:false , 
@@ -130,8 +131,9 @@ const userSlice = createSlice({
       })
 
       .addCase(userRegister.fulfilled, (state, action) => {
-        state.registerData = action.payload.data.user;
+        state.registerData = action.payload;
         state.isRegisterSuccess = action.payload.status
+        state.registerResponse = action.payload
        
       })
       .addCase(sendOtp.fulfilled, (state, action) => {

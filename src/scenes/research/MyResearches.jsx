@@ -87,8 +87,9 @@ const MyResearches = () => {
         <GrantStyledTable>
           <thead>
             <tr>
-              <GrantTableHead>الرقم</GrantTableHead>
+              <GrantTableHead> الرقم</GrantTableHead>
               <GrantTableHead>عنوان البحث</GrantTableHead>
+              <GrantTableHead> المادة </GrantTableHead>
               <GrantTableHead>حالة البحث</GrantTableHead>
               <GrantTableHead>اظهار </GrantTableHead>
               <GrantTableHead>تنزيل</GrantTableHead>
@@ -99,8 +100,9 @@ const MyResearches = () => {
               return (
                 <Fragment key={i}>
                   <tr>
-                    <TableData>{obj.id}</TableData>
+                    <TableData>{i+1}</TableData>
                     <TableData>{obj.name}</TableData>
+                    <TableData>{obj.subjecetName}</TableData>
                     <TableData>
                       {
                         obj.status==1 ? "جاهز" : "غير جاهز" 

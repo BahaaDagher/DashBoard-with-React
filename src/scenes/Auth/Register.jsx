@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { userRegister } from '../../store/slices/userSlice'
 import { Box } from '@mui/material'
 import styled from '@emotion/styled'
+import Swal from 'sweetalert2'
 
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -37,16 +38,37 @@ const Register = () => {
     package_id: "",
   });
 
+ 
+
   const navigate = useNavigate()
-  const registeData =useSelector((state) => state.userData.registerData ) 
+  const registerData =useSelector((state) => state.userData.registerData)
   const isRegisterSuccess =useSelector((state) => state.userData.isRegisterSuccess )
-  
+
+
+  const [change , setChange] = useState(false) 
   useEffect(() => {
+    console.log("2",change)
     if (isRegisterSuccess) {
-      localStorage.setItem('registeData', JSON.stringify(registeData))
-      navigate('/student/login')
+      localStorage.setItem('registerData', JSON.stringify(registerData.data.user))
+      Swal.fire({
+        icon: 'success',
+        title: 'تم التسجيل بنجاح',
+        text: 'سيتم تحويلك لصفحة تسجيل الدخول',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      setTimeout(() => {
+        navigate('/student/login')
+      }, 2300);
     }
-  }, [isRegisterSuccess])
+    else if(change) {
+      Swal.fire({
+        icon: 'error',
+        title: 'حدث خطأ ما',
+        text: registerData.message,
+      })
+    }
+  }, [isRegisterSuccess, registerData])
   
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -56,7 +78,7 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(userRegister(formData))
-    console.log(registeData);
+    setChange(true)
   };
   return (
     <>
@@ -107,8 +129,8 @@ const Register = () => {
               onChange={handleChange}
               name='level_id'>
                 <option value={''}>اختر المستوي الدراسي</option>
-                {levels.map((level)=>{
-                  return  <option value={level.id} >{level.name}</option>
+                {levels.map((level, i )=>{
+                  return  <option value={level.id} key={i}>{level.name}</option>
                 })}
                 
               </select>
@@ -119,8 +141,8 @@ const Register = () => {
               onChange={handleChange}
               name='package_id'>
                 <option value={''}>اختر  الباقة</option>
-                {pacakages.map((pacakage)=>{
-                  return  <option value={pacakage.id}>{pacakage.name}</option>
+                {pacakages.map((pacakage, i )=>{
+                  return  <option value={pacakage.id} key={i} >{pacakage.name}</option>
                 })}
                 
               </select>

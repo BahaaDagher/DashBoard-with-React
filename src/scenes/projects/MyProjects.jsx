@@ -86,8 +86,9 @@ const MyProjects = () => {
         <GrantStyledTable>
           <thead>
             <tr>
-              <GrantTableHead>الرقم</GrantTableHead>
+            <GrantTableHead> الرقم</GrantTableHead>
               <GrantTableHead>عنوان المشروع</GrantTableHead>
+              <GrantTableHead> المادة </GrantTableHead>
               <GrantTableHead>حالة المشروع</GrantTableHead>
               <GrantTableHead>اظهار </GrantTableHead>
               <GrantTableHead>تنزيل</GrantTableHead>
@@ -98,8 +99,9 @@ const MyProjects = () => {
               return (
                 <Fragment key={i}>
                   <tr>
-                    <TableData>{obj.id}</TableData>
+                  <TableData>{i+1}</TableData>
                     <TableData>{obj.name}</TableData>
+                    <TableData>{obj.subjecetName}</TableData>
                     <TableData>
                       {
                         obj.status==1 ? "جاهز" : "غير جاهز" 
