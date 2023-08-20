@@ -112,7 +112,7 @@ const StudentsChat = () => {
                   type="text"
                   className="form-control form-control-lg"
                   id="exampleFormControlInput1"
-                  placeholder="Type message"
+                  placeholder="أدخل رسالة "
                 />
               </div>
             </div>
