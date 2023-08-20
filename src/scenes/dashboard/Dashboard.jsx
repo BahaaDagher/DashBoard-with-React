@@ -50,7 +50,7 @@ const Dashboard = () => {
     <BoxContainer >
         <LinkStyle to = "/student/AddResearch"> <Tab> طلبات البحوث </Tab></LinkStyle>
         <LinkStyle to = "/student/AddProjects" ><Tab > طلبات المشاريع </Tab></LinkStyle>
-        <LinkStyle to = "/student/dashboard"><Tab> بوت بيت العلم </Tab></LinkStyle>
+        <LinkStyle to = "/student/scienceHomeBot"><Tab> بوت بيت العلم </Tab></LinkStyle>
         <LinkStyle to = "/student/homeWorks" ><Tab >حل الواجبات </Tab></LinkStyle>
         <LinkStyle to = "/student/dashboard"><Tab> شات الطلاب </Tab></LinkStyle>
         <LinkStyle to = "/student/exams"> <Tab>الاختبارات المركزية</Tab></LinkStyle>

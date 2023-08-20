@@ -146,6 +146,14 @@ function App() {
               }
             />
             <Route
+              path="student/scienceHomeBot"
+              element={
+                <Protected>
+                  <IframeSite url="https://www.chatbase.co/chatbot-iframe/nT3_wCtLRGZYC8LMyK_fL" title="بوت بيت العلم" />
+                </Protected>
+              }
+            />
+            <Route
               path="student/sciencePlatform"
               element={
                 <Protected>

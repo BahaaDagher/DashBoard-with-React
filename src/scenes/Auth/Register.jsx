@@ -7,6 +7,14 @@ import { getLevels } from '../../store/slices/levelSlice'
 import { getpackages } from '../../store/slices/packageSlice'
 import { useState } from 'react'
 import { userRegister } from '../../store/slices/userSlice'
+import { Box } from '@mui/material'
+import styled from '@emotion/styled'
+
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between", 
+}));
 
 
 const Register = () => {
@@ -52,8 +60,8 @@ const Register = () => {
   };
   return (
     <>
-      <div className="Auth-form-container">
-      <form className="Auth-form">
+      <div className="Auth-form-container" >
+      <form className="Auth-form" >
         <div className="Auth-form-content">
           <h1 className="Auth-form-title">إنشاء حساب</h1>
           <div className="text-center">
@@ -62,27 +70,26 @@ const Register = () => {
               تسجيل الدخول 
             </Link>
           </div>
-          <div className="form-group mt-3">
-            <label>الإسم</label>
-            <input
-              
-              type="text"
-              className="form-control mt-1"
-              placeholder="أدخل الاسم ثنائي"
-              onChange={handleChange}
-              name='name'
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>البريد الإلكتروني </label>
-            <input
-              type="email"
-              className="form-control mt-1"
-              placeholder="أدخل البريد الإلكتروني "
-              onChange={handleChange}
-              name='email'
-            />
-          </div>
+            <div className="form-group mt-3" >
+              <label>الإسم</label>
+              <input
+                type="text"
+                className="form-control mt-1"
+                placeholder="أدخل الاسم ثنائي"
+                onChange={handleChange}
+                name='name'
+              />
+            </div>
+            <div className="form-group mt-3">
+              <label>البريد الإلكتروني </label>
+              <input
+                type="email"
+                className="form-control mt-1"
+                placeholder="أدخل البريد الإلكتروني "
+                onChange={handleChange}
+                name='email'
+              />
+            </div>
           <div className="form-group mt-3">
             <label> رقم الهاتف </label>
             <input
@@ -93,30 +100,32 @@ const Register = () => {
               name='phone'
             />
           </div>
-          <div className="form-group mt-3">
-          <label> المستوي الدراسي </label>
-            <select className="form-select" aria-label="Default select example"
-            onChange={handleChange}
-            name='level_id'>
-              <option value={''}>اختر المستوي الدراسي</option>
-              {levels.map((level)=>{
-                return  <option value={level.id} >{level.name}</option>
-              })}
-              
-            </select>
-          </div>
-          <div className="form-group mt-3">
-          <label>  الباقة الشهرية </label>
-            <select className="form-select" aria-label="Default select example"
-            onChange={handleChange}
-            name='package_id'>
-              <option value={''}>اختر  الباقة</option>
-              {pacakages.map((pacakage)=>{
-                return  <option value={pacakage.id}>{pacakage.name}</option>
-              })}
-              
-            </select>
-          </div>
+          <StyledBox>
+            <div className="form-group mt-3" >
+            <label> المستوي الدراسي </label>
+              <select className="form-select" aria-label="Default select example"
+              onChange={handleChange}
+              name='level_id'>
+                <option value={''}>اختر المستوي الدراسي</option>
+                {levels.map((level)=>{
+                  return  <option value={level.id} >{level.name}</option>
+                })}
+                
+              </select>
+            </div>
+            <div className="form-group mt-3" >
+            <label>  الباقة الشهرية </label>
+              <select className="form-select" aria-label="Default select example"
+              onChange={handleChange}
+              name='package_id'>
+                <option value={''}>اختر  الباقة</option>
+                {pacakages.map((pacakage)=>{
+                  return  <option value={pacakage.id}>{pacakage.name}</option>
+                })}
+                
+              </select>
+            </div>
+          </StyledBox>
           <div className="form-group mt-3">
             <label>كلمة المرور</label>
             <input

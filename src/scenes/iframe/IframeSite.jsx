@@ -29,7 +29,7 @@ const IframeSite = ({url, title}) => {
         <BoxContainer>
             <Iframe
                 src={url}
-                title="بيت العلم"
+                title={title}
             />
         </BoxContainer>
     </>
