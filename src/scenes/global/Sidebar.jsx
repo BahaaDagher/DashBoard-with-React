@@ -207,7 +207,7 @@ const Sidebar = ({
             <Item
               sx={{ fontSize: "40px" }}
               title="الدعم الفني"
-              to="/"
+              to="/student/technicalSupport"
               icon={
                 <BuildOutlinedIcon sx={{ width: "20px", height: "20px" }} />
               }

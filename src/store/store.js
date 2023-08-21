@@ -8,6 +8,7 @@ import examsSlice from './slices/examsSlice'
 import projectsSlice from './slices/projectsSlice'
 import subjectsSlice from './slices/subjectsSlice'
 import passwordSlice from './slices/passwordSlice'
+import paymentSlice from './slices/paymentSlice'
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
     examsData : examsSlice , 
     subjectsData: subjectsSlice , 
     passwordData :passwordSlice , 
+    paymentData : paymentSlice , 
   },
 })

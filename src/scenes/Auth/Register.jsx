@@ -52,13 +52,13 @@ const Register = () => {
       localStorage.setItem('registerData', JSON.stringify(registerData.data.user))
       Swal.fire({
         icon: 'success',
-        title: 'تم التسجيل بنجاح',
-        text: 'سيتم تحويلك لصفحة تسجيل الدخول',
+        title: 'تم التسجيل البيانات الاساسية بنجاح',
+        text: 'سيتم تحويلك لصفحة  الدفع',
         showConfirmButton: false,
         timer: 2000
       })
       setTimeout(() => {
-        navigate('/student/login')
+        navigate('/student/payment')
       }, 2300);
     }
     else if(change) {

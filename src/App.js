@@ -18,12 +18,17 @@ import MyAnswers from "./scenes/Answers/MyAnswers";
 import HomeWorks from "./scenes/homeWorks/HomeWorks";
 import EditProfile from "./scenes/editProfile/EditProfile";
 import Protected from "./Protected";
+import ProtectRegister from "./ProtectRegister";
 import AddProjects from "./scenes/projects/AddProjects";
 import MyProjects from "./scenes/projects/MyProjects";
 import { useEffect, useState } from "react";
 import { useTheme } from "@emotion/react";
 import Exams from "./scenes/exams/Exams";
 import StudentsChat from "./scenes/chat/StudentsChat";
+import ClassChat from "./scenes/chat/ClassChat";
+import TechnicalSupport from "./scenes/chat/TechnicalSupport";
+import  Payment  from "./scenes/payment/Payment";
+import  PaymentResponse  from "./scenes/payment/PaymentResponse";
 function App() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
@@ -45,10 +50,12 @@ function App() {
       <div className="app">
         <Routes>
           <Route path="/student/login" element={<Login />} />
-          <Route path="/student/register" element={<Register />} />
+          <Route path="/student/register" element={<ProtectRegister><Register /> </ProtectRegister>} />
           <Route path="/student/forgetPassword" element={<ForgetPassword />} />
           <Route path="/student/OTP" element={<OTPCode />} />
           <Route path="/student/setPassword" element={<SetPassword />} />
+          <Route path="/student/payment" element={<Payment />} />
+          <Route path="/paymentResponse" element={<PaymentResponse />} />
           <Route path="/*" element={<h1>عذرا لا يوجد صفحة هنا</h1>} />
 
           <Route
@@ -186,7 +193,25 @@ function App() {
                 </Protected>
               }
             />
+            <Route
+              path="student/classChat"
+              element={
+                <Protected>
+                  <ClassChat/>
+                </Protected>
+              }
+            />
+            <Route
+              path="student/technicalSupport"
+              element={
+                <Protected>
+                  <TechnicalSupport/>
+                </Protected>
+              }
+            />
+            
           </Route>
+          
         </Routes>
       </div>
     </>

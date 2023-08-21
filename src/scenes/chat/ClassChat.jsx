@@ -3,7 +3,7 @@ import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import { Colors } from "../../theme";
 
-const StudentsChat = () => {
+const ClassChat = () => {
   const [message, setMessage] = React.useState("");
   const [messages, setMessages] = React.useState([]);
 
@@ -21,7 +21,7 @@ const StudentsChat = () => {
           <div className="col-md-12 col-lg-12 col-xl-12 h-100">
             <div className="card h-100" id="chat2" >
               <div className="card-header d-flex justify-content-between align-items-center p-3">
-                <h5 className="mb-0">شات الطلاب </h5>
+                <h5 className="mb-0">شات الصف </h5>
                 <button
                   type="button"
                   className="btn btn-primary btn-sm"
@@ -123,4 +123,4 @@ const StudentsChat = () => {
   );
 };
 
-export default StudentsChat;
+export default ClassChat;

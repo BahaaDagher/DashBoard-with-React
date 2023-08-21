@@ -51,9 +51,7 @@ const Select = styled("select")(({ theme }) => ({
   },
 }));
 const Option = styled("option")(({ theme }) => ({
-}))
-
-;
+}));
 
 const Button = styled("button")(({ theme }) => ({
   padding: "10px 30px",
@@ -131,7 +129,7 @@ const AddResearch = () => {
 
   return (
     <>
-      <Title>إضافة بحث :</Title>
+      <Title>إضافة بحث </Title>
       <FormContainer>
         <Form onSubmit={handleSubmit}>
           <Label>عنوان البحث</Label>
