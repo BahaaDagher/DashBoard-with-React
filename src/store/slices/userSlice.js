@@ -31,7 +31,8 @@ export const userRegister = createAsyncThunk(
           email:values.email,
           password:values.password,
           level_id:values.level_id,
-          package_id:values.package_id
+          package_id:values.package_id , 
+          gender : values.gender
         }
       );
       return response.data ;

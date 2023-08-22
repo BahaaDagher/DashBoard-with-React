@@ -15,6 +15,7 @@ import Swal from 'sweetalert2'
 const StyledBox = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between", 
+  alignItems: "center",
 }));
 
 
@@ -36,6 +37,7 @@ const Register = () => {
     phone: "",
     level_id: "",
     package_id: "",
+    gender : ""
   });
 
  
@@ -105,27 +107,28 @@ const Register = () => {
               تسجيل الدخول 
             </Link>
           </div>
-            <div className="form-group mt-3" >
-              <label>الإسم</label>
-              <input
-                type="text"
-                className="form-control mt-1"
-                placeholder="أدخل الاسم ثنائي"
-                onChange={handleChange}
-                name='name'
-              />
-            </div>
-            <div className="form-group mt-3">
-              <label>البريد الإلكتروني </label>
-              <input
-                type="email"
-                className="form-control mt-1"
-                placeholder="أدخل البريد الإلكتروني "
-                onChange={handleChange}
-                name='email'
-              />
-            </div>
+          <div className="form-group mt-3" >
+            <label>الإسم</label>
+            <input
+              type="text"
+              className="form-control mt-1"
+              placeholder="أدخل الاسم ثنائي"
+              onChange={handleChange}
+              name='name'
+            />
+          </div>
           <div className="form-group mt-3">
+            <label>البريد الإلكتروني </label>
+            <input
+              type="email"
+              className="form-control mt-1"
+              placeholder="أدخل البريد الإلكتروني "
+              onChange={handleChange}
+              name='email'
+            />
+          </div>
+          <StyledBox>
+          <div className="form-group mt-2">
             <label> رقم الهاتف </label>
             <input
               type="phone"
@@ -135,21 +138,33 @@ const Register = () => {
               name='phone'
             />
           </div>
-          <StyledBox>
-            <div className="form-group mt-3" >
-            <label> المستوي الدراسي </label>
+          <div className="form-group mt-3" >
+            <label>  الجنس </label>
               <select className="form-select" aria-label="Default select example"
               onChange={handleChange}
-              name='level_id'>
-                <option value={''}>اختر المستوي الدراسي</option>
-                {levels.map((level, i )=>{
-                  return  <option value={level.id} key={i}>{level.name}</option>
-                })}
-                
+              name='gender'>
+              <option value={''}>اختر  الجنس</option>
+              <option value={'ذكر'}>ذكر  </option>
+              <option value={'أنثى'}>أنثى  </option>
               </select>
+          </div>
+          </StyledBox>
+          
+          <StyledBox>
+            <div className="form-group mt-3" >
+              <label> المستوي الدراسي </label>
+                <select className="form-select" aria-label="Default select example"
+                onChange={handleChange}
+                name='level_id'>
+                  <option value={''}>اختر المستوي الدراسي</option>
+                  {levels.map((level, i )=>{
+                    return  <option value={level.id} key={i}>{level.name}</option>
+                  })}
+                  
+                </select>
             </div>
             <div className="form-group mt-3" >
-            <label>  الباقة الشهرية </label>
+            <label>  الباقة  </label>
               <select className="form-select" aria-label="Default select example"
               onChange={handleChange}
               name='package_id'>

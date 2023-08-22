@@ -14,16 +14,29 @@
     background-image: url("../../../public/assets/school.jpg");
     background-size: cover;
   }
+
+  
   
   .Auth-form {
     width: 500px;
     box-shadow: rgba(165, 98, 98, 0.16) 1px 1px 10px;
-    padding-top: 30px;
+    padding-top: 20px;
     padding-bottom: 20px;
     border-radius: 8px;
     background-color: white;
     opacity: 0.8;
   }
+
+  /* @media (max-width: 1200px) {
+    .Auth-form-container {
+      padding: 5px;
+      
+    }
+    .Auth-form {
+      height: 95vh;
+      overflow: auto;
+    }
+  } */
   
   .Auth-form-content {
     padding-left: 12%;

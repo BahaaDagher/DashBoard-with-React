@@ -8,10 +8,7 @@ const ProtectPayment = ({children}) => {
     if (userData) {
         return <Navigate to ="/student/dashboard" />
     }
-    else if (registerData) {
-        return <Navigate to ="/student/payment" />
-    }
-    else if (!registerData && !userData ){
+    else if (!registerData) {
         return <Navigate to ="/student/register" />
     }
     return children
