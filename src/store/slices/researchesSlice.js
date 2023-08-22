@@ -60,10 +60,12 @@ const researchesSlice = createSlice({
         state.isResearchSuccess = action.payload.status
         state.isResearchFail  = (state.isResearchSuccess)? false : true  ;
         state.sendResearchResponse = action.payload;
+        state.sendLoading = false ;
       })
       .addCase(sendResearch.rejected, (state, action) => {
         state.isResearchSuccess = action.payload.status
         state.isResearchFail  = true  ;
+        state.sendLoading = false ;
       })
   }
 });

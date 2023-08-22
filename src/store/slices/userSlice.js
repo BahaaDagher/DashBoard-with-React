@@ -123,6 +123,7 @@ const userSlice = createSlice({
     isOtpSuccess:false , 
     dataOfProfile : {} ,
     ResponseUpdateProfile : {} ,
+    profileLoading : false ,
   },
   extraReducers: (builder) => {
     builder
@@ -138,7 +139,6 @@ const userSlice = createSlice({
         state.registerData = action.payload;
         state.isRegisterSuccess = action.payload.status
         state.registerResponse = action.payload
-       
       })
       .addCase(sendOtp.fulfilled, (state, action) => {
         state.isOtpSuccess = action.payload.status
@@ -148,7 +148,15 @@ const userSlice = createSlice({
       })
       .addCase(profileData.fulfilled, (state, action) => {
         state.dataOfProfile = action.payload ; 
+        state.profileLoading = false; 
       })
+      .addCase(profileData.pending, (state, action) => {
+        state.profileLoading = true; 
+      })
+      .addCase(profileData.rejected, (state, action) => {
+        state.profileLoading = false; 
+      })
+      
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.ResponseUpdateProfile = action.payload; 
       })

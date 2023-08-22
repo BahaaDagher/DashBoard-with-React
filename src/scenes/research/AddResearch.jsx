@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import  Title from "../../components/Title";
 import { getSubjects } from "../../store/slices/subjectsSlice";
 import { profileData, userLogin } from "../../store/slices/userSlice";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -69,7 +69,7 @@ const Button = styled("button")(({ theme }) => ({
   margin: "auto",
   maxWidth: "1000px",
 }));
-const H5 = styled("h5")(({ theme }) => ({
+const H5 = styled("h6")(({ theme }) => ({
   textAlign: "left",
   color: Colors.main[1],
   fontWeight: "bold",
@@ -89,6 +89,7 @@ const AddResearch = () => {
   const sendResearchResponse = useSelector((state) => state.researchesData.sendResearchResponse ) ;
   const subjects = useSelector((state) => state.subjectsData.subjects ) ;
   const dataOfProfile = useSelector((state) => state.userData.dataOfProfile ) ;
+  const profileLoading = useSelector((state) => state.userData.profileLoading ) ;
 
 
   useEffect(() => {
@@ -138,7 +139,8 @@ const AddResearch = () => {
 
   return (
     <>
-    {dataOfProfile.count_research==0? <Title>لقد استهلكت الابحاث المتاحة لك </Title> :
+    {profileLoading? <CircularProgress/> : 
+    (dataOfProfile.count_research==0 ) ? <Title>لقد استهلكت الابحاث المتاحة لك </Title> :
     <Box>
       <H5> عدد الابحاث المتبقية :  
         <span> {dataOfProfile.count_research}</span>

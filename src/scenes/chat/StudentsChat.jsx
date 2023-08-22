@@ -3,6 +3,15 @@ import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import { Colors } from "../../theme";
 
+const customStyles = {
+  backgroundColor: Colors.main[6],
+  backgroundImage: "url(../../assets/hi.png)" , 
+  padding: '20px',
+  position: "relative", 
+  height: "100%"  , 
+  overflow:"auto"
+};
+
 const StudentsChat = () => {
   const [message, setMessage] = React.useState("");
   const [messages, setMessages] = React.useState([]);
@@ -22,19 +31,15 @@ const StudentsChat = () => {
             <div className="card h-100" id="chat2" >
               <div className="card-header d-flex justify-content-between align-items-center p-3">
                 <h5 className="mb-0">شات الطلاب </h5>
-                <button
-                  type="button"
-                  className="btn btn-primary btn-sm"
-                  data-mdb-ripple-color="dark"
-                >
-                  Let's Chat App
-                </button>
+                <h6 className="mb-0" style={{color : Colors.main[1] ,fontWeight:"bold"}} > اسماعيل محمود </h6>
+
               </div>
               <div
                 className="card-body"
                 data-mdb-perfect-scrollbar="true"
-                style={{ position: "relative", height: "100%"  , overflow:"auto" }}
+                style={customStyles}
               >
+                <h6 className="mb-2 d-flex flex-row justify-content-end">  عبدالرحمن أشرف  </h6>
                 <div className="d-flex flex-row justify-content-end">
                   
                   <div>
@@ -56,7 +61,7 @@ const StudentsChat = () => {
                     >
                       هل تشعر بالملل اليوم هيا بنا نذهب الي النادي 
                     </p>
-                    <p className="small ms-3 mb-3 rounded-3 text-muted ">
+                    <p className="small ms-3 mb-3 rounded-3 text-muted d-flex flex-row justify-content-end">
                       23:58
                     </p>
                   </div>
@@ -75,9 +80,9 @@ const StudentsChat = () => {
                     Today
                   </p>
                 </div>
-
+                <h6 className="mb-2"> اسماعيل محمود </h6>
                 <div className="d-flex flex-row justify-content-start mb-4 pt-1">
-                <img
+                  <img
                     src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
                     alt="avatar 1"
                     style={{ width: "45px", height: "100%" }}

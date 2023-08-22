@@ -9,7 +9,7 @@ import  Title  from "../../components/Title";
 import { sendProject } from "../../store/slices/projectsSlice";
 import { getSubjects } from "../../store/slices/subjectsSlice";
 import { profileData } from "../../store/slices/userSlice";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -73,7 +73,7 @@ const Button = styled("button")(({ theme }) => ({
   maxWidth: "1000px",
 }));
 
-const H5 = styled("h5")(({ theme }) => ({
+const H5 = styled("h6")(({ theme }) => ({
   textAlign: "left",
   color: Colors.main[1],
   fontWeight: "bold",
@@ -93,7 +93,7 @@ const AddProjects = () => {
   const subjects = useSelector((state) => state.subjectsData.subjects ) ;
   const sendProjectResponse = useSelector((state) => state.projectsData.sendProjectResponse ) ;
   const dataOfProfile = useSelector((state) => state.userData.dataOfProfile ) ;
-
+  const profileLoading = useSelector((state) => state.userData.profileLoading ) ;
 useEffect(() => {
     if (sendProjectResponse.status) {
       Swal.fire({
@@ -137,7 +137,8 @@ useEffect(() => {
 
   return (
     <>
-    {dataOfProfile.count_projecets==0? <Title>لقد استهلكت المشاريع المتاحة لك </Title> :
+    {profileLoading? <CircularProgress/> : 
+    dataOfProfile.count_projecets==0? <Title>لقد استهلكت المشاريع المتاحة لك </Title> :
     <Box>
       <H5> عدد المشاريع المتبقية :  
         <span> {dataOfProfile.count_projecets}</span>

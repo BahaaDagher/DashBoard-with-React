@@ -9,6 +9,7 @@ import projectsSlice from './slices/projectsSlice'
 import subjectsSlice from './slices/subjectsSlice'
 import passwordSlice from './slices/passwordSlice'
 import paymentSlice from './slices/paymentSlice'
+import chatSlice from './slices/chatSlice'
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
     subjectsData: subjectsSlice , 
     passwordData :passwordSlice , 
     paymentData : paymentSlice , 
+    chatData : chatSlice ,
   },
 })
