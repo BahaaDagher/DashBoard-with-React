@@ -21,12 +21,9 @@ const StudentsChat = () => {
   const [messages, setMessages] = useState([]);
   const [singleMessage , setSingleMessage] = useState("");
   const userData = JSON.parse(localStorage.getItem('userData'));
-  const groupChatGetResponse = useSelector((state) => state.chatData.groupChatGetResponse);
-  const groupChatSendResponse = useSelector((state) => state.chatData.groupChatSendResponse);
 
   const studentChatGetResponse = useSelector((state) => state.chatData.studentChatGetResponse);
-  const studentChatSendResponse = useSelector((state) => state.chatData.studentChatSendResponse);
-
+  
   useEffect(() => {
     if (studentChatGetResponse.status==true) {
       setMessages(studentChatGetResponse.data.messages);
