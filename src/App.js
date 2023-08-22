@@ -17,8 +17,8 @@ import IframeSite from "./scenes/iframe/IframeSite";
 import MyAnswers from "./scenes/Answers/MyAnswers";
 import HomeWorks from "./scenes/homeWorks/HomeWorks";
 import EditProfile from "./scenes/editProfile/EditProfile";
-import Protected from "./Protected";
-import ProtectRegister from "./ProtectRegister";
+import Protected from "./protect/Protected";
+import ProtectRegisterAndLogin from "./protect/ProtectRegisterAndLogin";
 import AddProjects from "./scenes/projects/AddProjects";
 import MyProjects from "./scenes/projects/MyProjects";
 import { useEffect, useState } from "react";
@@ -29,6 +29,7 @@ import ClassChat from "./scenes/chat/ClassChat";
 import TechnicalSupport from "./scenes/chat/TechnicalSupport";
 import  Payment  from "./scenes/payment/Payment";
 import  PaymentResponse  from "./scenes/payment/PaymentResponse";
+import ProtectPayment from "./protect/ProtectPayment";
 function App() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
@@ -49,13 +50,13 @@ function App() {
     <>
       <div className="app">
         <Routes>
-          <Route path="/student/login" element={<Login />} />
-          <Route path="/student/register" element={<ProtectRegister><Register /> </ProtectRegister>} />
+          <Route path="/student/login" element={ <ProtectRegisterAndLogin><Login /></ProtectRegisterAndLogin>} />
+          <Route path="/student/register" element={<ProtectRegisterAndLogin><Register /> </ProtectRegisterAndLogin>} />
           <Route path="/student/forgetPassword" element={<ForgetPassword />} />
           <Route path="/student/OTP" element={<OTPCode />} />
           <Route path="/student/setPassword" element={<SetPassword />} />
-          <Route path="/student/payment" element={<Payment />} />
-          <Route path="/paymentResponse" element={<PaymentResponse />} />
+          <Route path="/student/payment" element={<ProtectPayment><Payment /></ProtectPayment>} />
+          <Route path="/paymentResponse" element={<ProtectPayment><PaymentResponse /></ProtectPayment>} />
           <Route path="/*" element={<h1>عذرا لا يوجد صفحة هنا</h1>} />
 
           <Route

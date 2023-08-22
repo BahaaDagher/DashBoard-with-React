@@ -7,6 +7,8 @@ import { sendResearch } from "../../store/slices/researchesSlice";
 import Swal from "sweetalert2";
 import  Title from "../../components/Title";
 import { getSubjects } from "../../store/slices/subjectsSlice";
+import { profileData, userLogin } from "../../store/slices/userSlice";
+import { Box } from "@mui/material";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -67,7 +69,15 @@ const Button = styled("button")(({ theme }) => ({
   margin: "auto",
   maxWidth: "1000px",
 }));
-
+const H5 = styled("h5")(({ theme }) => ({
+  textAlign: "left",
+  color: Colors.main[1],
+  fontWeight: "bold",
+  "& span": {
+    color: "red",
+    fontWeight: "bold",
+  },
+}));
 
 
 const AddResearch = () => {
@@ -77,8 +87,8 @@ const AddResearch = () => {
   const [change , setChange] = useState(false) ;
 
   const sendResearchResponse = useSelector((state) => state.researchesData.sendResearchResponse ) ;
-
   const subjects = useSelector((state) => state.subjectsData.subjects ) ;
+  const dataOfProfile = useSelector((state) => state.userData.dataOfProfile ) ;
 
 
   useEffect(() => {
@@ -104,8 +114,6 @@ const AddResearch = () => {
       setTimeout(() => {
       }, 2300);
     }
-
-
   }, [sendResearchResponse]);
 
 
@@ -114,6 +122,7 @@ const AddResearch = () => {
   useEffect(() => { 
     dispatch(getSubjects()) ;
     setChange(true) ;
+    dispatch(profileData())
     console.log(subjects) ;
   }, [])
 
@@ -129,6 +138,11 @@ const AddResearch = () => {
 
   return (
     <>
+    {dataOfProfile.count_research==0? <Title>لقد استهلكت الابحاث المتاحة لك </Title> :
+    <Box>
+      <H5> عدد الابحاث المتبقية :  
+        <span> {dataOfProfile.count_research}</span>
+      </H5>
       <Title>إضافة بحث </Title>
       <FormContainer>
         <Form onSubmit={handleSubmit}>
@@ -165,6 +179,9 @@ const AddResearch = () => {
           <Button type="submit">إضافة</Button>
         </Form>
       </FormContainer>
+    </Box>
+    }
+    
     </>
   );
 };
