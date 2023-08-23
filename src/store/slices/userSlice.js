@@ -9,7 +9,7 @@ export const userLogin = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/login" ,{
+        "https://test.learnning.mohamedmansi.com/api/login" ,{
             phone:values.email,
             password:values.password
         }

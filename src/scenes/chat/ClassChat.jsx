@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import { Colors } from "../../theme";
@@ -13,55 +13,131 @@ const customStyles = {
   padding: '20px',
   position: "relative", 
   height: "100%"  , 
-  overflow:"auto"
+  overflow:"auto",
+  display:"flex",
+  flexDirection:"column"
 };
 
 const ClassChat = () => {
 
   const [messages, setMessages] = useState([]);
+  const [scrollToBot, setMScrollToBot] = useState(true);
   const [singleMessage , setSingleMessage] = useState("");
   const userData = JSON.parse(localStorage.getItem('userData'));
   const groupChatGetResponse = useSelector((state) => state.chatData.groupChatGetResponse);
   const groupChatSendResponse = useSelector((state) => state.chatData.groupChatSendResponse);
+  const pagechatGroup = useSelector((state) => state.chatData.groupChatPages);
+  const [lastPage, setlastPage] = useState();
+  const chatRef = useRef(null);
+  const dispatch = useDispatch();
+
 
 
   useEffect(() => {
     if (groupChatGetResponse.status==true) {
-      setMessages(groupChatGetResponse.data.messages);
-      console.log("the chat data", groupChatGetResponse.data.messages);
+      setlastPage(groupChatGetResponse.data.last_page )
+      setMessages(prevItems => [...prevItems, ...groupChatGetResponse.data.messages]);
+
     }
   }, [groupChatGetResponse])
 
 
-  useEffect(() => { 
-    console.log("we are here");
-    const pusher = new Pusher("8071a8e96650bf6eac15", {
-      // key: "8071a8e96650bf6eac15",
-      secret: "74f3c62856110435f421",
-      cluster: "us3" , 
-    });
-    const channel = pusher.subscribe('chat_api');
-    // console.log("the channel", channel.bind("LevelSent"));
 
-    channel.bind("LevelSent", (data) => {
-      console.log("the data", data);
-    });
+
+  useEffect(() => { 
+      getData(1)
+
+      const pusher = new Pusher("8071a8e96650bf6eac15", {
+        secret: "74f3c62856110435f421",
+        cluster: "us3" , 
+        forceTLS: true,
+        encrypted: true,
+      });
+
+      const channel = pusher.subscribe('chat_api');
+      channel.bind("LevelSent", (data) => {
+        console.log(messages);
+        console.log("the data", data);
+        // setMessages(prev => [...prev , ...[data]]);
+        setMessages(current => [...[data], ...current])
+        
+
+      });
+
+      return () => {
+      pusher.unsubscribe('chat_api');
+      pusher.disconnect();
+      };
     
   },[])
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(groupChatGet({group_id:userData.group_id , page:1})); 
-  }, [])
+
+
+
+  const getData=(value)=>{
+    dispatch(groupChatGet({group_id:userData.group_id , page:value})); 
+
+  }
+
 
 
   const handleSend = () => {
-    // console.log("the message", singleMessage);
     if (singleMessage!="") {
       dispatch(groupChatSend({message:singleMessage , group_id:userData.group_id})) 
+      scrollToBottom();
     }
     setSingleMessage("") ;
   }
+
+
+
+
+  useEffect(() => {
+    if(scrollToBot){
+      scrollToBottom();
+
+    }
+    
+  }, [messages]);
+
+
+
+  const scrollToBottom = () => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+  }}
+ 
+
+
+  useEffect(() => {
+    
+ 
+    const chatContainer = chatRef.current;
+    const handleScroll = () => {
+      if (chatContainer.scrollTop  === 0) {
+        console.log('kkkkkkkkkkkkkkkkkkkkkkkk');
+        if(lastPage>pagechatGroup){
+
+          getData(pagechatGroup)
+          chatContainer.scrollTop=chatContainer.scrollTop+1000
+          setMScrollToBot(false)
+        }
+      }
+    };
+
+    if (chatContainer) {
+      chatContainer.addEventListener('scroll', handleScroll);
+  
+    }
+    return () => {
+      if (chatContainer) {
+        chatContainer.removeEventListener('scroll', handleScroll);
+      }
+    };
+
+  },[pagechatGroup]);
+
+
 
 
   return (
@@ -77,9 +153,12 @@ const ClassChat = () => {
               <div
                 className="card-body"
                 data-mdb-perfect-scrollbar="true"
-                style={customStyles}
+                style={customStyles }
+
+                ref={chatRef} 
               >
-                {messages.map((message, index) => (
+                
+                {messages.toReversed().map((message, index) => (
                     message.isMine ? (
                       <div className="Mine" key={index}>
                         <h6 className="mb-2"> {message.userName}</h6>
@@ -127,6 +206,10 @@ const ClassChat = () => {
                       </div>
                     )
                 ))}
+
+
+
+
                 {/* <div>
                   <h6 className="mb-2 d-flex flex-row justify-content-end">  عبدالرحمن أشرف  </h6>
                   <div className="d-flex flex-row justify-content-end">
