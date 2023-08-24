@@ -7,7 +7,7 @@ export const getSubjects = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://dash.baetiy.com/api/homeScreen"  , 
+        "https://test.learnning.mohamedmansi.com/api/homeScreen"  , 
         { headers: {"Authorization" : token}}
       );
       return response.data.data.subjecets ;

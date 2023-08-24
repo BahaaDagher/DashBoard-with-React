@@ -9,7 +9,7 @@ export const addQuestions = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/addQuestion" ,{
+        "https://test.learnning.mohamedmansi.com/api/addQuestion" ,{
           questions:JSON.stringify(values)
         },{ headers: {"Authorization" : token ,'Content-Type': 'application/json'}}
       );
@@ -25,7 +25,7 @@ export const addImageQuestion = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/addQuestion" ,
+        "https://test.learnning.mohamedmansi.com/api/addQuestion" ,
           values
          ,{ headers: {"Authorization" : token , "Content-Type": "multipart/form-data",}}
       );
@@ -41,7 +41,7 @@ export const getQuestions = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://dash.baetiy.com/api/getQuestionsStudent" ,
+        "https://test.learnning.mohamedmansi.com/api/getQuestionsStudent?page=1&limit=50" ,
         { headers: {"Authorization" : token , }}
       );
       return response.data ;
@@ -54,7 +54,8 @@ const questionsSlice = createSlice({
   name: "questions",
   initialState: {
     questions: [],
-    isQuestionsAdded:{}
+    addImageResponse:{} , 
+    isQuestionsAdded : {}
 
   },
   extraReducers: (builder) => {
@@ -69,7 +70,7 @@ const questionsSlice = createSlice({
       })
 
       .addCase(addImageQuestion.fulfilled, (state, action) => {
-        state.isQuestionsAdded = action.payload;
+        state.addImageResponse = action.payload;
       })
      
   }

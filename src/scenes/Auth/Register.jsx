@@ -143,9 +143,9 @@ const Register = () => {
               <select className="form-select" aria-label="Default select example"
               onChange={handleChange}
               name='gender'>
-              <option value={''}>اختر  الجنس</option>
-              <option value={'ذكر'}>ذكر  </option>
-              <option value={'أنثى'}>أنثى  </option>
+              <option value="">اختر  الجنس</option>
+              <option value="male">ذكر  </option>
+              <option value="female">أنثى  </option>
               </select>
           </div>
           </StyledBox>

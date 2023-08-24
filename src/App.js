@@ -151,7 +151,7 @@ function App() {
               path="student/scienceHome"
               element={
                 <Protected>
-                  <IframeSite url="https://www.baetiy.com/" title="بيت العلم" />
+                  <IframeSite url="https://www.baetiy.com/" title="بيت العلم" bot= {false} />
                 </Protected>
               }
             />
@@ -159,7 +159,7 @@ function App() {
               path="student/scienceHomeBot"
               element={
                 <Protected>
-                  <IframeSite url="https://www.chatbase.co/chatbot-iframe/nT3_wCtLRGZYC8LMyK_fL" title="بوت بيت العلم" />
+                  <IframeSite url="" title="بوت بيت العلم" bot= {true}/>
                 </Protected>
               }
             />
@@ -171,6 +171,7 @@ function App() {
                   <IframeSite
                     url="https://www.el3elm.com/"
                     title="منصة العلم"
+                    bot= {false}
                   />{" "}
                 </Protected>
               }

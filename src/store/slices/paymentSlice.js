@@ -6,7 +6,7 @@ export const getPaymentMethods = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(
-        "https://dash.baetiy.com/api/getPaymentMethods"
+        "https://test.learnning.mohamedmansi.com/api/getPaymentMethods"
       );
       return response.data ;
     } catch (error) {
@@ -21,7 +21,7 @@ export const postPayment = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('registerData')).token;
       try {
         const response = await axios.post(
-          "https://dash.baetiy.com/api/payment" , 
+          "https://test.learnning.mohamedmansi.com/api/payment" , 
           {
             order_id : values.order_id , 
             payment_method_id : values.payment_method_id ,
@@ -40,7 +40,7 @@ export const postPayment = createAsyncThunk(
     async (values) => {
       try {
         const response = await axios.get(
-          `https://dash.baetiy.com/api/successPayment?status=${values.status}&order_id=${values.order_id}&invoice_id=${values.invoice_id}` , 
+          `https://test.learnning.mohamedmansi.com/api/successPayment?status=${values.status}&order_id=${values.order_id}&invoice_id=${values.invoice_id}` , 
         );
         return response.data ;
       } catch (error) {

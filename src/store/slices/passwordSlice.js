@@ -6,7 +6,7 @@ export const forgetPassword = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/forgetPassword" , 
+        "https://test.learnning.mohamedmansi.com/api/forgetPassword" , 
         {
             phone : values.phone 
         }
@@ -23,7 +23,7 @@ export const otpCode = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/verifyOtpPassword" , 
+        "https://test.learnning.mohamedmansi.com/api/verifyOtpPassword" , 
         {
             phone : values.phone ,
             otp : values.otp ,
@@ -40,7 +40,7 @@ export const changePassword = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/changePassword" , 
+        "https://test.learnning.mohamedmansi.com/api/changePassword" , 
         {
             phone : values.phone ,
             password : values.password ,

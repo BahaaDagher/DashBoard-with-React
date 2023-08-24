@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { H5 } from './MCQ';
 import SubmitButton from '../../components/SubmitButton';
 import InputFile from '../../components/InputFile';
 import LabelFile from '../../components/LabelFile';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import styled from '@emotion/styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addImageQuestion } from '../../store/slices/questionsSlice';
+import Swal from 'sweetalert2';
 
 const CenterDiv = styled("div")(({ theme }) => ({
   textAlign: "center" ,
@@ -15,6 +16,8 @@ const CenterDiv = styled("div")(({ theme }) => ({
 function Picture() {
 
   const [selectedPicture, setSelectedPicture] = useState(null);
+  const [change , setChange] = useState(false) ;
+  const addImageResponse = useSelector((state) => state.questionsData.addImageResponse);
   
   const handlePictureChange = (event) => {
     const file = event.target.files[0];
@@ -23,13 +26,39 @@ function Picture() {
     }
   };
 
+  useEffect(() => {
+    if (change) {
+      if (addImageResponse.status==true) {
+        Swal.fire({
+          icon: 'success',
+          title: 'تم اضافة الصورة بنجاح',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setSelectedPicture(null)
+      }
+    }
+  }, [addImageResponse])
+
   const dispatch = useDispatch() ;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('image', selectedPicture );
-    dispatch(addImageQuestion(formData))
+    console.log(selectedPicture);
+    if (selectedPicture) {
+      const formData = new FormData();
+      formData.append('image', selectedPicture);
+      dispatch(addImageQuestion(formData))
+      setChange(true)
+    }
+    else {
+      Swal.fire({
+        icon: 'error',
+        text : 'برجاء رفع الصورة اولا ' ,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
 
   };
 

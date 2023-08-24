@@ -81,7 +81,7 @@ const Exams = () => {
 
   return (
     <>
-      <Title> الإختبارات المركزية  :</Title>
+      <Title> الإختبارات المركزية  </Title>
       <BoxParent>
         <BoxContainer>
           {Exams.map((exam, index) => (

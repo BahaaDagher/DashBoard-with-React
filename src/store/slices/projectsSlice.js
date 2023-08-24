@@ -9,7 +9,7 @@ export const getProjects = createAsyncThunk(
     console.log(token);
     try {
       const response = await axios.get(
-        "https://dash.baetiy.com/api/getProjecets?page=1&limit=20" , 
+        "https://test.learnning.mohamedmansi.com/api/getProjecets?page=1&limit=20" , 
         { headers: {"Authorization" : token}}
       );
       return response.data.data.projecets;
@@ -24,7 +24,7 @@ export const sendProject = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/addProjecet" , {
+        "https://test.learnning.mohamedmansi.com/api/addProjecet" , {
           name:values.name,
           subjecet_id:values.subjecet_id,
           teacher_name: values.teacher_name,

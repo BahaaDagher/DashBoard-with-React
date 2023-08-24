@@ -7,7 +7,7 @@ export const getResearches = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://dash.baetiy.com/api/getResearches?page=1&limit=20" , 
+        "https://test.learnning.mohamedmansi.com/api/getResearches?page=1&limit=20" , 
         { headers: {"Authorization" : token}}
       );
       return response.data.data.researchs ;
@@ -22,7 +22,7 @@ export const sendResearch = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/addResearch" , {
+        "https://test.learnning.mohamedmansi.com/api/addResearch" , {
           name:values.name,
           subjecet_id:values.subjecet_id,
           teacher_name: values.teacher_name,

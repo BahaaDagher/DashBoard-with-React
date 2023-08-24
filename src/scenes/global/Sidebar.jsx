@@ -14,11 +14,6 @@ import { Colors } from "../../theme";
 import { useState } from "react";
 import styled from "@emotion/styled";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import PlagiarismOutlinedIcon from "@mui/icons-material/PlagiarismOutlined";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
@@ -76,9 +71,9 @@ const Sidebar = ({
   const [selected, setSelected] = useState("Dashboard");
 
   const localStorageData = JSON.parse(localStorage.getItem("userData"));
-  const userData = localStorageData
-    ? localStorageData
-    : "default-token-sideBar";
+  const userData = localStorageData ? localStorageData : "default-token-sideBar";
+
+  const profilePicture = userData.image 
 
   console.log(userData);
   const mobileItemClicked = () => {
@@ -121,11 +116,10 @@ const Sidebar = ({
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/person3.png`}
+                  src={ (profilePicture) ? profilePicture : userData.gender === "female" ? "../../assets/female.png" : "../../assets/male.png"}
                   style={{
                     borderRadius: "50%",
                     border: "2px solid #fff",
-                    paddingTop: "5px",
                   }}
                 />
               </Box>

@@ -6,6 +6,17 @@ import { getLevels } from "../../store/slices/levelSlice";
 import { profileData, updateProfile } from "../../store/slices/userSlice";
 import Swal from "sweetalert2";
 import  Title  from "../../components/Title";
+import InputFile from "../../components/InputFile";
+import LabelFile from "../../components/LabelFile";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+
+
+const StyledLabel = styled(LabelFile)(({ theme }) => ({
+  borderRadius : "50%" , 
+  width : "130px" , 
+  height : "130px"   , 
+  fontSize: "17px",
+}));
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -15,6 +26,9 @@ const FormContainer = styled("div")(({ theme }) => ({
   border: "1px solid #e4e4e4",
   borderRadius: "5px",
   boxShadow: "0 2px 4px #00a4a97d",
+  height : `calc(100vh - ${Colors.height} - 70px)` , 
+  overflow: "auto",
+
 }));
 
 const Form = styled("form")(({ theme }) => ({
@@ -82,12 +96,16 @@ const EditProfile = () => {
   const ResponseUpdateProfile = useSelector((state) => state.userData.ResponseUpdateProfile )
 
   const [name, setName] = useState(user.name);
+  const [nakeName, setNakeName] = useState(user.n_name);
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
   const [selectedLevel, setSelectedLevel] = useState(user.level_id);
   const [levelObject , setLevelObject] = useState({}) ;
+  const [done , setDone] = useState(false) ;
 
   const [selectedPicture, setSelectedPicture] = useState();
+
+  const dataOfProfile = useSelector((state) => state.userData.dataOfProfile ) ;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -111,27 +129,40 @@ const EditProfile = () => {
     }
   };
 
+
+  useEffect(() => {
+    console.log("dataOfProfile", dataOfProfile)
+      if(dataOfProfile.id && done) {
+        const storedData = localStorage.getItem('userData');
+        const data = JSON.parse(storedData);
+        data.name = name ;
+        data.n_name = nakeName ; 
+        data.email = email ;
+        data.phone = phone ;
+        data.level_id = selectedLevel ;
+        data.level = levelObject.name ; 
+        data.image = dataOfProfile.image ;
+        const updatedData = JSON.stringify(data);
+        localStorage.setItem('userData', updatedData);
+        Swal.fire({
+          icon: 'success',
+          title: 'تم تعديل البيانات بنجاح',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        // window.location.reload();
+      }
+     
+  }, [dataOfProfile] );
+
+
   useEffect(() => {
     if(ResponseUpdateProfile.status == true) {
-      const storedData = localStorage.getItem('userData');
-      const data = JSON.parse(storedData);
-      data.name = name ;
-      data.email = email ;
-      data.phone = phone ;
-      data.level_id = selectedLevel ;
-      data.level = levelObject.name ; 
-      
-      const updatedData = JSON.stringify(data);
-      localStorage.setItem('userData', updatedData);
-      Swal.fire({
-        icon: 'success',
-        title: 'تم تعديل البيانات بنجاح',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      window.location.reload();
+      dispatch(profileData())
+      setDone(true)
     }
-    else if (ResponseUpdateProfile.status==false) {
+    else if (ResponseUpdateProfile.status == false)
+    {
       Swal.fire({
         icon: 'error',
         text: ResponseUpdateProfile.message ,
@@ -143,10 +174,14 @@ const EditProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateProfile({name : name , email : email , phone : phone , level_id : selectedLevel , image: selectedPicture}))
-    console.log( "name : " , name , "email : " , email , "phone : " , phone , "level_id : " , selectedLevel )
-    console.log("levels" , levels) ;
-    console.log("selectedLevel" , selectedLevel) ;
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("n_name", nakeName);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("level_id", selectedLevel);
+    if (selectedPicture) formData.append("image", selectedPicture);
+    dispatch(updateProfile(formData))
     setLevelObject(levels.find(level => level.id == selectedLevel))
     console.log("levelObject" , levelObject) ;
   };
@@ -161,6 +196,14 @@ const EditProfile = () => {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            onFocus={(e) => e.target.classList.add("active")}
+            onBlur={(e) => e.target.classList.remove("active")}
+          />
+          <Label> الاسم المستعار </Label>
+          <Input
+            type="text"
+            value={nakeName}
+            onChange={(e) => setNakeName(e.target.value)}
             onFocus={(e) => e.target.classList.add("active")}
             onBlur={(e) => e.target.classList.remove("active")}
           />
@@ -195,11 +238,13 @@ const EditProfile = () => {
           </Select>
           <Label> الصورة </Label>
           <div>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handlePictureChange}
-            />
+          <InputFile
+          id = "uploadPicture"
+          type="file"
+          accept="image/*"
+          onChange={handlePictureChange}
+        />
+        <StyledLabel htmlFor="uploadPicture"> <AddPhotoAlternateIcon sx= {{fontSize : "20px"}}/> اختر صورة</StyledLabel>
           </div>
           <Button type="submit">حفظ</Button>
         </Form>

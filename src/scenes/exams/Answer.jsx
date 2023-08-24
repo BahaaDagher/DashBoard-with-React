@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Box } from '@mui/material'
 import React from 'react'
 import FiberManualRecordOutlinedIcon from '@mui/icons-material/FiberManualRecordOutlined';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import CheckIcon from '@mui/icons-material/Check';
 import { Colors } from '../../theme'
 
@@ -27,60 +28,51 @@ const BoxAnswer = styled(Box)(({ theme }) => ({
 const Item = styled(Box)(({ theme }) => ({
     display:"flex" ,
     alignItems:"center" ,
+    justifyContent : "center" ,
+    textAlign:"center" ,
     padding: '10px' ,
+    margin: '10px' ,
     [theme.breakpoints.down('1200')]: {
         width:"50%" ,
     } , 
     [theme.breakpoints.down('800')]: {
         width:"100%" ,
+    } , 
+    color : "#fff" ,
+    backgroundColor : "#198754" ,
+    "&.wrong" : {
+        backgroundColor : "#dc3545" ,
     }
-    
 })); 
+
 const H6 = styled("h6")(({ theme }) => ({
     minWidth:"160px" ,   
     margin: '0' ,   
     paddingRight: '10px' ,
-}));  
+}));
 
 const Answer = ({singleQuestion}) => {
     const ans = singleQuestion.answer ;
   return (
     <>
-        <BoxContainer>
+        <BoxContainer style={{ wordWrap:"break-word"}}>
             <h5 style={{fontWeight : "bold"}} ><span>{singleQuestion.id}</span> -  {singleQuestion.name}</h5>
             <BoxAnswer>
-                <Item>
-                    {
-                        (ans===1) ? 
-                        (<CheckIcon sx={{fontSize:"20px" , color : Colors.main[1] }} />) :
-                        (<FiberManualRecordOutlinedIcon sx={{fontSize:"20px" }} />)
-                    }
-                    <H6>{singleQuestion.option_1 } </H6>
-                </Item>
-                <Item>
-                    {
-                        (ans===2) ?  
-                        (<CheckIcon sx={{fontSize:"20px" , color : Colors.main[1] }} />) :
-                        (<FiberManualRecordOutlinedIcon sx={{fontSize:"20px" }} />)
-                    }
-                    <H6>{singleQuestion.option_2 } </H6>
-                </Item>
-                <Item>
-                    {
-                        (ans===3) ? 
-                        (<CheckIcon sx={{fontSize:"20px" , color : Colors.main[1] }} />) :
-                        (<FiberManualRecordOutlinedIcon sx={{fontSize:"20px" }} />)
-                    }
-                    <H6>{singleQuestion.option_3 } </H6>
-                </Item>
-                <Item>
-                    {
-                        (ans===4) ? 
-                        (<CheckIcon sx={{fontSize:"20px" , color : Colors.main[1] }} />) :
-                        (<FiberManualRecordOutlinedIcon sx={{fontSize:"20px" }} />)
-                    }
-                    <H6>{singleQuestion.option_4 } </H6>
-                </Item>
+                {singleQuestion.options.map((option , index) => {
+                    return (
+                        option.name != null ? (
+                        option.isCorrect==true  ? 
+                        <Item>
+                            <CheckIcon sx={{fontSize:"30px"  }} />
+                            <H6>{option.name } </H6>
+                        </Item>  : 
+                        <Item className = "wrong">
+                            <CloseOutlinedIcon sx={{fontSize:"30px" }} />
+                            <H6>{option.name } </H6>
+                        </Item> 
+                        ) : null
+                    )
+                })}
             </BoxAnswer>
         </BoxContainer>
     </>

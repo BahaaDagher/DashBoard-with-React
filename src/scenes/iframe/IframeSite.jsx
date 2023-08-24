@@ -22,7 +22,11 @@ const Title = styled("h1")(({ theme }) => ({
     color: Colors.main[1] ,
     fontWeight: 'bold' ,
 }));  
-const IframeSite = ({url, title}) => {
+const IframeSite = ({url, title , bot}) => {
+    if (bot) {
+        const userData = JSON.parse(localStorage.getItem('userData'))
+        url = userData.chatPot 
+    }
   return (
     <>
         <Title>{title}</Title>
@@ -35,5 +39,4 @@ const IframeSite = ({url, title}) => {
     </>
   )
 }
-
 export default IframeSite

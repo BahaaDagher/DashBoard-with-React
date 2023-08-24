@@ -25,7 +25,7 @@ export const userRegister = createAsyncThunk(
   async (values) => {
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/register" ,{
+        "https://test.learnning.mohamedmansi.com/api/register" ,{
           name:values.name,
           phone:values.phone,
           email:values.email,
@@ -47,7 +47,7 @@ export const sendOtp = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('registeData')).token;
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/verifyOtp" ,{
+        "https://test.learnning.mohamedmansi.com/api/verifyOtp" ,{
           otp:values.otp,
           order_id:values.orderId,
         },{ headers: {"Authorization" : token}}
@@ -66,7 +66,7 @@ export const logout = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/logout" ,{ headers: {"Authorization" : token}}
+        "https://test.learnning.mohamedmansi.com/api/logout" ,{ headers: {"Authorization" : token}}
       );
       return response.data ;
     } catch (error) {
@@ -80,7 +80,7 @@ export const profileData = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://dash.baetiy.com/api/getProfileData" ,
+        "https://test.learnning.mohamedmansi.com/api/getProfileData" ,
         { headers: {"Authorization" : token}}
       );
       return response.data.data.user ;
@@ -95,13 +95,9 @@ export const updateProfile = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
-        "https://dash.baetiy.com/api/updateProfile" ,{
-          name:values.name,
-          email:values.email,
-          phone:values.phone,
-          level_id:values.level_id,
-          image :values.image
-        },
+        "https://test.learnning.mohamedmansi.com/api/updateProfile" ,
+          values
+        ,
         { headers: {"Authorization" : token}}
       );
       return response.data ;

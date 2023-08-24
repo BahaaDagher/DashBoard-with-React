@@ -7,7 +7,7 @@ export const groupChatGet = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        `https://test.learnning.mohamedmansi.com/api/groupChat?group_id=${vlaues.group_id}&limit=10&page=${vlaues.page}`, 
+        `https://test.learnning.mohamedmansi.com/api/groupChat?group_id=${values.group_id}&limit=10&page=${values.page}`, 
         { headers: {"Authorization" : token}}
       );
       return response.data ;
@@ -40,7 +40,7 @@ export const groupChatSend = createAsyncThunk(
       const token = JSON.parse(localStorage.getItem('userData')).token;
       try {
         const response = await axios.get(
-          `https://dash.baetiy.com/api/chat?limit=5&page=${values.page}`, 
+          `https://test.learnning.mohamedmansi.com/api/chat?limit=5&page=${values.page}`, 
           { headers: {"Authorization" : token}}
         );
         return response.data ;
@@ -55,7 +55,7 @@ export const groupChatSend = createAsyncThunk(
         const token = JSON.parse(localStorage.getItem('userData')).token;
         try {
           const response = await axios.post(
-            "https://dash.baetiy.com/api/sendChat" ,{
+            "https://test.learnning.mohamedmansi.com/api/sendChat" ,{
               message:values.message,
             },
             { headers: {"Authorization" : token}}
@@ -71,7 +71,7 @@ export const groupChatSend = createAsyncThunk(
         const token = JSON.parse(localStorage.getItem('userData')).token;
         try {
           const response = await axios.get(
-            `https://dash.baetiy.com/api/technical_support?limit=5&page=${values.page}`, 
+            `https://test.learnning.mohamedmansi.com/api/technical_support?limit=5&page=${values.page}`, 
             { headers: {"Authorization" : token}}
           );
           return response.data ;
@@ -86,7 +86,7 @@ export const groupChatSend = createAsyncThunk(
           const token = JSON.parse(localStorage.getItem('userData')).token;
           try {
             const response = await axios.post(
-              "https://dash.baetiy.com/api/technical_support_sendMessage" ,{
+              "https://test.learnning.mohamedmansi.com/api/technical_support_sendMessage" ,{
                 message:values.message,
               },
               { headers: {"Authorization" : token}}
@@ -102,11 +102,13 @@ const chatSlice = createSlice({
   initialState: {
     groupChatGetResponse : {} ,
     groupChatSendResponse : {} ,
-    groupChatPages:0
+    groupChatPages:0 ,
     studentChatGetResponse : {} ,
     studentChatSendResponse : {} ,
+    studentChatPages:0 ,
     technicalChatGetResponse : {} ,
     technicalChatSendResponse : {} ,
+    technicalChatPages:0 ,
 
   },
   extraReducers: (builder) => {
@@ -119,14 +121,18 @@ const chatSlice = createSlice({
       .addCase(groupChatSend.fulfilled, (state, action) => {
         state.groupChatSendResponse = action.payload;
       })
+
       .addCase(StudentChatGet.fulfilled, (state, action) => {
         state.studentChatGetResponse = action.payload;
+        state.studentChatPages +=1
       })
       .addCase(StudentChatSend.fulfilled, (state, action) => {
         state.studentChatSendResponse = action.payload;
       })
+
       .addCase(technicalChatGet.fulfilled, (state, action) => {
         state.technicalChatGetResponse = action.payload;
+        state.technicalChatPages +=1
       })
       .addCase(technicalChatSend.fulfilled, (state, action) => {
         state.technicalChatSendResponse = action.payload;

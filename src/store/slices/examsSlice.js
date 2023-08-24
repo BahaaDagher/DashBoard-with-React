@@ -7,7 +7,7 @@ export const getExams = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        "https://dash.baetiy.com/api/getExams" , 
+        "https://test.learnning.mohamedmansi.com/api/getExams" , 
         { headers: {"Authorization" : token}}
       );
       return response.data.data.exams ;
@@ -22,7 +22,7 @@ export const getExamQuestions = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
-        `https://dash.baetiy.com/api/getQuestions?exam_id=${examId}` , 
+        `https://test.learnning.mohamedmansi.com/api/getQuestions?exam_id=${examId}` , 
         { headers: {"Authorization" : token}}
       );
       return response.data.data.questions ;
@@ -34,8 +34,8 @@ export const getExamQuestions = createAsyncThunk(
 const examsSlice = createSlice({
   name: "exams",
   initialState: {
-    Exams: [],
-    ExamQuestions :[] 
+    Exams: [] ,
+    ExamQuestions : [] 
   },
   extraReducers: (builder) => {
     builder

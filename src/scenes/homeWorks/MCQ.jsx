@@ -157,11 +157,31 @@ function MCQ() {
       let currentAns = [...currentAnswer]
       currentAns[i]  = ''
       setCurrentAnswer(currentAns);
+      setOptionCounter(1) ;
     }
   };
   const handleSubmit = () => {
     console.log(data);
-    dispatch(addQuestions(data))
+    const sendArray = [] 
+    let send = false  ; 
+    data.map((ques ,i)=>{
+      if (ques.name !="" && ques.answer.length>0)  {
+        sendArray.push(ques)
+        send = true ; 
+      }
+    })
+    if (send) {
+      dispatch(addQuestions(sendArray))
+    }
+    else{
+      Swal.fire({
+        icon: 'error',
+        text: 'برجاء اضافة الاسئلة والاختيارات ',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      
+    }
     console.log('gg');
   };
 
@@ -177,6 +197,8 @@ function MCQ() {
     setData(questions)
   
   };
+
+  const [optionCounter , setOptionCounter] = useState(0)
 
   return (
     <>
@@ -205,7 +227,10 @@ function MCQ() {
               value={currentAnswer[i]}
               onChange={(e)=>handleAnswerChange(e,i)}
             />
-            <AddButton onClick={()=>addAnswer(i)}>اضافة اختيار</AddButton>
+            { ques.answer.length == 0 ?
+              <AddButton onClick={()=>addAnswer(i)}>اضافة اختيار</AddButton>  :
+              <AddButton onClick={()=>addAnswer(i)}>اضافة اختيار اخر </AddButton>
+            } 
           </FlexBox>
           <Ul>
             {
@@ -223,8 +248,6 @@ function MCQ() {
       <SubmitButton onClick={handleSubmit}>ارسال الأسئلة</SubmitButton>
       <SubmitButton onClick={addAnotherQues}>اضافة سؤال اخر</SubmitButton>
     </Div>
-    
-    
     </>
   );
 }
