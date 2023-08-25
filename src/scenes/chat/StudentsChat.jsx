@@ -167,7 +167,7 @@ const handleFileSelect = (event) => {
                 ref={chatRef} 
               >
                 {messages.toReversed().map((message, index) => (
-                  message.isMine ? (
+                  message.user_id == userData.id  ? (
                       <div className="Mine" key={index}>
                         <h6 className="mb-2"> {message.userName}</h6>
                         <div className="d-flex flex-row justify-content-start mb-4 pt-1">

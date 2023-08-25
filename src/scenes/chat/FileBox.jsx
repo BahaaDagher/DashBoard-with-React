@@ -28,7 +28,7 @@ const FileBox = ({ src, mine }) => {
     }, [src]);
 
     const handleClick = () => {
-        // window.open(src);
+        window.open(src);
         console.log(src);
     };
 

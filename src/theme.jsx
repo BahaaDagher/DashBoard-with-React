@@ -5,7 +5,7 @@ import { createTheme } from "@mui/material";
 // color design tokens  
 export const Colors = {
     height: "87px", 
-    mobile : "30px" , 
+    mobile : "45px" , 
     main:{
         1 :"#008d95" , 
         2 :"#00a4a9"  , 
