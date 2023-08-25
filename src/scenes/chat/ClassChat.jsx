@@ -103,40 +103,27 @@ const ClassChat = () => {
   }, [messages]);
 
 
-
+  
   const scrollToBottom = () => {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }}
- 
 
 
-  useEffect(() => {
-    
- 
+
+  const handleScroll = () => {
     const chatContainer = chatRef.current;
-    const handleScroll = () => {
-      if (chatContainer.scrollTop  === 0) {
-        if(lastPage>pagechatGroup){
+    if (chatContainer.scrollTop  === 0) {
+      if(lastPage>pagechatGroup){
 
-          getData(pagechatGroup)
-          chatContainer.scrollTop=chatContainer.scrollTop+1000
-          setMScrollToBot(false)
-        }
+        getData(pagechatGroup)
+        chatContainer.scrollTop=chatContainer.scrollTop+1000
+        setMScrollToBot(false)
       }
-    };
-
-    if (chatContainer) {
-      chatContainer.addEventListener('scroll', handleScroll);
-  
     }
-    return () => {
-      if (chatContainer) {
-        chatContainer.removeEventListener('scroll', handleScroll);
-      }
-    };
+  };
 
-  },[pagechatGroup]);
+
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
@@ -168,6 +155,7 @@ const ClassChat = () => {
                 data-mdb-perfect-scrollbar="true"
                 style={customStyles }
                 ref={chatRef} 
+                onScroll={handleScroll}
               >
                 {messages.toReversed().map((message, index) => (
                   message.user_id == userData.id ? (

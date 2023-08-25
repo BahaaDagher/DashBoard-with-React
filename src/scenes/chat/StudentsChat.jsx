@@ -108,31 +108,17 @@ const scrollToBottom = () => {
 
 
 
-useEffect(() => {
-  
-
+const handleScroll = () => {
   const chatContainer = chatRef.current;
-  const handleScroll = () => {
-    if (chatContainer.scrollTop  === 0) {
-      if(lastPage>studentChatPages){
+  if (chatContainer.scrollTop  === 0) {
+    if(lastPage>studentChatPages){
 
-        getData(studentChatPages)
-        chatContainer.scrollTop=chatContainer.scrollTop+1000
-        setMScrollToBot(false)
-      }
+      getData(studentChatPages)
+      chatContainer.scrollTop=chatContainer.scrollTop+1000
+      setMScrollToBot(false)
     }
-  };
-
-  if (chatContainer) {
-    chatContainer.addEventListener('scroll', handleScroll);
-
   }
-  return () => {
-    if (chatContainer) {
-      chatContainer.removeEventListener('scroll', handleScroll);
-    }
-  };
-},[studentChatPages]);
+};
 
 const handleFileSelect = (event) => {
   console.log("the event");
@@ -163,7 +149,7 @@ const handleFileSelect = (event) => {
                 className="card-body"
                 data-mdb-perfect-scrollbar="true"
                 style={customStyles }
-
+                onScroll={handleScroll}
                 ref={chatRef} 
               >
                 {messages.toReversed().map((message, index) => (
