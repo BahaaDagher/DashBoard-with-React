@@ -98,7 +98,6 @@ const Payment = () => {
   const dispatch = useDispatch()
 
   useEffect (() => {
-    console.log("redirect" , redirect , "postPaymentResponse" , postPaymentResponse.status)
     if (redirect==true && postPaymentResponse.status==true) {
         const Link  = postPaymentResponse.data.payment.payment_data.redirectTo
         window.location.href = Link
@@ -122,7 +121,6 @@ const Payment = () => {
   
   const handleOkClick = () => {
     if (selectedPayment) {
-        console.log("sdfsfd")
         dispatch (postPayment({order_id : order_id , payment_method_id : selectedPayment ,currency:selectedCurrency})) 
     } else {
         Swal.fire({

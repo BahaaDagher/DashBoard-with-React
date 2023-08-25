@@ -122,14 +122,12 @@ useEffect(() => {
   useEffect(() => { 
     dispatch(getSubjects()) ;
     dispatch(profileData())
-    console.log(subjects) ;
   }, [])
 
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", title, selectedSubject);
     dispatch(sendProject({name : title , teacher_name: supervisor, subjecet_id : selectedSubject })) ;
     setChange(true) ;
     

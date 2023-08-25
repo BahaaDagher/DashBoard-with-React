@@ -18,7 +18,6 @@ const MyAnswers = () => {
     const dispatch = useDispatch() ;
     useEffect(()=>{
         dispatch(getQuestions()) ; 
-        console.log(Questions);
     },[]) 
   return (
     <>
@@ -28,7 +27,7 @@ const MyAnswers = () => {
             <Title>حلولي </Title>
             <BoxContainer sx = {{}}>
                 {Questions.map((question,index) => (
-                    <Answer singleQuestion={question} index={index} />
+                    <Answer singleQuestion={question} index={index} key = {index} />
                 ))}
             </BoxContainer>
         </div>

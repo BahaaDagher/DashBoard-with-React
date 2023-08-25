@@ -45,7 +45,6 @@ const IframeSite = ({ title , bot}) => {
 
     useEffect(() => {
         if (externals.status==true) {
-            console.log(externals.data.externials[0].iframe)
             setUrl (externals.data.externials[0].iframe) 
         }
     }, [externals])

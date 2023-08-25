@@ -57,8 +57,6 @@ const TechnicalSupport = () => {
 
     const channel = pusher.subscribe('chat_api');
     channel.bind("MessageSent", (data) => {
-      console.log(messages);
-      console.log("the data", data);
       setMessages(current => [...[data.message], ...current])
     });
 
@@ -121,7 +119,6 @@ const handleScroll = () => {
 const handleFileSelect = (event) => {
   const file = event.target.files[0];
   if (file) {
-    console.log("Selected file:", file);
     const formData = new FormData();
     formData.append("file", file);
     dispatch(technicalChatSend(formData))
@@ -234,7 +231,6 @@ const handleFileSelect = (event) => {
                   onChange = {(e) => setSingleMessage(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
-                      console.log("the key is enter");
                       handleSend()
                     }
                   }}

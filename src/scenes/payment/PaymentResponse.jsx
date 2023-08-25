@@ -43,7 +43,6 @@ const PaymentResponse = () => {
     var status = url.searchParams.get("status");
     var order_id = url.searchParams.get("order_id");
     var invoice_id = url.searchParams.get("invoice_id");
-    console.log(status , order_id , invoice_id)
     dispatch(paymentResponse({status , order_id , invoice_id}))   
   }, [])
 

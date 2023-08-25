@@ -118,12 +118,10 @@ const EditProfile = () => {
       setPhone(user.phone);
       setSelectedLevel(user.level_id);
     }
-    console.log("user" , user) ; 
   }, [user] );
 
   const handlePictureChange = (event) => {
     const file = event.target.files[0];
-    console.log("file" , file) ;
     if (file) {
       setSelectedPicture(file);
     }
@@ -131,7 +129,6 @@ const EditProfile = () => {
 
 
   useEffect(() => {
-    console.log("dataOfProfile", dataOfProfile)
       if(dataOfProfile.id && done) {
         const storedData = sessionStorage.getItem('userData');
         const data = JSON.parse(storedData);
@@ -183,8 +180,6 @@ const EditProfile = () => {
     if (selectedPicture) formData.append("image", selectedPicture);
     dispatch(updateProfile(formData))
     setLevelObject(levels.find(level => level.id == selectedLevel))
-    console.log("levelObject" , levelObject) ;
-    console.log("nakeName" , nakeName)
   };
 
   return (

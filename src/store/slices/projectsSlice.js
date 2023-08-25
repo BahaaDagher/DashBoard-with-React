@@ -6,7 +6,6 @@ export const getProjects = createAsyncThunk(
   async () => {
   
     const token = JSON.parse(sessionStorage.getItem('userData')).token;
-    console.log(token);
     try {
       const response = await axios.get(
         "https://test.learnning.mohamedmansi.com/api/getProjecets?page=1&limit=20" , 

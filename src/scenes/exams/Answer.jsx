@@ -62,11 +62,11 @@ const Answer = ({singleQuestion}) => {
                     return (
                         option.name != null ? (
                         option.isCorrect==true  ? 
-                        <Item>
+                        <Item key = {index}>
                             <CheckIcon sx={{fontSize:"30px"  }} />
                             <H6>{option.name } </H6>
                         </Item>  : 
-                        <Item className = "wrong">
+                        <Item className = "wrong" key = {index}>
                             <CloseOutlinedIcon sx={{fontSize:"30px" }} />
                             <H6>{option.name } </H6>
                         </Item> 

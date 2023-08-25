@@ -44,7 +44,6 @@ function Picture() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(selectedPicture);
     if (selectedPicture) {
       const formData = new FormData();
       formData.append('image', selectedPicture);

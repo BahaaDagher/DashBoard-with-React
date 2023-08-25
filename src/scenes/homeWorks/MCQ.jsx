@@ -161,7 +161,6 @@ function MCQ() {
     }
   };
   const handleSubmit = () => {
-    console.log(data);
     const sendArray = [] 
     let send = false  ; 
     data.map((ques ,i)=>{
@@ -182,7 +181,7 @@ function MCQ() {
       })
       
     }
-    console.log('gg');
+   
   };
 
   const addAnotherQues = () => {
@@ -205,41 +204,41 @@ function MCQ() {
     {data.map((ques ,i)=>{
       
        return(
-        <Box border="1px solid #20c997  " margin="20px 0px" padding="10px">
+        <Box border="1px solid #20c997  " margin="20px 0px" padding="10px" key = {i}>
         <ChildBox>
-          <H5>  السؤال : {i+1}</H5>
-          <div>
-            <Input
-              type="text"
-              placeholder="أدخل السؤال هنا"
-              value={ques.name}
-              onChange={(e)=>handleQuestionChange(e ,i)}
-            />
-          </div>
-        </ChildBox>
-        <ChildBox>
-          <H5>   الإجابات :</H5>
-          <FlexBox display="flex" justifyContent="space-between">
-            <Input
-              className="add"
-              type="text"
-              placeholder="أدخل الاختيار هنا"
-              value={currentAnswer[i]}
-              onChange={(e)=>handleAnswerChange(e,i)}
-            />
-            { ques.answer.length == 0 ?
-              <AddButton onClick={()=>addAnswer(i)}>اضافة اختيار</AddButton>  :
-              <AddButton onClick={()=>addAnswer(i)}>اضافة اختيار اخر </AddButton>
-            } 
-          </FlexBox>
-          <Ul>
-            {
-              ques.answer.map((ans ,j)=>{
-                return <Li key={j}> {j+1}- {ans}</Li>
-              })
-            }
-          </Ul>
-        </ChildBox>
+            <H5>  السؤال : {i+1}</H5>
+            <div>
+              <Input
+                type="text"
+                placeholder="أدخل السؤال هنا"
+                value={ques.name}
+                onChange={(e)=>handleQuestionChange(e ,i)}
+              />
+            </div>
+          </ChildBox>
+          <ChildBox>
+            <H5>   الإجابات :</H5>
+            <FlexBox display="flex" justifyContent="space-between">
+              <Input
+                className="add"
+                type="text"
+                placeholder="أدخل الاختيار هنا"
+                value={currentAnswer[i]}
+                onChange={(e)=>handleAnswerChange(e,i)}
+              />
+              { ques.answer.length == 0 ?
+                <AddButton onClick={()=>addAnswer(i)}>اضافة اختيار</AddButton>  :
+                <AddButton onClick={()=>addAnswer(i)}>اضافة اختيار اخر </AddButton>
+              } 
+            </FlexBox>
+            <Ul>
+              {
+                ques.answer.map((ans ,j)=>{
+                  return <Li key={j}> {j+1}- {ans} </Li>
+                })
+              }
+            </Ul>
+          </ChildBox>
         </Box>
        )
        

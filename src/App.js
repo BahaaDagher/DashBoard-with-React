@@ -41,16 +41,16 @@ function App() {
   const navigate = useNavigate()
 
   const [go , setGo] = useState(false)
-  useEffect(() => {
-    if ( pathname == '/') {
-      window.location.href='https://app.baetiy.com/home'
-      setGo(true)
-    }
-  },[])
+  // useEffect(() => {
+  //   if ( pathname == '/') {
+  //     window.location.href='https://app.baetiy.com/home'
+  //     setGo(true)
+  //   }
+  // },[])
 
   return (
     <> 
-      {go&&
+      
       <div className="app">
         <Routes>
           <Route path="/student/login" element={ <ProtectRegisterAndLogin><Login /></ProtectRegisterAndLogin>} />
@@ -218,7 +218,7 @@ function App() {
           
         </Routes>
       </div>
-      }
+      
     </>
   );
 }

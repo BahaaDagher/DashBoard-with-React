@@ -49,7 +49,6 @@ const Register = () => {
 
   const [change , setChange] = useState(false)
   useEffect(() => {
-    console.log("2",change)
     if (isRegisterSuccess) {
       localStorage.setItem('registerData', JSON.stringify(registerData.data.user))
       Swal.fire({

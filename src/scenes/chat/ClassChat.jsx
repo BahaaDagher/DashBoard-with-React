@@ -27,7 +27,6 @@ const ClassChat = () => {
 
   const groupChatGetResponse = useSelector((state) => state.chatData.groupChatGetResponse);
   const ProfilePicture = JSON.parse(sessionStorage.getItem('userData')).image;
-  console.log("the profile picture", ProfilePicture);
 
   const [messages, setMessages] = useState([]);
   const [scrollToBot, setMScrollToBot] = useState(true);
@@ -62,8 +61,6 @@ const ClassChat = () => {
 
       const channel = pusher.subscribe('chat_api');
       channel.bind("LevelSent", (data) => {
-        console.log(messages);
-        console.log("the data", data);
         setMessages(current => [...[data.message], ...current])
       });
 
@@ -128,7 +125,6 @@ const ClassChat = () => {
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
     if (file) {
-      console.log("Selected file:", file);
       const formData = new FormData();
       formData.append("file", file);
       formData.append("group_id", userData.group_id);
@@ -244,7 +240,6 @@ const ClassChat = () => {
                   onChange = {(e) => setSingleMessage(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
-                      console.log("the key is enter");
                       handleSend()
                     }
                   }}

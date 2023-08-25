@@ -70,16 +70,15 @@ const Topbar = ({
   const dispatch = useDispatch();
   const token = JSON.parse(sessionStorage.getItem('userData')).token;
   useEffect(() => {
-    console.log("isAuth", isAuth);
+
     if (!isAuth) {
-      console.log("logout");
       sessionStorage.clear()
       navigate("/student/login");
     }
   }, [isAuth,token]);
 
   const handleLogout = () => {
-    console.log(isAuth);
+  
     dispatch(logout());
   };
 

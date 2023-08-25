@@ -124,7 +124,6 @@ const AddResearch = () => {
     dispatch(getSubjects()) ;
     setChange(true) ;
     dispatch(profileData())
-    console.log(subjects) ;
   }, [])
 
 
@@ -132,7 +131,6 @@ const AddResearch = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", title, selectedSubject);
     dispatch(sendResearch({name : title , teacher_name: supervisor, subjecet_id : selectedSubject })) ;
     
   };

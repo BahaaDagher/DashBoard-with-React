@@ -74,8 +74,6 @@ const Exams = () => {
 
   useEffect(() => {
     dispatch(getExams())
-    console.log( "Exam", Exams)
-    console.log( "ExamQuestions", ExamQuestions)
   }, []);
 
 
@@ -85,7 +83,7 @@ const Exams = () => {
       <BoxParent>
         <BoxContainer>
           {Exams.map((exam, index) => (
-            <ParenButton style= {{}}>
+            <ParenButton style= {{}} key = {index}>
               <Button key={index} onClick={() => setSelectedExam(exam.id)}>{exam.name}</Button>
             </ParenButton>
           ))}

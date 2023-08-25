@@ -72,7 +72,6 @@ const MyResearches = () => {
 
   useEffect (() => {
     dispatch(getResearches()) ; 
-    console.log("researches ",researches);
   },[])
 
   const pdfLink = (pdf) =>{

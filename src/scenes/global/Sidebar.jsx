@@ -75,7 +75,7 @@ const Sidebar = ({
 
   const profilePicture = userData.image 
 
-  console.log(userData);
+
   const mobileItemClicked = () => {
     setMobileOpen(false);
   };

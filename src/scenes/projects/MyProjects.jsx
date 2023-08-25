@@ -71,7 +71,6 @@ const MyProjects = () => {
 
   useEffect (() => {
     dispatch(getProjects()) ; 
-    console.log("projects ",projects);
   },[])
 
   const pdfLink = (pdf) =>{

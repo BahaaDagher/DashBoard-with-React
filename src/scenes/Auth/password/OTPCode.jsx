@@ -48,9 +48,7 @@ const OTPCode = () => {
   const handleSubmit = (e) => { 
 
     e.preventDefault()
-    console.log("first")
     dispatch(otpCode({phone:passwordPhone , otp :otp}))
-    console.log("second")
     setChange(true)
   }
 

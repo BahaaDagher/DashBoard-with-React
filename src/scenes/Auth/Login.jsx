@@ -43,7 +43,6 @@ const Login = () => {
     event.preventDefault();
     dispatch(userLogin(formData))
     setChange(true)
-    console.log("loginValidation" , loginValidation) 
   };
   return (
     <>
