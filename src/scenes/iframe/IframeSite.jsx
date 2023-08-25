@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
 import { Box } from '@mui/system'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Colors } from '../../theme';
+import { useDispatch, useSelector } from 'react-redux';
+import { getExternals } from '../../store/slices/externalsSlice';
 
 const BoxContainer = styled(Box)(({ theme }) => ({
     border: `1px solid ${Colors.main[3]}` ,
@@ -22,11 +24,33 @@ const Title = styled("h1")(({ theme }) => ({
     color: Colors.main[1] ,
     fontWeight: 'bold' ,
 }));  
-const IframeSite = ({url, title , bot}) => {
-    if (bot) {
-        const userData = JSON.parse(sessionStorage.getItem('userData'))
-        url = userData.chatPot 
-    }
+const IframeSite = ({ title , bot}) => {
+
+    const [url , setUrl] = useState('')
+    const dispatch = useDispatch()
+
+    const externals = useSelector((state) => state.externalsData.externals)
+
+    
+
+    useEffect(() => {
+        if (bot) {
+            const userData = JSON.parse(sessionStorage.getItem('userData'))
+            setUrl(userData.chatPot) 
+        }
+        else {
+            dispatch (getExternals())
+        }
+    }, [])
+
+    useEffect(() => {
+        if (externals.status==true) {
+            console.log(externals.data.externials[1].iframe)
+            setUrl (externals.data.externials[1].iframe) 
+        }
+    }, [externals])
+
+    
   return (
     <>
         <Title>{title}</Title>
