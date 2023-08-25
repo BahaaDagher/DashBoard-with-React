@@ -12,6 +12,8 @@ import FemaleAvatar from "../../components/chatAvatars/FemaleAvatar";
 import MaleAvatar from "../../components/chatAvatars/MaleAvatar";
 import PersonalPic from "../../components/chatAvatars/PersonalPic";
 import AdminAvatar from "../../components/chatAvatars/AdminAvatar";
+import FileBox from "./FileBox";
+import ImageBox from "./ImageBox";
 
 const customStyles = {
   backgroundColor: Colors.main[6],
@@ -28,7 +30,7 @@ const TechnicalSupport = () => {
   const [messages, setMessages] = useState([]);
   const [scrollToBot, setMScrollToBot] = useState(true);
   const [singleMessage , setSingleMessage] = useState("");
-  const userData = JSON.parse(localStorage.getItem('userData'));
+  const userData = JSON.parse(sessionStorage.getItem('userData'));
   const technicalChatPages = useSelector((state) => state.chatData.technicalChatPages);
   const [lastPage, setlastPage] = useState();
   const chatRef = useRef(null);
@@ -54,10 +56,10 @@ const TechnicalSupport = () => {
     });
 
     const channel = pusher.subscribe('chat_api');
-    channel.bind("LevelSent", (data) => {
+    channel.bind("MessageSent", (data) => {
       console.log(messages);
       console.log("the data", data);
-      setMessages(current => [...[data], ...current])
+      setMessages(current => [...[data.message], ...current])
     });
 
     return () => {
@@ -77,7 +79,9 @@ const getData=(value)=>{
 
 const handleSend = () => {
   if (singleMessage!="") {
-    dispatch(technicalChatSend({message:singleMessage })) 
+    const formData = new FormData();
+    formData.append("message", singleMessage);
+    dispatch(technicalChatSend(formData))
     scrollToBottom();
   }
   setSingleMessage("") ;
@@ -125,24 +129,30 @@ useEffect(() => {
       chatContainer.removeEventListener('scroll', handleScroll);
     }
   };
-
 },[technicalChatPages ]);
 
 const handleFileSelect = (event) => {
-  const file = event.target.files[0]; 
+  const file = event.target.files[0];
   if (file) {
     console.log("Selected file:", file);
+    const formData = new FormData();
+    formData.append("file", file);
+    dispatch(technicalChatSend(formData))
+    event.target.value = null;
   }
 };
+
   return (
     <section>
-      <div className= "w-100 " style={{height: `calc(100vh - ${Colors.height})` }}>
+      <div className= "w-100 " style={{height: `calc(100vh - ${Colors.height} - ${Colors.mobile})` }}>
         <div className="row d-flex justify-content-center w-100 m-0 h-100">
           <div className="col-md-12 col-lg-12 col-xl-12 h-100">
             <div className="card h-100" id="chat2" >
               <div className="card-header d-flex justify-content-between align-items-center p-3">
                 <h5 className="mb-0"> الدعم الفني </h5>
-                <h6 className="mb-0" style={{color : Colors.main[1] ,fontWeight:"bold"}} >  {userData.name} </h6>
+                <h6 className="mb-0" style={{color : Colors.main[1] ,fontWeight:"bold"}} >  
+                { userData.n_name !="" ? userData.n_name : userData.name }
+                </h6>
               </div>
               <div
                 className="card-body"
@@ -166,7 +176,9 @@ const handleFileSelect = (event) => {
                               >
                                  <span style={{ fontFamily: "inherit" , fontSize :"inherit" , whiteSpace: "pre-wrap" }}
                                  >
-                                  {message.message}
+                                  {message.type== "text" ? message.message : 
+                                  message.type== "pdf" ? <FileBox src = {message.file} mine={true}/> :
+                                  message.type== "image" ? <ImageBox src = {message.file}/> : null }
                                  </span>
                               </p>
                             <p className="small me-3 mb-3 rounded-3 text-muted d-flex flex-row justify-content-end"
@@ -190,7 +202,9 @@ const handleFileSelect = (event) => {
                             >
                               <span style={{ fontFamily: "inherit" , fontSize :"inherit" , whiteSpace: "pre-wrap" }}
                                  >
-                                  {message.message}
+                                  {message.type== "text" ? message.message : 
+                                  message.type== "pdf" ? <FileBox src = {message.file} mine={false}/> :
+                                  message.type== "image" ? <ImageBox src = {message.file}/> : null }
                                  </span>
                             </p>
                             <p className="small ms-3 mb-3 rounded-3 text-muted d-flex flex-row justify-content-start"
@@ -222,7 +236,6 @@ const handleFileSelect = (event) => {
                   onClick={handleSend}
                   style = {{fontSize : "30px" , color : Colors.main[1] , cursor: "pointer" , marginLeft : "10px"}}
                 />
-                
                 <textarea
                   style={{resize: "none" , height : "50px" , width : "100%"}}
                   type="text"

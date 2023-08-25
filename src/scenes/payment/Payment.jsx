@@ -71,7 +71,7 @@ const Payment = () => {
 
     const paymentMethods = useSelector((state) => state.paymentData.paymentMethods)
     const postPaymentResponse = useSelector((state) => state.paymentData.postPaymentResponse)
-    const order_id  = JSON.parse(localStorage.getItem("registerData")).order_id
+    const order_id  = JSON.parse(sessionStorage.getItem("registerData")).order_id
 
 
   const [selectedPayment, setSelectedPayment] = useState('');

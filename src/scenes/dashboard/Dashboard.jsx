@@ -20,7 +20,7 @@ const BoxContainer = styled("div")(({ theme }) => ({
   width: "100%",
   display : "flex",
   justifyContent : "space-around" ,
-  maxHeight: `calc(100vh - ${Colors.height} )`,
+  maxHeight: `calc(100vh - ${Colors.height} - ${Colors.mobile}  )`,
   overflow: "auto",
   alignItems : "center" ,
   textAlign : "center" ,

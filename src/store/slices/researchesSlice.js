@@ -4,7 +4,7 @@ import axios from "axios";
 export const getResearches = createAsyncThunk(
   "researches/getResearches", 
   async () => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
         "https://test.learnning.mohamedmansi.com/api/getResearches?page=1&limit=20" , 
@@ -19,7 +19,7 @@ export const getResearches = createAsyncThunk(
 export const sendResearch = createAsyncThunk(
   "researches/sendResearch", 
   async (values) => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
         "https://test.learnning.mohamedmansi.com/api/addResearch" , {

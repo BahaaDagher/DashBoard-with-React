@@ -4,7 +4,7 @@ import axios from "axios";
 export const groupChatGet = createAsyncThunk(
   "chat/groupChatGet", 
   async (values) => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
         `https://test.learnning.mohamedmansi.com/api/groupChat?group_id=${values.group_id}&limit=10&page=${values.page}`, 
@@ -19,13 +19,12 @@ export const groupChatGet = createAsyncThunk(
 export const groupChatSend = createAsyncThunk(
     "chat/groupChatSend", 
     async (values) => {
-      const token = JSON.parse(localStorage.getItem('userData')).token;
+      const token = JSON.parse(sessionStorage.getItem('userData')).token;
       try {
         const response = await axios.post(
-          "https://test.learnning.mohamedmansi.com/api/groupChat_sendMessage" ,{
-            message:values.message,
-            group_id :values.group_id
-          },
+          "https://test.learnning.mohamedmansi.com/api/groupChat_sendMessage" ,
+          values
+          ,
           { headers: {"Authorization" : token}}
         );
         return response.data ;
@@ -37,7 +36,7 @@ export const groupChatSend = createAsyncThunk(
   export const StudentChatGet = createAsyncThunk(
     "chat/StudentChatGet", 
     async (values) => {
-      const token = JSON.parse(localStorage.getItem('userData')).token;
+      const token = JSON.parse(sessionStorage.getItem('userData')).token;
       try {
         const response = await axios.get(
           `https://test.learnning.mohamedmansi.com/api/chat?limit=5&page=${values.page}`, 
@@ -52,12 +51,12 @@ export const groupChatSend = createAsyncThunk(
   export const StudentChatSend = createAsyncThunk(
       "chat/StudentChatSend", 
       async (values) => {
-        const token = JSON.parse(localStorage.getItem('userData')).token;
+        const token = JSON.parse(sessionStorage.getItem('userData')).token;
         try {
           const response = await axios.post(
-            "https://test.learnning.mohamedmansi.com/api/sendChat" ,{
-              message:values.message,
-            },
+            "https://test.learnning.mohamedmansi.com/api/sendChat" ,
+              values
+            ,
             { headers: {"Authorization" : token}}
           );
           return response.data ;
@@ -68,7 +67,7 @@ export const groupChatSend = createAsyncThunk(
     export const technicalChatGet = createAsyncThunk(
       "chat/technicalChatGet",
       async (values) => {
-        const token = JSON.parse(localStorage.getItem('userData')).token;
+        const token = JSON.parse(sessionStorage.getItem('userData')).token;
         try {
           const response = await axios.get(
             `https://test.learnning.mohamedmansi.com/api/technical_support?limit=5&page=${values.page}`, 
@@ -83,12 +82,12 @@ export const groupChatSend = createAsyncThunk(
     export const technicalChatSend = createAsyncThunk(
         "chat/technicalChatSend",
         async (values) => {
-          const token = JSON.parse(localStorage.getItem('userData')).token;
+          const token = JSON.parse(sessionStorage.getItem('userData')).token;
           try {
             const response = await axios.post(
-              "https://test.learnning.mohamedmansi.com/api/technical_support_sendMessage" ,{
-                message:values.message,
-              },
+              "https://test.learnning.mohamedmansi.com/api/technical_support_sendMessage" ,
+              values
+              ,
               { headers: {"Authorization" : token}}
             );
             return response.data ;

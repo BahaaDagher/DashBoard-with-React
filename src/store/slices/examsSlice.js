@@ -4,7 +4,7 @@ import axios from "axios";
 export const getExams = createAsyncThunk(
   "exams/getExams", 
   async () => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
         "https://test.learnning.mohamedmansi.com/api/getExams" , 
@@ -19,7 +19,7 @@ export const getExams = createAsyncThunk(
 export const getExamQuestions = createAsyncThunk(
   "exams/getExamQuestions", 
   async (examId) => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
         `https://test.learnning.mohamedmansi.com/api/getQuestions?exam_id=${examId}` , 

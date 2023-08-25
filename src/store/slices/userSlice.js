@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-const userData = JSON.parse(localStorage.getItem('userData'));
+const userData = JSON.parse(sessionStorage.getItem('userData'));
 
 export const userLogin = createAsyncThunk(
   "user/userLogin", 
@@ -44,7 +44,7 @@ export const userRegister = createAsyncThunk(
 export const sendOtp = createAsyncThunk(
   "user/sendOtp", 
   async (values) => {
-    const token = JSON.parse(localStorage.getItem('registeData')).token;
+    const token = JSON.parse(sessionStorage.getItem('registeData')).token;
     try {
       const response = await axios.post(
         "https://test.learnning.mohamedmansi.com/api/verifyOtp" ,{
@@ -63,7 +63,7 @@ export const sendOtp = createAsyncThunk(
 export const logout = createAsyncThunk(
   "user/logout", 
   async () => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
         "https://test.learnning.mohamedmansi.com/api/logout" ,{ headers: {"Authorization" : token}}
@@ -77,7 +77,7 @@ export const logout = createAsyncThunk(
 export const profileData = createAsyncThunk(
   "user/profileData", 
   async (values) => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
         "https://test.learnning.mohamedmansi.com/api/getProfileData" ,
@@ -92,7 +92,7 @@ export const profileData = createAsyncThunk(
 export const updateProfile = createAsyncThunk(
   "user/updateProfile", 
   async (values) => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
         "https://test.learnning.mohamedmansi.com/api/updateProfile" ,

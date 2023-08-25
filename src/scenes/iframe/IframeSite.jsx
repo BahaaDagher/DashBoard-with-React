@@ -5,7 +5,7 @@ import { Colors } from '../../theme';
 
 const BoxContainer = styled(Box)(({ theme }) => ({
     border: `1px solid ${Colors.main[3]}` ,
-    height: `calc(100vh - ${Colors.height} - 76px)`,
+    height: `calc(100vh - ${Colors.height} - ${Colors.mobile} - 76px)`,
 }));  
 
 const Iframe = styled("iframe")(({ theme }) => ({
@@ -24,7 +24,7 @@ const Title = styled("h1")(({ theme }) => ({
 }));  
 const IframeSite = ({url, title , bot}) => {
     if (bot) {
-        const userData = JSON.parse(localStorage.getItem('userData'))
+        const userData = JSON.parse(sessionStorage.getItem('userData'))
         url = userData.chatPot 
     }
   return (

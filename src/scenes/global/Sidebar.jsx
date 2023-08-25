@@ -70,8 +70,8 @@ const Sidebar = ({
   const theme = useTheme();
   const [selected, setSelected] = useState("Dashboard");
 
-  const localStorageData = JSON.parse(localStorage.getItem("userData"));
-  const userData = localStorageData ? localStorageData : "default-token-sideBar";
+  const sessionStorageData = JSON.parse(sessionStorage.getItem("userData"));
+  const userData = sessionStorageData ? sessionStorageData : "default-token-sideBar";
 
   const profilePicture = userData.image 
 
@@ -234,7 +234,7 @@ const Sidebar = ({
           sx={{
             height: "100vh",
             "& .pro-sidebar-inner": {
-              paddingTop: "55px",
+              // paddingTop: "15px",
               background: `${Colors.main[1]} !important`,
             },
             "& .pro-icon-wrapper": {
@@ -267,11 +267,10 @@ const Sidebar = ({
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/person3.png`}
+                  src={ (profilePicture) ? profilePicture : userData.gender === "female" ? "../../assets/female.png" : "../../assets/male.png"}
                   style={{
                     borderRadius: "50%",
                     border: "2px solid #fff",
-                    paddingTop: "5px",
                   }}
                 />
               </Box>
@@ -360,7 +359,7 @@ const Sidebar = ({
                   onClick={mobileItemClicked}
                   sx={{ fontSize: "40px" }}
                   title="الدعم الفني"
-                  to="/"
+                  to="/student/technicalSupport"
                   icon={
                     <BuildOutlinedIcon sx={{ width: "20px", height: "20px" }} />
                   }

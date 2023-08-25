@@ -25,8 +25,8 @@ const FormContainer = styled("div")(({ theme }) => ({
   padding: "20px",
   border: "1px solid #e4e4e4",
   borderRadius: "5px",
-  boxShadow: "0 2px 4px #00a4a97d",
-  height : `calc(100vh - ${Colors.height} - 70px)` , 
+  // boxShadow: "0 2px 4px #00a4a97d",
+  height : `calc(100vh - ${Colors.height} - ${Colors.mobile} - 70px)` , 
   overflow: "auto",
 
 }));
@@ -114,6 +114,7 @@ const EditProfile = () => {
       dispatch(profileData()) ; 
     } else {
       setName(user.name);
+      setNakeName(user.n_name);
       setEmail(user.email);
       setPhone(user.phone);
       setSelectedLevel(user.level_id);
@@ -133,7 +134,7 @@ const EditProfile = () => {
   useEffect(() => {
     console.log("dataOfProfile", dataOfProfile)
       if(dataOfProfile.id && done) {
-        const storedData = localStorage.getItem('userData');
+        const storedData = sessionStorage.getItem('userData');
         const data = JSON.parse(storedData);
         data.name = name ;
         data.n_name = nakeName ; 
@@ -143,14 +144,14 @@ const EditProfile = () => {
         data.level = levelObject.name ; 
         data.image = dataOfProfile.image ;
         const updatedData = JSON.stringify(data);
-        localStorage.setItem('userData', updatedData);
+        sessionStorage.setItem('userData', updatedData);
         Swal.fire({
           icon: 'success',
           title: 'تم تعديل البيانات بنجاح',
           showConfirmButton: false,
           timer: 1500
         })
-        // window.location.reload();
+        window.location.reload();
       }
      
   }, [dataOfProfile] );
@@ -184,6 +185,7 @@ const EditProfile = () => {
     dispatch(updateProfile(formData))
     setLevelObject(levels.find(level => level.id == selectedLevel))
     console.log("levelObject" , levelObject) ;
+    console.log("nakeName" , nakeName)
   };
 
   return (
@@ -238,13 +240,16 @@ const EditProfile = () => {
           </Select>
           <Label> الصورة </Label>
           <div>
-          <InputFile
-          id = "uploadPicture"
-          type="file"
-          accept="image/*"
-          onChange={handlePictureChange}
-        />
-        <StyledLabel htmlFor="uploadPicture"> <AddPhotoAlternateIcon sx= {{fontSize : "20px"}}/> اختر صورة</StyledLabel>
+              <InputFile
+              id = "uploadPicture"
+              type="file"
+              accept="image/*"
+              onChange={handlePictureChange}
+            />
+            <StyledLabel htmlFor="uploadPicture">
+              <AddPhotoAlternateIcon sx= {{fontSize : "20px"}}/> 
+              اختر صورة
+            </StyledLabel>
           </div>
           <Button type="submit">حفظ</Button>
         </Form>

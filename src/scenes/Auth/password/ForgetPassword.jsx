@@ -15,7 +15,7 @@ const Login = () => {
   
   useEffect(() => {
     if (forgetPasswordResponse.status) {
-      localStorage.setItem('passwordPhone', JSON.stringify(phone))
+      sessionStorage.setItem('passwordPhone', JSON.stringify(phone))
       Swal.fire({
         icon: 'success',
         title: 'تم ارسال رمز التعيين بنجاح',

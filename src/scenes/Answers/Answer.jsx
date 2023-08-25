@@ -66,7 +66,7 @@ const Answer = ({singleQuestion ,index}) => {
             : singleQuestion.status != 0 ? 
              <>
                 <BoxAnswer>
-                    {singleQuestion.options.map((option , index) => {
+                    {singleQuestion.options.map((option , index) => {   
                         return (
                             option.name != null ? (
                             option.isCorrect==true  ? 

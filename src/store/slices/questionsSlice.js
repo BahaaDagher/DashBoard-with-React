@@ -6,7 +6,7 @@ import axios from "axios";
 export const addQuestions = createAsyncThunk(
   "questions/addQuestions", 
   async (values) => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
         "https://test.learnning.mohamedmansi.com/api/addQuestion" ,{
@@ -22,7 +22,7 @@ export const addQuestions = createAsyncThunk(
 export const addImageQuestion = createAsyncThunk(
   "questions/addImageQuestion", 
   async (values) => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
         "https://test.learnning.mohamedmansi.com/api/addQuestion" ,
@@ -38,7 +38,7 @@ export const addImageQuestion = createAsyncThunk(
 export const getQuestions = createAsyncThunk(
   "questions/getQuestions", 
   async () => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
         "https://test.learnning.mohamedmansi.com/api/getQuestionsStudent?page=1&limit=50" ,

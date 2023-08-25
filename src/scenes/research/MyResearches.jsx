@@ -10,7 +10,7 @@ import  Title  from "../../components/Title";
 
 const Container = styled("div")(({ theme }) => ({
   textAlign: "center",
-  maxHeight: `calc(100vh - ${Colors.height} - 70px)` ,
+  maxHeight: `calc(100vh - ${Colors.height} -${Colors.mobile} - 70px)` ,
   overflow: "auto",
 }));
 

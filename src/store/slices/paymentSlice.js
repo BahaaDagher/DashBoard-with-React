@@ -18,7 +18,7 @@ export const getPaymentMethods = createAsyncThunk(
 export const postPayment = createAsyncThunk(
     "payment/postPayment", 
     async (values) => {
-    const token = JSON.parse(localStorage.getItem('registerData')).token;
+    const token = JSON.parse(sessionStorage.getItem('registerData')).token;
       try {
         const response = await axios.post(
           "https://test.learnning.mohamedmansi.com/api/payment" , 

@@ -10,8 +10,8 @@ import { otpCode } from '../../../store/slices/passwordSlice'
 
 const OTPCode = () => {
 
-  const passwordPhone = (localStorage.getItem('passwordPhone') ) ? 
-  JSON.parse(localStorage.getItem('passwordPhone')) : "01010673076"
+  const passwordPhone = (sessionStorage.getItem('passwordPhone') ) ? 
+  JSON.parse(sessionStorage.getItem('passwordPhone')) : "01010673076"
 
   const [otp, setOtp] = useState('') ;
   const [change , setChange] = useState(false)

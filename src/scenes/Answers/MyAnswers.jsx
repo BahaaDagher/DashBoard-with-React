@@ -8,7 +8,7 @@ import { getQuestions } from '../../store/slices/questionsSlice';
 import  Title  from '../../components/Title';
 
 const BoxContainer = styled(Box)(({ theme }) => ({
-    maxHeight : `calc(100vh - ${Colors.height} - 70px)` ,
+    maxHeight : `calc(100vh - ${Colors.height} - ${Colors.mobile} - 70px)` ,
     overflow : "auto" ,
 })); 
 
@@ -39,3 +39,9 @@ const MyAnswers = () => {
 }
 
 export default MyAnswers
+
+
+
+
+
+

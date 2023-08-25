@@ -19,7 +19,7 @@ const Login = () => {
   useEffect(() => {
     // redirect user to login page if registration was successful
     if (isAuth) {
-      localStorage.setItem('userData', JSON.stringify(userData.data.user))
+      sessionStorage.setItem('userData', JSON.stringify(userData.data.user))
       navigate('/student/dashboard')
     }
     else if (!loginValidation.data && change) {

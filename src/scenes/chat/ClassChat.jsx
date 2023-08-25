@@ -4,12 +4,14 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import { Colors } from "../../theme";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { groupChatGet, groupChatSend } from "../../store/slices/chatSlice";
+import { StudentChatSend, groupChatGet, groupChatSend } from "../../store/slices/chatSlice";
 import { useState } from "react";
 import Pusher from 'pusher-js';
 import FemaleAvatar from "../../components/chatAvatars/FemaleAvatar";
 import MaleAvatar from "../../components/chatAvatars/MaleAvatar";
 import PersonalPic from "../../components/chatAvatars/PersonalPic";
+import FileBox from "./FileBox";
+import ImageBox from "./ImageBox";
 
 const customStyles = {
   backgroundColor: Colors.main[6],
@@ -24,13 +26,13 @@ const customStyles = {
 const ClassChat = () => {
 
   const groupChatGetResponse = useSelector((state) => state.chatData.groupChatGetResponse);
-  const ProfilePicture = JSON.parse(localStorage.getItem('userData')).image;
+  const ProfilePicture = JSON.parse(sessionStorage.getItem('userData')).image;
   console.log("the profile picture", ProfilePicture);
 
   const [messages, setMessages] = useState([]);
   const [scrollToBot, setMScrollToBot] = useState(true);
   const [singleMessage , setSingleMessage] = useState("");
-  const userData = JSON.parse(localStorage.getItem('userData'));
+  const userData = JSON.parse(sessionStorage.getItem('userData'));
   const pagechatGroup = useSelector((state) => state.chatData.groupChatPages);
   const [lastPage, setlastPage] = useState();
   const chatRef = useRef(null);
@@ -62,7 +64,7 @@ const ClassChat = () => {
       channel.bind("LevelSent", (data) => {
         console.log(messages);
         console.log("the data", data);
-        setMessages(current => [...[data], ...current])
+        setMessages(current => [...[data.message], ...current])
       });
 
       return () => {
@@ -82,7 +84,10 @@ const ClassChat = () => {
 
   const handleSend = () => {
     if (singleMessage!="") {
-      dispatch(groupChatSend({message:singleMessage , group_id:userData.group_id})) 
+      const formData = new FormData();
+      formData.append("message", singleMessage);
+      formData.append("group_id", userData.group_id);
+      dispatch(groupChatSend(formData)) 
       scrollToBottom();
     }
     setSingleMessage("") ;
@@ -134,22 +139,29 @@ const ClassChat = () => {
   },[pagechatGroup]);
 
   const handleFileSelect = (event) => {
-    const file = event.target.files[0]; 
+    const file = event.target.files[0];
     if (file) {
       console.log("Selected file:", file);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("group_id", userData.group_id);
+      dispatch(groupChatSend(formData))
+      event.target.value = null;
     }
   };
 
 
   return (
     <section>
-      <div className= "w-100 " style={{height: `calc(100vh - ${Colors.height})` }}>
+      <div className= "w-100 " style={{height: `calc(100vh - ${Colors.height } - ${Colors.mobile})` }}>
         <div className="row d-flex justify-content-center w-100 m-0 h-100">
           <div className="col-md-12 col-lg-12 col-xl-12 h-100">
             <div className="card h-100" id="chat2" >
               <div className="card-header d-flex justify-content-between align-items-center p-3">
                 <h5 className="mb-0">شات الصف </h5>
-                <h6 className="mb-0" style={{color : Colors.main[1] ,fontWeight:"bold"}} >  {userData.name} </h6>
+                <h6 className="mb-0" style={{color : Colors.main[1] ,fontWeight:"bold"}} >  
+                { userData.n_name !="" ? userData.n_name : userData.name }
+                </h6>
               </div>
               <div
                 className="card-body"
@@ -174,7 +186,9 @@ const ClassChat = () => {
                               >
                                  <span style={{ fontFamily: "inherit" , fontSize :"inherit" , whiteSpace: "pre-wrap" }}
                                  >
-                                  {message.message}
+                                  {message.type== "text" ? message.message : 
+                                  message.type== "pdf" ? <FileBox src = {message.file} mine={true}/> :
+                                  message.type== "image" ? <ImageBox src = {message.file}/> : null }
                                  </span>
                               </p>
                             <p className="small me-3 mb-3 rounded-3 text-muted d-flex flex-row justify-content-end"
@@ -198,7 +212,9 @@ const ClassChat = () => {
                             >
                               <span style={{ fontFamily: "inherit" , fontSize :"inherit" , whiteSpace: "pre-wrap" }}
                                  >
-                                  {message.message}
+                                  {message.type== "text" ? message.message : 
+                                  message.type== "pdf" ? <FileBox src = {message.file} mine={false}/> :
+                                  message.type== "image" ? <ImageBox src = {message.file}/> : null }
                                  </span>
                             </p>
                             <p className="small ms-3 mb-3 rounded-3 text-muted d-flex flex-row justify-content-start"

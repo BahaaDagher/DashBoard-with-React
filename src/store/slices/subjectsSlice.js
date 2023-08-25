@@ -4,7 +4,7 @@ import axios from "axios";
 export const getSubjects = createAsyncThunk(
   "subjects/getSubjects", 
   async () => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.get(
         "https://test.learnning.mohamedmansi.com/api/homeScreen"  , 

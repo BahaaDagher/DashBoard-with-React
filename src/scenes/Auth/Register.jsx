@@ -51,7 +51,7 @@ const Register = () => {
   useEffect(() => {
     console.log("2",change)
     if (isRegisterSuccess) {
-      localStorage.setItem('registerData', JSON.stringify(registerData.data.user))
+      sessionStorage.setItem('registerData', JSON.stringify(registerData.data.user))
       Swal.fire({
         icon: 'success',
         title: 'تم التسجيل البيانات الاساسية بنجاح',

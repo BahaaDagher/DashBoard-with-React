@@ -37,7 +37,7 @@ const Button = styled("button")(({ theme }) => ({
 
 
 const BoxParent = styled(Box)(({ theme }) => ({
-  height: `calc(100vh - ${Colors.height} - 70px)` ,
+  height: `calc(100vh - ${Colors.height} - ${Colors.mobile} - 70px)` ,
   overflow: "auto",
 }));
 

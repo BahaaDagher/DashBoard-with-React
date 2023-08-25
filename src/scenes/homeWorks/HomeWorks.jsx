@@ -36,21 +36,22 @@ const TabBox = styled(Box)(({ theme }) => ({
     },
 }));
 const Box2 = styled(Box)(({ theme }) => ({
-
-    maxHeight : `calc(100vh - ${Colors.height} - 170px) ` ,
     padding : "20px" ,
-    overflowY : "auto" ,
-    [theme.breakpoints.down("800")]: {
-        maxHeight : `calc(100vh - ${Colors.height} - 225px) ` ,
-      },
 }));
+
+const ParentBox = styled(Box)(({ theme }) => ({
+
+    maxHeight : `calc(100vh - ${Colors.height} - 60px - ${Colors.mobile}) ` ,
+    overflowY : "auto" ,
+}));
+
 const HomeWorks = () => {
     const [tab , setTab] = useState("");
 
   return (
     <>
         <Title>حل الواجبات </Title>
-        <Box>
+        <ParentBox>
             <Box1>
                 <TabBox onClick={()=>setTab("mcq")}>كتابة سؤال</TabBox>
                 <TabBox onClick={()=>setTab("picture")}>أدخل بالصورة</TabBox>
@@ -60,7 +61,7 @@ const HomeWorks = () => {
                     tab === "picture" ?  <Picture/> : <MCQ/>
                 }
             </Box2>
-        </Box>
+        </ParentBox>
     </>
   )
 }

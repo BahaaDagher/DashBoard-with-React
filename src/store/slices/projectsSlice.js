@@ -5,7 +5,7 @@ export const getProjects = createAsyncThunk(
   "projects/getProjects", 
   async () => {
   
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     console.log(token);
     try {
       const response = await axios.get(
@@ -21,7 +21,7 @@ export const getProjects = createAsyncThunk(
 export const sendProject = createAsyncThunk(
   "projects/sendProject", 
   async (values) => {
-    const token = JSON.parse(localStorage.getItem('userData')).token;
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
     try {
       const response = await axios.post(
         "https://test.learnning.mohamedmansi.com/api/addProjecet" , {

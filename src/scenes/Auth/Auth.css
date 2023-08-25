@@ -27,22 +27,22 @@
     opacity: 0.8;
   }
 
-  /* @media (max-width: 1200px) {
-    .Auth-form-container {
-      padding: 5px;
-      
-    }
-    .Auth-form {
-      height: 95vh;
-      overflow: auto;
-    }
-  } */
-  
   .Auth-form-content {
     padding-left: 12%;
     padding-right: 12%;
   }
-  
+  @media (max-width: 800px) {
+    .Auth-form {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      
+    }
+    .Auth-form-content {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  }
+
   .Auth-form-title {
     text-align: center;
     margin-bottom: 1em;
