@@ -92,7 +92,6 @@ const MyProjects = () => {
               <GrantTableHead>عنوان المشروع</GrantTableHead>
               <GrantTableHead> المادة </GrantTableHead>
               <GrantTableHead>حالة المشروع</GrantTableHead>
-              <GrantTableHead>اظهار </GrantTableHead>
               <GrantTableHead>تنزيل</GrantTableHead>
             </tr>
           </thead>
@@ -109,16 +108,7 @@ const MyProjects = () => {
                         obj.status==1 ? "جاهز" : "غير جاهز" 
                       }
                     </TableData>
-                    <TableData>
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
-                    <div className="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                      <div className="modal-dialog modal-lg">
-                        <div className="modal-content">
-                          ...
-                        </div>
-                      </div>
-                    </div>
-                    </TableData>
+          
                     <TableData>
                       {
                         obj.status==1 ? 

@@ -39,7 +39,7 @@ export const groupChatSend = createAsyncThunk(
       const token = JSON.parse(sessionStorage.getItem('userData')).token;
       try {
         const response = await axios.get(
-          `https://test.learnning.mohamedmansi.com/api/chat?limit=5&page=${values.page}`, 
+          `https://test.learnning.mohamedmansi.com/api/chat?limit=10&page=${values.page}`, 
           { headers: {"Authorization" : token}}
         );
         return response.data ;
@@ -70,7 +70,7 @@ export const groupChatSend = createAsyncThunk(
         const token = JSON.parse(sessionStorage.getItem('userData')).token;
         try {
           const response = await axios.get(
-            `https://test.learnning.mohamedmansi.com/api/technical_support?limit=5&page=${values.page}`, 
+            `https://test.learnning.mohamedmansi.com/api/technical_support?limit=10&page=${values.page}`, 
             { headers: {"Authorization" : token}}
           );
           return response.data ;
@@ -101,13 +101,13 @@ const chatSlice = createSlice({
   initialState: {
     groupChatGetResponse : {} ,
     groupChatSendResponse : {} ,
-    groupChatPages:0 ,
+    groupChatPages:1 ,
     studentChatGetResponse : {} ,
     studentChatSendResponse : {} ,
-    studentChatPages:0 ,
+    studentChatPages:1 ,
     technicalChatGetResponse : {} ,
     technicalChatSendResponse : {} ,
-    technicalChatPages:0 ,
+    technicalChatPages:1 ,
 
   },
   extraReducers: (builder) => {

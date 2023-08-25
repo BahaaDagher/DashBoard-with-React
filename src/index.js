@@ -13,13 +13,13 @@ import { Provider } from 'react-redux';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-   <React.StrictMode>
+
    <BrowserRouter>
       <ThemeProvider theme={theme}>
           <App />
       </ThemeProvider>
     </BrowserRouter>
-  </React.StrictMode>
+
   </Provider>
  
 );
