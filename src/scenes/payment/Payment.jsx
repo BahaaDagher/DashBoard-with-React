@@ -75,6 +75,7 @@ const Payment = () => {
 
 
   const [selectedPayment, setSelectedPayment] = useState('');
+  const [selectedCurrency, setSelectedCurrency] = useState('SR');
   const [redirect , setRedirect] = useState(false) ;
   const [methods, setMethods] = useState([]);
 
@@ -87,6 +88,11 @@ const Payment = () => {
         }
     }
     )
+  };
+
+  const handlePaymentCurrency = (event) => {
+    setSelectedCurrency(event.target.value);
+  
   };
 
   const dispatch = useDispatch()
@@ -116,7 +122,7 @@ const Payment = () => {
   
   const handleOkClick = () => {
     if (selectedPayment) {
-        dispatch (postPayment({order_id : order_id , payment_method_id : selectedPayment})) 
+        dispatch (postPayment({order_id : order_id , payment_method_id : selectedPayment ,currency:selectedCurrency})) 
     } else {
         Swal.fire({
             icon: 'error',
@@ -137,11 +143,23 @@ const Payment = () => {
             <option value="">اختر طريقة الدفع</option>
 
             {methods?.map((option) => (
-                (option.redirect==="true") ?
+       
+                (option.name_en==="Visa-Mastercard") ?
                 (
-                    <option key={option.paymentId} value={option.paymentId}>{option.name_ar}</option>
+                    <option key={option.paymentId} value={option.paymentId}>البطاقة البنكية</option>
                 ) : () => {}
             ))}
+        </Select>
+        <Select 
+            value={selectedCurrency} 
+            onChange={handlePaymentCurrency} 
+        >
+            <option value="">اختر عملة الدفع</option>
+
+           
+                    <option value="SR"> الريال السعودي</option>
+                    <option value="EGP"> الجنيه المصري</option>
+                
         </Select>
         <SubmitButton onClick={handleOkClick} >تأكيد</SubmitButton>
         </Container>

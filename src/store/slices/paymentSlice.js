@@ -25,6 +25,7 @@ export const postPayment = createAsyncThunk(
           {
             order_id : values.order_id , 
             payment_method_id : values.payment_method_id ,
+            currency:values.currency
           }, 
           { headers: {"Authorization" : token}} 
         );

@@ -39,11 +39,11 @@ function App() {
   const { pathname } = useLocation();
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if ( pathname == '/') {
-      window.location.href='https://app.baetiy.com/home'
-    }
-  },[])
+  // useEffect(() => {
+  //   if ( pathname == '/') {
+  //     window.location.href='https://app.baetiy.com/home'
+  //   }
+  // },[])
   
   return (
     <>
