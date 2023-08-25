@@ -25,8 +25,7 @@ const FormContainer = styled("div")(({ theme }) => ({
   padding: "20px",
   border: "1px solid #e4e4e4",
   borderRadius: "5px",
-  // boxShadow: "0 2px 4px #00a4a97d",
-  height : `calc(100vh - ${Colors.height} - ${Colors.mobile} - 70px)` , 
+  height : `calc(100%  - 60px) ` , 
   overflow: "auto",
 
 }));
@@ -239,7 +238,7 @@ const EditProfile = () => {
             ))}
           </Select>
           <Label> الصورة </Label>
-          <div>
+          <div style = {{textAlign :"center" }}>
               <InputFile
               id = "uploadPicture"
               type="file"

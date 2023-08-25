@@ -7,7 +7,7 @@ import { getExternals } from '../../store/slices/externalsSlice';
 
 const BoxContainer = styled(Box)(({ theme }) => ({
     border: `1px solid ${Colors.main[3]}` ,
-    height: `calc(100vh - ${Colors.height} - ${Colors.mobile} - 76px)`,
+    height: `calc(100%  - 60px) `,
 }));  
 
 const Iframe = styled("iframe")(({ theme }) => ({
@@ -45,8 +45,8 @@ const IframeSite = ({ title , bot}) => {
 
     useEffect(() => {
         if (externals.status==true) {
-            console.log(externals.data.externials[1].iframe)
-            setUrl (externals.data.externials[1].iframe) 
+            console.log(externals.data.externials[0].iframe)
+            setUrl (externals.data.externials[0].iframe) 
         }
     }, [externals])
 

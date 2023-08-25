@@ -18,9 +18,10 @@ const PaymentResponse = () => {
         timer: 2000
       })
       setTimeout(() => {
+        localStorage.removeItem('registerData')
         navigate ("/student/login") ;
       }, 2300);
-    } 
+    }
     else if(PaymentResponse.status ==false){
       Swal.fire({
         icon: 'error',
@@ -37,7 +38,7 @@ const PaymentResponse = () => {
   
   const dispatch = useDispatch()
   useEffect(() => {
-    var url_string = "https://app.baetiy.com/paymentResponse?status=fail&order_id=38&invoice_id=1016920"; 
+    var url_string = window.location.href; 
     var url = new URL(url_string);
     var status = url.searchParams.get("status");
     var order_id = url.searchParams.get("order_id");

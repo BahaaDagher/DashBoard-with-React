@@ -40,14 +40,17 @@ function App() {
   const { pathname } = useLocation();
   const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   if ( pathname == '/') {
-  //     window.location.href='https://app.baetiy.com/home'
-  //   }
-  // },[])
+  const [go , setGo] = useState(false)
+  useEffect(() => {
+    if ( pathname == '/') {
+      window.location.href='https://app.baetiy.com/home'
+      setGo(true)
+    }
+  },[])
 
   return (
-    <>
+    <> 
+      {go&&
       <div className="app">
         <Routes>
           <Route path="/student/login" element={ <ProtectRegisterAndLogin><Login /></ProtectRegisterAndLogin>} />
@@ -58,7 +61,6 @@ function App() {
           <Route path="/student/payment" element={<ProtectPayment><Payment /></ProtectPayment>} />
           <Route path="/paymentResponse" element={<ProtectPayment><PaymentResponse /></ProtectPayment>} />
           <Route path="/*" element={<h1>عذرا لا يوجد صفحة هنا</h1>} />
-
           <Route
             path="/"
             element={
@@ -216,6 +218,7 @@ function App() {
           
         </Routes>
       </div>
+      }
     </>
   );
 }
@@ -237,7 +240,7 @@ function LayoutsWithNavbar() {
         anchorEl={anchorEl}
         setAnchorEl={setAnchorEl}
       />
-      <main className="content" style={{ overflow: "hidden" }}>
+      <main className="content" style={{ overflow: "hidden" , height : "100vh"}}>
         <Topbar
           phone={phone}
           isCollapsed={isCollapsed}
@@ -247,7 +250,7 @@ function LayoutsWithNavbar() {
           anchorEl={anchorEl}
           setAnchorEl={setAnchorEl}
         />
-        <Box style={{ margin: "10px" }}>
+        <Box style={{ margin: "10px" , height : `calc(100vh - 90px)` }}>
           <Outlet />
         </Box>
       </main>

@@ -22,6 +22,9 @@ const LabelFile = styled("label")(({ theme }) => ({
     } , 
     "&:hover": {
       backgroundColor: Colors.main[2],
+    } , 
+    [theme.breakpoints.down("500")]: { 
+      fontSize: "18px",
     }
   })) 
 

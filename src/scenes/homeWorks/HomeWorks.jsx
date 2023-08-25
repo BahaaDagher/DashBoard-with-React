@@ -41,7 +41,7 @@ const Box2 = styled(Box)(({ theme }) => ({
 
 const ParentBox = styled(Box)(({ theme }) => ({
 
-    maxHeight : `calc(100vh - ${Colors.height} - 60px - ${Colors.mobile}) ` ,
+    maxHeight : `calc(100%  - 60px) ` ,
     overflowY : "auto" ,
 }));
 

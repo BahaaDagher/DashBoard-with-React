@@ -152,8 +152,8 @@ const ClassChat = () => {
 
 
   return (
-    <section>
-      <div className= "w-100 " style={{height: `calc(100vh - ${Colors.height } - ${Colors.mobile})` }}>
+    <section style = {{height : "100%"}}>
+      <div className= "w-100 " style={{height: "100%" }}>
         <div className="row d-flex justify-content-center w-100 m-0 h-100">
           <div className="col-md-12 col-lg-12 col-xl-12 h-100">
             <div className="card h-100" id="chat2" >

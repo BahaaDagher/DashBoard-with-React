@@ -8,7 +8,7 @@ import { getQuestions } from '../../store/slices/questionsSlice';
 import  Title  from '../../components/Title';
 
 const BoxContainer = styled(Box)(({ theme }) => ({
-    maxHeight : `calc(100vh - ${Colors.height} - ${Colors.mobile} - 70px)` ,
+    maxHeight : `calc(100%  - 60px)` ,
     overflow : "auto" ,
 })); 
 
@@ -24,13 +24,13 @@ const MyAnswers = () => {
     <>
     {
         Questions.length == 0 ? <Title>لم تسأل اي سؤال بعد    </Title> :
-        <div>
-        <Title>حلولي </Title>
-        <BoxContainer sx = {{}}>
-            {Questions.map((question,index) => (
-                <Answer singleQuestion={question} index={index} />
-            ))}
-        </BoxContainer>
+        <div style={{height :"100%"}}>
+            <Title>حلولي </Title>
+            <BoxContainer sx = {{}}>
+                {Questions.map((question,index) => (
+                    <Answer singleQuestion={question} index={index} />
+                ))}
+            </BoxContainer>
         </div>
     }
     

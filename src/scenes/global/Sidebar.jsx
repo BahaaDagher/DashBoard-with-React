@@ -234,7 +234,6 @@ const Sidebar = ({
           sx={{
             height: "100vh",
             "& .pro-sidebar-inner": {
-              // paddingTop: "15px",
               background: `${Colors.main[1]} !important`,
             },
             "& .pro-icon-wrapper": {

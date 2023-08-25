@@ -47,11 +47,11 @@ const Register = () => {
   const isRegisterSuccess =useSelector((state) => state.userData.isRegisterSuccess )
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [change , setChange] = useState(false) 
+  const [change , setChange] = useState(false)
   useEffect(() => {
     console.log("2",change)
     if (isRegisterSuccess) {
-      sessionStorage.setItem('registerData', JSON.stringify(registerData.data.user))
+      localStorage.setItem('registerData', JSON.stringify(registerData.data.user))
       Swal.fire({
         icon: 'success',
         title: 'تم التسجيل البيانات الاساسية بنجاح',
