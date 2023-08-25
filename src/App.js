@@ -41,12 +41,12 @@ function App() {
   const navigate = useNavigate()
 
   const [go , setGo] = useState(false)
-  // useEffect(() => {
-  //   if ( pathname == '/') {
-  //     window.location.href='https://app.baetiy.com/home'
-  //     setGo(true)
-  //   }
-  // },[])
+  useEffect(() => {
+    if ( pathname == '/') {
+      window.location.href='https://app.baetiy.com/home'
+      setGo(true)
+    }
+  },[])
 
   return (
     <> 

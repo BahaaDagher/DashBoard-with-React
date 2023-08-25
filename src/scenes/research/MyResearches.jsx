@@ -80,7 +80,7 @@ const MyResearches = () => {
 
   return (
     <>
-    {loading? <CircularProgress/>:  (researches.length == 0) ? <Title>لا يوجد بحوث</Title> :
+    {loading? <CircularProgress/>:  (researches.length <= 0) ? <Title>لا يوجد بحوث</Title> :
     <Box>
     <Title>أبحاثي  </Title>
       <Container>
