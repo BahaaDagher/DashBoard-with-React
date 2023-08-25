@@ -30,6 +30,7 @@ import TechnicalSupport from "./scenes/chat/TechnicalSupport";
 import  Payment  from "./scenes/payment/Payment";
 import  PaymentResponse  from "./scenes/payment/PaymentResponse";
 import ProtectPayment from "./protect/ProtectPayment";
+import { useDispatch } from "react-redux";
 function App() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
@@ -39,12 +40,13 @@ function App() {
   const { pathname } = useLocation();
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if ( pathname == '/') {
-      window.location.href='https://app.baetiy.com/home'
-    }
-  },[])
-  
+  // useEffect(() => {
+  //   if ( pathname == '/') {
+  //     window.location.href='https://app.baetiy.com/home'
+  //   }
+  // },[])
+
+
   return (
     <>
       <div className="app">
@@ -150,7 +152,7 @@ function App() {
               path="student/scienceHome"
               element={
                 <Protected>
-                  <IframeSite url="https://www.baetiy.com/" title="بيت العلم" bot= {false} />
+                  <IframeSite url="" title="بيت العلم" bot= {false} />
                 </Protected>
               }
             />
