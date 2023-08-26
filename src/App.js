@@ -31,22 +31,17 @@ import  Payment  from "./scenes/payment/Payment";
 import  PaymentResponse  from "./scenes/payment/PaymentResponse";
 import ProtectPayment from "./protect/ProtectPayment";
 import { useDispatch } from "react-redux";
+import Notification from "./scenes/notification/Notification";
 function App() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const theme = useTheme();
-  const phone = useMediaQuery(theme.breakpoints.down("sm"));
-  const { pathname } = useLocation();
   const navigate = useNavigate()
 
   const [go , setGo] = useState(false)
-  useEffect(() => {
-    if ( pathname == '/') {
-      window.location.href='https://app.baetiy.com/home'
-      setGo(true)
-    }
-  },[])
+  // useEffect(() => {
+  //   if ( pathname == '/') {
+  //     window.location.href='https://app.baetiy.com/home'
+  //     setGo(true)
+  //   }
+  // },[])
 
   return (
     <> 
@@ -74,6 +69,14 @@ function App() {
               element={
                 <Protected>
                   <Dashboard />
+                </Protected>
+              }
+            />
+            <Route
+              path="student/notification"
+              element={
+                <Protected>
+                  <Notification />
                 </Protected>
               }
             />

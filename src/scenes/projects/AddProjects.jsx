@@ -130,13 +130,12 @@ useEffect(() => {
     e.preventDefault();
     dispatch(sendProject({name : title , teacher_name: supervisor, subjecet_id : selectedSubject })) ;
     setChange(true) ;
-    
   };
 
   return (
     <>
     {profileLoading? <CircularProgress/> : 
-    dataOfProfile.count_projecets==0? <Title>لقد استهلكت المشاريع المتاحة لك </Title> :
+    dataOfProfile.count_projecets<=0? <Title>لقد استهلكت المشاريع المتاحة لك </Title> :
     <Box>
       <H5> عدد المشاريع المتبقية :  
         <span> {dataOfProfile.count_projecets}</span>
@@ -152,7 +151,7 @@ useEffect(() => {
             onFocus={(e) => e.target.classList.add("active")}
             onBlur={(e) => e.target.classList.remove("active")}
           />
-          <Label>  مشرف المشروع </Label>
+          <Label>  مشرف  </Label>
           <Input
             type="text"
             value={supervisor}

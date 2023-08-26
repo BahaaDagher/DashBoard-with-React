@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Answer from './Answer'
-import { Box } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import { Colors } from '../../theme'
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,8 @@ const BoxContainer = styled(Box)(({ theme }) => ({
 const MyAnswers = () => {
 
     const Questions = useSelector(state => state.questionsData.questions) ;
+    const questionsLoading = useSelector(state => state.questionsData.questionsLoading) ;
+
     const dispatch = useDispatch() ;
     useEffect(()=>{
         dispatch(getQuestions()) ; 
@@ -22,6 +24,7 @@ const MyAnswers = () => {
   return (
     <>
     {
+        questionsLoading? <CircularProgress/> :  
         Questions.length == 0 ? <Title>لم تسأل اي سؤال بعد    </Title> :
         <div style={{height :"100%"}}>
             <Title>حلولي </Title>

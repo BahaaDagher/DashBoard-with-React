@@ -51,7 +51,6 @@ const ClassChat = () => {
 
   useEffect(() => { 
       getData(1)
-
       const pusher = new Pusher("8071a8e96650bf6eac15", {
         secret: "74f3c62856110435f421",
         cluster: "us3" , 
@@ -69,9 +68,6 @@ const ClassChat = () => {
       pusher.disconnect();
       };
   },[])
-
-
-
 
   const getData=(value)=>{
     dispatch(groupChatGet({group_id:userData.group_id , page:value})); 

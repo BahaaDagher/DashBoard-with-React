@@ -190,7 +190,7 @@ const Sidebar = ({
             <Item
               sx={{ fontSize: "40px" }}
               title="تنبيهاتي"
-              to="/"
+              to="/student/notification"
               icon={
                 <CampaignOutlinedIcon sx={{ width: "20px", height: "20px" }} />
               }
@@ -346,7 +346,7 @@ const Sidebar = ({
                   onClick={mobileItemClicked}
                   sx={{ fontSize: "40px" }}
                   title="تنبيهاتي"
-                  to="/"
+                  to="/student/notification"
                   icon={
                     <CampaignOutlinedIcon sx={{ width: "20px", height: "20px" }} />
                   }

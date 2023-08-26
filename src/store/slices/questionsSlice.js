@@ -55,8 +55,8 @@ const questionsSlice = createSlice({
   initialState: {
     questions: [],
     addImageResponse:{} , 
-    isQuestionsAdded : {}
-
+    isQuestionsAdded : {} , 
+    questionsLoading: false,
   },
   extraReducers: (builder) => {
     builder
@@ -67,6 +67,13 @@ const questionsSlice = createSlice({
 
       .addCase(getQuestions.fulfilled, (state, action) => {
         state.questions = action.payload.data.questions;
+        state.questionsLoading = false;
+      })
+      .addCase(getQuestions.pending, (state, action) => {
+        state.questionsLoading = true;
+      })
+      .addCase(getQuestions.rejected, (state, action) => {
+        state.questionsLoading = false;
       })
 
       .addCase(addImageQuestion.fulfilled, (state, action) => {

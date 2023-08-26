@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { Colors } from "../../theme";
 import { Fragment } from "react";
-import Researchers from "./Researchers";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getResearches } from "../../store/slices/researchesSlice";
@@ -72,6 +71,7 @@ const MyResearches = () => {
 
   useEffect (() => {
     dispatch(getResearches()) ; 
+    
   },[])
 
   const pdfLink = (pdf) =>{
