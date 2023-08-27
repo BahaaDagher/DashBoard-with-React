@@ -154,7 +154,7 @@ const AddResearch = () => {
             onFocus={(e) => e.target.classList.add("active")}
             onBlur={(e) => e.target.classList.remove("active")}
           />
-          <Label>  مشرف البحث </Label>
+          <Label>   معلم/ة المادة </Label>
           <Input
             type="text"
             value={supervisor}

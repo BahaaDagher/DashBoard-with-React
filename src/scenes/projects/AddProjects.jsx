@@ -151,7 +151,7 @@ useEffect(() => {
             onFocus={(e) => e.target.classList.add("active")}
             onBlur={(e) => e.target.classList.remove("active")}
           />
-          <Label>  مشرف  </Label>
+          <Label>  معلم/ة المادة  </Label>
           <Input
             type="text"
             value={supervisor}

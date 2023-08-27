@@ -35,11 +35,11 @@ import Notification from "./scenes/notification/Notification";
 function App() {
   const navigate = useNavigate()
   
-  const { pathname } = useLocation()
+  // const { pathname } = useLocation()
 
-    if ( pathname == '/') {
-      window.location.href='https://app.baetiy.com/home'
-    }
+  //   if ( pathname == '/') {
+  //     window.location.href='https://app.baetiy.com/home'
+  //   }
 
   return (
     <> 

@@ -151,11 +151,11 @@ const Register = () => {
           
           <StyledBox>
             <div className="form-group mt-3" >
-              <label> المستوي الدراسي </label>
+              <label>  الصفوف  </label>
                 <select className="form-select" aria-label="Default select example"
                 onChange={handleChange}
                 name='level_id'>
-                  <option value={''}>اختر المستوي الدراسي</option>
+                  <option value={''}>اختر الصف الدراسي</option>
                   {levels.map((level, i )=>{
                     return  <option value={level.id} key={i}>{level.name}</option>
                   })}
