@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import {
@@ -19,7 +19,10 @@ import PlagiarismOutlinedIcon from "@mui/icons-material/PlagiarismOutlined";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import BuildOutlinedIcon from "@mui/icons-material/BuildOutlined";
 import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
+import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useSelector } from "react-redux";
+import Pusher from "pusher-js";
 
 const Item = ({ title, to, icon, selected, setSelected, onClick }) => {
   const theme = useTheme();
@@ -72,9 +75,31 @@ const Sidebar = ({
 
   const sessionStorageData = JSON.parse(sessionStorage.getItem("userData"));
   const userData = sessionStorageData ? sessionStorageData : "default-token-sideBar";
+  const [notifications, setNotifications] = useState(false);
 
   const profilePicture = userData.image 
 
+  useEffect(()=>{
+
+    
+    const pusher = new Pusher("8071a8e96650bf6eac15", {
+      secret: "74f3c62856110435f421",
+      cluster: "us3" , 
+      forceTLS: true,
+      encrypted: true,
+    });
+    
+    const channel = pusher.subscribe('chat_api');
+    channel.bind("NotificantionEvent", (data) => {
+      setNotifications(true)
+    });
+    
+    return () => {
+      pusher.unsubscribe('chat_api');
+      pusher.disconnect();
+    };
+
+}, [])
 
   const mobileItemClicked = () => {
     setMobileOpen(false);
@@ -186,17 +211,23 @@ const Sidebar = ({
               setSelected={setSelected}
             />
             <Line />
-
-            <Item
-              sx={{ fontSize: "40px" }}
-              title="تنبيهاتي"
-              to="/student/notification"
-              icon={
-                <CampaignOutlinedIcon sx={{ width: "20px", height: "20px" }} />
+            <div style = {{position : "relative"}}>
+              {notifications && 
+                <NotificationsIcon sx={{ width: "20px", height: "20px" , color : Colors.main[4] ,  position: "absolute"  , top: "14px" , left: "50px" , zIndex:"5"}} />
               }
-              selected={selected}
-              setSelected={setSelected}
-            />
+              <Item
+                sx={{ fontSize: "40px" }}
+                title="تنبيهاتي"
+                to="/student/notification"
+                icon={
+                  <CampaignOutlinedIcon sx={{ width: "20px", height: "20px" }} />
+                  
+                }
+                selected={selected}
+                setSelected={setSelected}
+                onClick={() => setNotifications(false)}
+              />
+            </div>
             <Line />
             <Item
               sx={{ fontSize: "40px" }}
@@ -342,17 +373,23 @@ const Sidebar = ({
                 />
                 <Line />
 
-                <Item
-                  onClick={mobileItemClicked}
-                  sx={{ fontSize: "40px" }}
-                  title="تنبيهاتي"
-                  to="/student/notification"
-                  icon={
-                    <CampaignOutlinedIcon sx={{ width: "20px", height: "20px" }} />
+                <div style = {{position : "relative"}}>
+                  {notifications && 
+                    <NotificationsIcon sx={{ width: "20px", height: "20px" , color : Colors.main[4] ,  position: "absolute"  , top: "14px" , left: "50px" , zIndex:"5"}} />
                   }
-                  selected={selected}
-                  setSelected={setSelected}
-                />
+                  <Item
+                    sx={{ fontSize: "40px" }}
+                    title="تنبيهاتي"
+                    to="/student/notification"
+                    icon={
+                      <CampaignOutlinedIcon sx={{ width: "20px", height: "20px" }} />
+                      
+                    }
+                    onClick={() => setNotifications(false)}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </div>
                 <Line />
                 <Item
                   onClick={mobileItemClicked}

@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import React, { useEffect } from 'react'
 import Title from '../../components/Title';
 import { Colors } from '../../theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNotifications } from '../../store/slices/notificationSlice';
 import { useState } from 'react';
+import Pusher from 'pusher-js';
+import { CircleNotifications } from '@mui/icons-material';
 
 const BoxContainer = styled(Box)(({ theme }) => ({
     maxHeight : `calc(100%  - 60px)` ,
@@ -28,28 +30,52 @@ const Notification = () => {
     const [Notifications, setNotifications] = useState([]) ;
     const dispatch = useDispatch() ;
     const notifications  = useSelector(state => state.notificationData.notifications) ;
+    const notificationLoading = useSelector(state => state.notificationData.notificationLoading) ;
     
     useEffect(()=> {
         if (notifications.status == true) {
-            setNotifications(notifications.data.levels)
+            setNotifications(notifications.data.notifications)
         }
     }, [notifications])
+
     useEffect(()=>{
         dispatch(getNotifications())
+        const pusher = new Pusher("8071a8e96650bf6eac15", {
+          secret: "74f3c62856110435f421",
+          cluster: "us3" , 
+          forceTLS: true,
+          encrypted: true,
+        });
+    
+        const channel = pusher.subscribe('chat_api');
+        channel.bind("NotificantionEvent", (data) => {
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000);
+        });
+    
+        return () => {
+            pusher.unsubscribe('chat_api');
+            pusher.disconnect();
+        };
     }, [])
     
   return (
     <>
+    {notificationLoading ? <CircularProgress/> : 
         <div style={{height :"100%"}}>
             <Title>تنبيهاتي </Title>
             <BoxContainer>
-                {Notifications.map((item,index) => (
+                {Notifications.toReversed().map((item,index) => (
                     <NotifyContainer key={index}>
-                        <h5 style={{fontWeight : "bold"}} >{item.name}</h5>
+                        <h5 style={{fontWeight : "bold"}} >{item.subject}</h5>
+                        <p>{item.message}</p>
+                        <p style={{direction : "ltr" , fontSize : "12px" , fontWeight : "bold" }}>{item.created_at}</p>
                     </NotifyContainer>
                 ))}
             </BoxContainer>
         </div>
+    }
     </>
   )
 }

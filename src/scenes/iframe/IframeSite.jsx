@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Colors } from '../../theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { getExternals } from '../../store/slices/externalsSlice';
+import Title from '../../components/Title';
 
 const BoxContainer = styled(Box)(({ theme }) => ({
     border: `1px solid ${Colors.main[3]}` ,
@@ -15,15 +16,15 @@ const Iframe = styled("iframe")(({ theme }) => ({
     height: '100%',
     border: '1px solid #ccc' , 
 }));  
-const Title = styled("h1")(({ theme }) => ({
-    margin: '10px auto' ,
-    padding : '10px' ,  
-    textAlign: 'center' ,
-    backgroundColor: Colors.main[6] ,
-    width: '100%' ,
-    color: Colors.main[1] ,
-    fontWeight: 'bold' ,
-}));  
+// const Title = styled("h1")(({ theme }) => ({
+//     margin: '10px auto' ,
+//     padding : '10px' ,  
+//     textAlign: 'center' ,
+//     backgroundColor: Colors.main[6] ,
+//     width: '100%' ,
+//     color: Colors.main[1] ,
+//     fontWeight: 'bold' ,
+// }));  
 const IframeSite = ({ title , bot}) => {
 
     const [url , setUrl] = useState('')

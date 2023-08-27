@@ -34,20 +34,19 @@ import { useDispatch } from "react-redux";
 import Notification from "./scenes/notification/Notification";
 function App() {
   const navigate = useNavigate()
+  
+  const { pathname } = useLocation()
 
-  const [go , setGo] = useState(false)
-  // useEffect(() => {
-  //   if ( pathname == '/') {
-  //     window.location.href='https://app.baetiy.com/home'
-  //     setGo(true)
-  //   }
-  // },[])
+    if ( pathname == '/') {
+      window.location.href='https://app.baetiy.com/home'
+    }
 
   return (
     <> 
       
       <div className="app">
         <Routes>
+          <Route path="/" element={<div></div>} />
           <Route path="/student/login" element={ <ProtectRegisterAndLogin><Login /></ProtectRegisterAndLogin>} />
           <Route path="/student/register" element={<ProtectRegisterAndLogin><Register /> </ProtectRegisterAndLogin>} />
           <Route path="/student/forgetPassword" element={<ForgetPassword />} />
