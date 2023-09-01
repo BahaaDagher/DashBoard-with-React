@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import { Box, colors } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Colors } from '../../theme';
+import Title from '../../components/Title';
 
 const Tab = styled("div")(({ theme }) => ({
   backgroundColor: Colors.main[6],
@@ -20,7 +21,7 @@ const BoxContainer = styled("div")(({ theme }) => ({
   width: "100%",
   display : "flex",
   justifyContent : "space-around" ,
-  maxHeight: "100%",
+  maxHeight: "calc(100% - 60px)",
   overflow: "auto",
   alignItems : "center" ,
   textAlign : "center" ,
@@ -44,19 +45,27 @@ const LinkStyle = styled(Link)(({ theme }) => ({
     fontSize: "15px",
   },
 }));
-
+const TITLE = styled(Title)(({ theme }) => ({
+  fontSize: "18px",
+  color : "red" ,
+}));
 const Dashboard = () => {
+  const expire = JSON.parse(sessionStorage.getItem("userData")).expire;
+
   return (
-    <BoxContainer >
-        <LinkStyle to = "/student/AddResearch"> <Tab> طلبات البحوث </Tab></LinkStyle>
-        <LinkStyle to = "/student/AddProjects" ><Tab > طلبات المشاريع </Tab></LinkStyle>
-        <LinkStyle to = "/student/scienceHomeBot"><Tab> بوت بيت العلم </Tab></LinkStyle>
-        <LinkStyle to = "/student/homeWorks" ><Tab >حل الواجبات </Tab></LinkStyle>
-        <LinkStyle to = "/student/exams"> <Tab>الاختبارات المركزية</Tab></LinkStyle>
-        <LinkStyle to = "/student/scienceHome"><Tab > بيت العلم بدون اعلانات </Tab></LinkStyle>
-        <LinkStyle to = "/student/StudentsChat"><Tab> شات الطلاب </Tab></LinkStyle>
-        <LinkStyle to = "/student/classChat"><Tab> شات الصف </Tab></LinkStyle>
-    </BoxContainer>
+    <>
+      <TITLE>  تاريخ انتهاء الباقة  : {expire} </TITLE>
+      <BoxContainer >
+          <LinkStyle to = "/student/AddResearch"> <Tab> طلبات البحوث </Tab></LinkStyle>
+          <LinkStyle to = "/student/AddProjects" ><Tab > طلبات المشاريع </Tab></LinkStyle>
+          <LinkStyle to = "/student/scienceHomeBot"><Tab> بوت بيت العلم </Tab></LinkStyle>
+          <LinkStyle to = "/student/homeWorks" ><Tab >حل الواجبات </Tab></LinkStyle>
+          <LinkStyle to = "/student/exams"> <Tab>الاختبارات المركزية</Tab></LinkStyle>
+          <LinkStyle to = "/student/scienceHome"><Tab > بيت العلم بدون اعلانات </Tab></LinkStyle>
+          <LinkStyle to = "/student/StudentsChat"><Tab> شات الطلاب </Tab></LinkStyle>
+          <LinkStyle to = "/student/classChat"><Tab> شات الصف </Tab></LinkStyle>
+      </BoxContainer>
+    </>
   )
 }
 

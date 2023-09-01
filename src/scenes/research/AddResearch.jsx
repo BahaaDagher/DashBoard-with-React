@@ -9,6 +9,7 @@ import  Title from "../../components/Title";
 import { getSubjects } from "../../store/slices/subjectsSlice";
 import { profileData, userLogin } from "../../store/slices/userSlice";
 import { Box, CircularProgress } from "@mui/material";
+import MoreResearch from "./MoreResearch";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -52,6 +53,7 @@ const Select = styled("select")(({ theme }) => ({
     borderColor: Colors.main[3] , 
   },
 }));
+
 const Option = styled("option")(({ theme }) => ({
 }));
 
@@ -138,7 +140,7 @@ const AddResearch = () => {
   return (
     <>
     {profileLoading? <CircularProgress/> : 
-    (dataOfProfile.count_research<=0 ) ? <Title>لقد استهلكت الابحاث المتاحة لك </Title> :
+    (dataOfProfile.count_research<=0 ) ? <MoreResearch/> :
     <Box>
       <H5> عدد الابحاث المتبقية :  
         <span> {dataOfProfile.count_research}</span>

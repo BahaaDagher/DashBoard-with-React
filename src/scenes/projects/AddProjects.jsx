@@ -10,6 +10,7 @@ import { sendProject } from "../../store/slices/projectsSlice";
 import { getSubjects } from "../../store/slices/subjectsSlice";
 import { profileData } from "../../store/slices/userSlice";
 import { Box, CircularProgress } from "@mui/material";
+import MoreProjects from "./MoreProjects";
 
 
 const FormContainer = styled("div")(({ theme }) => ({
@@ -135,7 +136,7 @@ useEffect(() => {
   return (
     <>
     {profileLoading? <CircularProgress/> : 
-    dataOfProfile.count_projecets<=0? <Title>لقد استهلكت المشاريع المتاحة لك </Title> :
+    dataOfProfile.count_projecets<=0? <MoreProjects/> :
     <Box>
       <H5> عدد المشاريع المتبقية :  
         <span> {dataOfProfile.count_projecets}</span>

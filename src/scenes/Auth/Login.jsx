@@ -15,12 +15,25 @@ const Login = () => {
   const isAuth =useSelector((state) => state.userData.isAuth ) 
   const userData =useSelector((state) => state.userData.userData ) 
   const loginValidation =useSelector((state) => state.userData.loginValidation )
+  const [renewable , setRenewable] = useState(false)
+
+
 
   useEffect(() => {
     // redirect user to login page if registration was successful
     if (isAuth) {
-      sessionStorage.setItem('userData', JSON.stringify(userData.data.user))
-      navigate('/student/dashboard')
+      if (userData.data.user.subScribes==1) {
+        Swal.fire({
+          icon: 'error',
+          text: "لقد انتهت صلاحية الباقة الخاصة بك",
+          showConfirmButton: false,
+          timer: 2000
+        })
+      }
+      else {
+        sessionStorage.setItem('userData', JSON.stringify(userData.data.user))
+        navigate('/student/dashboard')
+      }
     }
     else if (!loginValidation.data && change) {
       Swal.fire({
@@ -88,5 +101,6 @@ const Login = () => {
     </>
   )
 }
-
+ 
+  
 export default Login

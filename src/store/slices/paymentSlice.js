@@ -35,6 +35,8 @@ export const postPayment = createAsyncThunk(
       }
   });
 
+  
+
 
   export const paymentResponse = createAsyncThunk(
     "payment/paymentResponse", 
@@ -49,26 +51,65 @@ export const postPayment = createAsyncThunk(
       }
   });
 
+  export const pricePackage = createAsyncThunk(
+    "payment/pricePackage", 
+    async () => {
+      try {
+        const response = await axios.get(
+          "https://test.learnning.mohamedmansi.com/api/getPricePackages" 
+        );
+        return response.data ;
+      } catch (error) {
+        console.error(error);
+      }
+  });
+
+  export const renewal = createAsyncThunk(
+    "payment/renewal", 
+    async (values) => {
+    const token = JSON.parse(sessionStorage.getItem('userData')).token;
+      try {
+        const response = await axios.post(
+          "https://test.learnning.mohamedmansi.com/api/renewal" , 
+          {
+            order_id : values.order_id , 
+            payment_method_id : values.payment_method_id ,
+            projecets : values.projecets,
+            research : values.research,
+            currency:values.currency
+          }, 
+          { headers: {"Authorization" : token}} 
+        );
+        return response.data ;
+      } catch (error) {
+        console.error(error);
+      }
+  });
 const paymentSlice = createSlice({
   name: "payment",
   initialState: {
     paymentMethods: {},
     postPaymentResponse: {},
     PaymentResponse: {},
+    pricePackageResponse: {},
+    renewalResponse: {},
   },
   extraReducers: (builder) => {
     builder
       .addCase(getPaymentMethods.fulfilled, (state, action) => {
         state.paymentMethods = action.payload;
-       
       })
       .addCase(postPayment.fulfilled, (state, action) => {
         state.postPaymentResponse = action.payload;
-       
       })
       .addCase(paymentResponse.fulfilled, (state, action) => {
         state.PaymentResponse = action.payload;
-       
+      })
+      .addCase(pricePackage.fulfilled, (state, action) => {
+        state.pricePackageResponse = action.payload;
+      })
+      .addCase(renewal.fulfilled, (state, action) => {
+        state.renewalResponse = action.payload;
       })
   }
 });

@@ -41,7 +41,6 @@ const Container = styled(Box)(({ theme }) => ({
         margin: '30px 10px',
     },
 
-    
 }));
 const Title = styled("h2")(({ theme }) => ({
     fontSize: '1.5rem',
